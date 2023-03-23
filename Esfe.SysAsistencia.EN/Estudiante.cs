@@ -6,7 +6,16 @@ using System.Threading.Tasks;
 
 namespace Esfe.SysAsistencia.EN
 {
-    internal class Estudiante
+    public class Estudiante
     {
+        public int Id { get; set; }
+        public string Nombres { get; set; }
+        public string Apellidos { get; set; }
+        public byte[] HuellaDigital { get; set; } 
+        public string Carrera {get; set;}
+        public int Año {get; set;}
+        public int Grupo {get;set ;}
+
+        // al crear un estudiante si no existe el grupo se crea y si ya existe se asigna 
     }
 }

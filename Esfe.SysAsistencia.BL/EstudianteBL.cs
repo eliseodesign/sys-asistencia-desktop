@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Esfe.SysAsistencia.BL
 {
-    internal class EstudianteBL
+    public class EstudianteBL
     {
     }
 }

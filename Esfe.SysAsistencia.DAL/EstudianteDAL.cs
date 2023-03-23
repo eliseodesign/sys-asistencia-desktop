@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Esfe.SysAsistencia.DAL
 {
-    internal class EstudianteDAL
+    public class EstudianteDAL
     {
     }
 }
