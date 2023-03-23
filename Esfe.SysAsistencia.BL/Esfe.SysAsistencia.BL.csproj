@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Esfe.SysAsistencia.DAL\Esfe.SysAsistencia.DAL.csproj" />
+    <ProjectReference Include="..\Esfe.SysAsistencia.EN\Esfe.SysAsistencia.EN.csproj" />
+  </ItemGroup>
+
+</Project>
