@@ -15,7 +15,5 @@ namespace Esfe.SysAsistencia.EN
         public string Carrera {get; set;}
         public int Año {get; set;}
         public int Grupo {get;set ;}
-
-        // al crear un estudiante si no existe el grupo se crea y si ya existe se asigna 
     }
 }

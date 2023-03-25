@@ -10,6 +10,5 @@ namespace Esfe.SysAsistencia.EN
     {
         public DateTime Fecha { get; set; }
         List<AsistEstudiante> Asistencias { get; set; } = new List<AsistEstudiante>();
-        
     }
 }
