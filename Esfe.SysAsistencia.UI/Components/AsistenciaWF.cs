@@ -8,12 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Esfe.SysAsistencia.UI
-{
-    public partial class EstudianteWF : Form
+namespace Esfe.SysAsistencia.UI.Components 
+{ 
+
+    public partial class AsistenciaWF : Form
     {
-        public EstudianteWF()
+        public Panel _panel_app;
+        public AsistenciaWF(Panel panel)
         {
+            _panel_app = panel;
             InitializeComponent();
         }
     }
