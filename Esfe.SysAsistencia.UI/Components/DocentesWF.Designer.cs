@@ -29,50 +29,115 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
-            dataGridView1 = new DataGridView();
-            label8 = new Label();
-            button3 = new Button();
-            label7 = new Label();
-            comboBox1 = new ComboBox();
-            label6 = new Label();
-            textBox5 = new TextBox();
-            label5 = new Label();
-            textBox4 = new TextBox();
-            label4 = new Label();
-            textBox3 = new TextBox();
-            label3 = new Label();
-            textBox2 = new TextBox();
-            label1 = new Label();
-            textBox1 = new TextBox();
-            button2 = new Button();
-            button1 = new Button();
-            groupBox1 = new GroupBox();
+            panel3 = new Panel();
+            panel2 = new Panel();
+            gridDocentes = new DataGridView();
             label2 = new Label();
+            groupBox1 = new GroupBox();
+            label8 = new Label();
+            btnChangeHuella = new Button();
+            label7 = new Label();
+            txtCarrera = new ComboBox();
+            label6 = new Label();
+            txtNit = new TextBox();
+            label5 = new Label();
+            txtDui = new TextBox();
+            label4 = new Label();
+            txtTelefono = new TextBox();
+            label3 = new Label();
+            txtApellidos = new TextBox();
+            label1 = new Label();
+            txtNombres = new TextBox();
+            btnGuardar = new Button();
+            btnEliminar = new Button();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            panel3.SuspendLayout();
+            panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)gridDocentes).BeginInit();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
-            panel1.Controls.Add(dataGridView1);
+            panel1.Controls.Add(panel3);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
             panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(529, 414);
+            panel1.Size = new Size(578, 423);
             panel1.TabIndex = 0;
             // 
-            // dataGridView1
+            // panel3
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(325, 76);
-            dataGridView1.Margin = new Padding(3, 2, 3, 2);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.RowTemplate.Height = 29;
-            dataGridView1.Size = new Size(192, 306);
-            dataGridView1.TabIndex = 8;
+            panel3.Controls.Add(panel2);
+            panel3.Controls.Add(label2);
+            panel3.Controls.Add(groupBox1);
+            panel3.Dock = DockStyle.Fill;
+            panel3.Location = new Point(0, 0);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(578, 423);
+            panel3.TabIndex = 10;
+            panel3.Paint += panel3_Paint;
+            // 
+            // panel2
+            // 
+            panel2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panel2.Controls.Add(gridDocentes);
+            panel2.Location = new Point(312, 0);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(266, 423);
+            panel2.TabIndex = 11;
+            // 
+            // gridDocentes
+            // 
+            gridDocentes.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            gridDocentes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            gridDocentes.Location = new Point(16, 12);
+            gridDocentes.Name = "gridDocentes";
+            gridDocentes.RowTemplate.Height = 25;
+            gridDocentes.Size = new Size(238, 399);
+            gridDocentes.TabIndex = 0;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Lucida Sans Unicode", 22.2F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.ForeColor = SystemColors.ActiveCaptionText;
+            label2.Location = new Point(12, 9);
+            label2.Name = "label2";
+            label2.Size = new Size(159, 37);
+            label2.TabIndex = 10;
+            label2.Text = "Docentes";
+            // 
+            // groupBox1
+            // 
+            groupBox1.Anchor = AnchorStyles.Left;
+            groupBox1.Controls.Add(label8);
+            groupBox1.Controls.Add(btnChangeHuella);
+            groupBox1.Controls.Add(label7);
+            groupBox1.Controls.Add(txtCarrera);
+            groupBox1.Controls.Add(label6);
+            groupBox1.Controls.Add(txtNit);
+            groupBox1.Controls.Add(label5);
+            groupBox1.Controls.Add(txtDui);
+            groupBox1.Controls.Add(label4);
+            groupBox1.Controls.Add(txtTelefono);
+            groupBox1.Controls.Add(label3);
+            groupBox1.Controls.Add(txtApellidos);
+            groupBox1.Controls.Add(label1);
+            groupBox1.Controls.Add(txtNombres);
+            groupBox1.Controls.Add(btnGuardar);
+            groupBox1.Controls.Add(btnEliminar);
+            groupBox1.Font = new Font("Lucida Sans Unicode", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
+            groupBox1.Location = new Point(3, 71);
+            groupBox1.Margin = new Padding(3, 2, 3, 2);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Padding = new Padding(3, 2, 3, 2);
+            groupBox1.Size = new Size(303, 323);
+            groupBox1.TabIndex = 9;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Editar";
+            groupBox1.Enter += groupBox1_Enter;
             // 
             // label8
             // 
@@ -85,15 +150,16 @@
             label8.TabIndex = 19;
             label8.Text = "Huella";
             // 
-            // button3
+            // btnChangeHuella
             // 
-            button3.Location = new Point(101, 212);
-            button3.Margin = new Padding(3, 2, 3, 2);
-            button3.Name = "button3";
-            button3.Size = new Size(186, 26);
-            button3.TabIndex = 18;
-            button3.Text = "Cambiar Huella";
-            button3.UseVisualStyleBackColor = true;
+            btnChangeHuella.Location = new Point(101, 212);
+            btnChangeHuella.Margin = new Padding(3, 2, 3, 2);
+            btnChangeHuella.Name = "btnChangeHuella";
+            btnChangeHuella.Size = new Size(186, 26);
+            btnChangeHuella.TabIndex = 18;
+            btnChangeHuella.Text = "Cambiar Huella";
+            btnChangeHuella.UseVisualStyleBackColor = true;
+            btnChangeHuella.Click += btnChangeHuella_Click;
             // 
             // label7
             // 
@@ -106,14 +172,15 @@
             label7.TabIndex = 17;
             label7.Text = "Carrera";
             // 
-            // comboBox1
+            // txtCarrera
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(101, 177);
-            comboBox1.Margin = new Padding(3, 2, 3, 2);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(186, 25);
-            comboBox1.TabIndex = 16;
+            txtCarrera.DropDownStyle = ComboBoxStyle.DropDownList;
+            txtCarrera.FormattingEnabled = true;
+            txtCarrera.Location = new Point(101, 177);
+            txtCarrera.Margin = new Padding(3, 2, 3, 2);
+            txtCarrera.Name = "txtCarrera";
+            txtCarrera.Size = new Size(186, 25);
+            txtCarrera.TabIndex = 16;
             // 
             // label6
             // 
@@ -126,14 +193,14 @@
             label6.TabIndex = 15;
             label6.Text = "NIT";
             // 
-            // textBox5
+            // txtNit
             // 
-            textBox5.Font = new Font("Lucida Sans Unicode", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
-            textBox5.Location = new Point(101, 146);
-            textBox5.Margin = new Padding(3, 2, 3, 2);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(186, 30);
-            textBox5.TabIndex = 14;
+            txtNit.Font = new Font("Lucida Sans Unicode", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
+            txtNit.Location = new Point(101, 146);
+            txtNit.Margin = new Padding(3, 2, 3, 2);
+            txtNit.Name = "txtNit";
+            txtNit.Size = new Size(186, 30);
+            txtNit.TabIndex = 14;
             // 
             // label5
             // 
@@ -146,14 +213,14 @@
             label5.TabIndex = 13;
             label5.Text = "DUI";
             // 
-            // textBox4
+            // txtDui
             // 
-            textBox4.Font = new Font("Lucida Sans Unicode", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
-            textBox4.Location = new Point(101, 116);
-            textBox4.Margin = new Padding(3, 2, 3, 2);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(186, 30);
-            textBox4.TabIndex = 12;
+            txtDui.Font = new Font("Lucida Sans Unicode", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
+            txtDui.Location = new Point(101, 116);
+            txtDui.Margin = new Padding(3, 2, 3, 2);
+            txtDui.Name = "txtDui";
+            txtDui.Size = new Size(186, 30);
+            txtDui.TabIndex = 12;
             // 
             // label4
             // 
@@ -166,14 +233,14 @@
             label4.TabIndex = 11;
             label4.Text = "Teléfono";
             // 
-            // textBox3
+            // txtTelefono
             // 
-            textBox3.Font = new Font("Lucida Sans Unicode", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
-            textBox3.Location = new Point(101, 85);
-            textBox3.Margin = new Padding(3, 2, 3, 2);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(186, 30);
-            textBox3.TabIndex = 10;
+            txtTelefono.Font = new Font("Lucida Sans Unicode", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
+            txtTelefono.Location = new Point(101, 85);
+            txtTelefono.Margin = new Padding(3, 2, 3, 2);
+            txtTelefono.Name = "txtTelefono";
+            txtTelefono.Size = new Size(186, 30);
+            txtTelefono.TabIndex = 10;
             // 
             // label3
             // 
@@ -186,14 +253,14 @@
             label3.TabIndex = 9;
             label3.Text = "Apellidos";
             // 
-            // textBox2
+            // txtApellidos
             // 
-            textBox2.Font = new Font("Lucida Sans Unicode", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
-            textBox2.Location = new Point(101, 54);
-            textBox2.Margin = new Padding(3, 2, 3, 2);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(186, 30);
-            textBox2.TabIndex = 8;
+            txtApellidos.Font = new Font("Lucida Sans Unicode", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
+            txtApellidos.Location = new Point(101, 54);
+            txtApellidos.Margin = new Padding(3, 2, 3, 2);
+            txtApellidos.Name = "txtApellidos";
+            txtApellidos.Size = new Size(186, 30);
+            txtApellidos.TabIndex = 8;
             // 
             // label1
             // 
@@ -206,115 +273,79 @@
             label1.TabIndex = 7;
             label1.Text = "Nombres";
             // 
-            // textBox1
+            // txtNombres
             // 
-            textBox1.Font = new Font("Lucida Sans Unicode", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox1.Location = new Point(101, 23);
-            textBox1.Margin = new Padding(3, 2, 3, 2);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(186, 30);
-            textBox1.TabIndex = 2;
+            txtNombres.Font = new Font("Lucida Sans Unicode", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
+            txtNombres.Location = new Point(101, 23);
+            txtNombres.Margin = new Padding(3, 2, 3, 2);
+            txtNombres.Name = "txtNombres";
+            txtNombres.Size = new Size(186, 30);
+            txtNombres.TabIndex = 2;
             // 
-            // button2
+            // btnGuardar
             // 
-            button2.Enabled = false;
-            button2.Location = new Point(152, 268);
-            button2.Margin = new Padding(3, 2, 3, 2);
-            button2.Name = "button2";
-            button2.Size = new Size(134, 32);
-            button2.TabIndex = 1;
-            button2.Text = "Guardar";
-            button2.UseVisualStyleBackColor = true;
+            btnGuardar.Location = new Point(152, 268);
+            btnGuardar.Margin = new Padding(3, 2, 3, 2);
+            btnGuardar.Name = "btnGuardar";
+            btnGuardar.Size = new Size(134, 32);
+            btnGuardar.TabIndex = 1;
+            btnGuardar.Text = "Guardar";
+            btnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.Click += btnGuardar_Click;
             // 
-            // button1
+            // btnEliminar
             // 
-            button1.Location = new Point(13, 268);
-            button1.Margin = new Padding(3, 2, 3, 2);
-            button1.Name = "button1";
-            button1.Size = new Size(134, 32);
-            button1.TabIndex = 0;
-            button1.Text = "Eliminar";
-            button1.UseVisualStyleBackColor = true;
-            // 
-            // groupBox1
-            // 
-            groupBox1.Controls.Add(label8);
-            groupBox1.Controls.Add(button3);
-            groupBox1.Controls.Add(label7);
-            groupBox1.Controls.Add(comboBox1);
-            groupBox1.Controls.Add(label6);
-            groupBox1.Controls.Add(textBox5);
-            groupBox1.Controls.Add(label5);
-            groupBox1.Controls.Add(textBox4);
-            groupBox1.Controls.Add(label4);
-            groupBox1.Controls.Add(textBox3);
-            groupBox1.Controls.Add(label3);
-            groupBox1.Controls.Add(textBox2);
-            groupBox1.Controls.Add(label1);
-            groupBox1.Controls.Add(textBox1);
-            groupBox1.Controls.Add(button2);
-            groupBox1.Controls.Add(button1);
-            groupBox1.Font = new Font("Lucida Sans Unicode", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
-            groupBox1.Location = new Point(18, 66);
-            groupBox1.Margin = new Padding(3, 2, 3, 2);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new Padding(3, 2, 3, 2);
-            groupBox1.Size = new Size(304, 316);
-            groupBox1.TabIndex = 9;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Editar";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Lucida Sans Unicode", 22.2F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.ForeColor = SystemColors.ActiveCaptionText;
-            label2.Location = new Point(10, 16);
-            label2.Name = "label2";
-            label2.Size = new Size(329, 37);
-            label2.TabIndex = 7;
-            label2.Text = "Listado de Docentes";
+            btnEliminar.Location = new Point(13, 268);
+            btnEliminar.Margin = new Padding(3, 2, 3, 2);
+            btnEliminar.Name = "btnEliminar";
+            btnEliminar.Size = new Size(134, 32);
+            btnEliminar.TabIndex = 0;
+            btnEliminar.Text = "Eliminar";
+            btnEliminar.UseVisualStyleBackColor = true;
             // 
             // DocentesWF
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(529, 414);
-            Controls.Add(groupBox1);
-            Controls.Add(label2);
+            ClientSize = new Size(578, 423);
             Controls.Add(panel1);
+            ForeColor = SystemColors.ActiveCaptionText;
             FormBorderStyle = FormBorderStyle.None;
             Name = "DocentesWF";
             Text = "DocentesWF";
             panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            panel3.ResumeLayout(false);
+            panel3.PerformLayout();
+            panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)gridDocentes).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
         private Panel panel1;
-        private Label label8;
-        private Button button3;
-        private Label label7;
-        private ComboBox comboBox1;
-        private Label label6;
-        private TextBox textBox5;
-        private Label label5;
-        private TextBox textBox4;
-        private Label label4;
-        private TextBox textBox3;
-        private Label label3;
-        private TextBox textBox2;
-        private Label label1;
-        private TextBox textBox1;
-        private Button button2;
-        private Button button1;
-        private GroupBox groupBox1;
-        private DataGridView dataGridView1;
+        private Panel panel3;
+        private Panel panel2;
         private Label label2;
+        private GroupBox groupBox1;
+        private Label label8;
+        private Button btnChangeHuella;
+        private Label label7;
+        private ComboBox txtCarrera;
+        private Label label6;
+        private TextBox txtNit;
+        private Label label5;
+        private TextBox txtDui;
+        private Label label4;
+        private TextBox txtTelefono;
+        private Label label3;
+        private TextBox txtApellidos;
+        private Label label1;
+        private TextBox txtNombres;
+        private Button btnGuardar;
+        private Button btnEliminar;
+        private DataGridView gridDocentes;
     }
 }

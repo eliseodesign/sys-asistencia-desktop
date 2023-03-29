@@ -43,11 +43,18 @@
             label6 = new Label();
             pictureBox2 = new PictureBox();
             label5 = new Label();
+            panel1 = new Panel();
+            lblLoginDocente = new Label();
+            groupBox1 = new GroupBox();
+            pictureBox4 = new PictureBox();
             panelLateral.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panelFooter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            panel1.SuspendLayout();
+            groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             SuspendLayout();
             // 
             // panelLateral
@@ -65,6 +72,7 @@
             // 
             // label3
             // 
+            label3.Anchor = AnchorStyles.Left;
             label3.AutoSize = true;
             label3.Font = new Font("Lucida Sans Unicode", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             label3.ForeColor = SystemColors.ButtonFace;
@@ -76,6 +84,7 @@
             // 
             // label2
             // 
+            label2.Anchor = AnchorStyles.Left;
             label2.AutoSize = true;
             label2.Font = new Font("Lucida Sans Unicode", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             label2.ForeColor = SystemColors.ButtonFace;
@@ -97,6 +106,7 @@
             // 
             // pictureBox1
             // 
+            pictureBox1.Anchor = AnchorStyles.Left;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
             pictureBox1.Location = new Point(50, 41);
             pictureBox1.Name = "pictureBox1";
@@ -120,7 +130,7 @@
             label4.AutoSize = true;
             label4.Font = new Font("Lucida Sans Unicode", 9F, FontStyle.Regular, GraphicsUnit.Point);
             label4.ForeColor = Color.Gray;
-            label4.Location = new Point(6, 8);
+            label4.Location = new Point(6, 10);
             label4.Name = "label4";
             label4.Size = new Size(396, 16);
             label4.TabIndex = 4;
@@ -128,14 +138,15 @@
             // 
             // btnIniciarSesion
             // 
+            btnIniciarSesion.Anchor = AnchorStyles.None;
             btnIniciarSesion.BackColor = Color.FromArgb(58, 163, 217);
             btnIniciarSesion.Cursor = Cursors.Hand;
             btnIniciarSesion.FlatStyle = FlatStyle.Flat;
             btnIniciarSesion.Font = new Font("Lucida Sans Unicode", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             btnIniciarSesion.ForeColor = SystemColors.ButtonFace;
-            btnIniciarSesion.Location = new Point(426, 203);
+            btnIniciarSesion.Location = new Point(97, 184);
             btnIniciarSesion.Name = "btnIniciarSesion";
-            btnIniciarSesion.Size = new Size(183, 37);
+            btnIniciarSesion.Size = new Size(231, 37);
             btnIniciarSesion.TabIndex = 28;
             btnIniciarSesion.Text = "Iniciar Sesión";
             btnIniciarSesion.UseVisualStyleBackColor = false;
@@ -143,10 +154,11 @@
             // 
             // txtUseKey
             // 
+            txtUseKey.Anchor = AnchorStyles.None;
             txtUseKey.BackColor = SystemColors.Control;
             txtUseKey.BorderStyle = BorderStyle.None;
             txtUseKey.Font = new Font("Lucida Sans Unicode", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtUseKey.Location = new Point(363, 149);
+            txtUseKey.Location = new Point(74, 139);
             txtUseKey.Margin = new Padding(10, 3, 3, 3);
             txtUseKey.Name = "txtUseKey";
             txtUseKey.PasswordChar = '●';
@@ -156,10 +168,11 @@
             // 
             // txtUserName
             // 
+            txtUserName.Anchor = AnchorStyles.None;
             txtUserName.BackColor = SystemColors.Control;
             txtUserName.BorderStyle = BorderStyle.None;
             txtUserName.Font = new Font("Lucida Sans Unicode", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtUserName.Location = new Point(363, 99);
+            txtUserName.Location = new Point(74, 89);
             txtUserName.Margin = new Padding(10, 3, 3, 3);
             txtUserName.Name = "txtUserName";
             txtUserName.PlaceholderText = "Ingrese su usuario";
@@ -168,8 +181,9 @@
             // 
             // pictureBox3
             // 
+            pictureBox3.Anchor = AnchorStyles.Top;
             pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(318, 149);
+            pictureBox3.Location = new Point(29, -265);
             pictureBox3.Name = "pictureBox3";
             pictureBox3.Size = new Size(32, 32);
             pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
@@ -178,10 +192,11 @@
             // 
             // label6
             // 
+            label6.Anchor = AnchorStyles.None;
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label6.ForeColor = Color.DimGray;
-            label6.Location = new Point(356, 160);
+            label6.Location = new Point(67, 150);
             label6.Name = "label6";
             label6.Size = new Size(325, 21);
             label6.TabIndex = 30;
@@ -189,8 +204,9 @@
             // 
             // pictureBox2
             // 
+            pictureBox2.Anchor = AnchorStyles.None;
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(318, 99);
+            pictureBox2.Location = new Point(29, 89);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(32, 32);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
@@ -199,31 +215,82 @@
             // 
             // label5
             // 
+            label5.Anchor = AnchorStyles.None;
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label5.ForeColor = Color.DimGray;
-            label5.Location = new Point(356, 110);
+            label5.Location = new Point(67, 100);
             label5.Name = "label5";
             label5.Size = new Size(325, 21);
             label5.TabIndex = 29;
             label5.Text = "_____________________________________________";
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(lblLoginDocente);
+            panel1.Controls.Add(groupBox1);
+            panel1.Dock = DockStyle.Fill;
+            panel1.ForeColor = SystemColors.ControlDarkDark;
+            panel1.Location = new Point(250, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(534, 340);
+            panel1.TabIndex = 31;
+            panel1.Paint += panel1_Paint;
+            // 
+            // lblLoginDocente
+            // 
+            lblLoginDocente.AutoSize = true;
+            lblLoginDocente.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            lblLoginDocente.ForeColor = Color.FromArgb(58, 163, 217);
+            lblLoginDocente.Location = new Point(201, 312);
+            lblLoginDocente.Name = "lblLoginDocente";
+            lblLoginDocente.Size = new Size(138, 19);
+            lblLoginDocente.TabIndex = 32;
+            lblLoginDocente.Text = "Iniciar como Docente";
+            lblLoginDocente.Click += lblLoginDocente_Click;
+            // 
+            // groupBox1
+            // 
+            groupBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            groupBox1.AutoSize = true;
+            groupBox1.Controls.Add(pictureBox4);
+            groupBox1.Controls.Add(pictureBox3);
+            groupBox1.Controls.Add(btnIniciarSesion);
+            groupBox1.Controls.Add(pictureBox2);
+            groupBox1.Controls.Add(txtUseKey);
+            groupBox1.Controls.Add(txtUserName);
+            groupBox1.Controls.Add(label5);
+            groupBox1.Controls.Add(label6);
+            groupBox1.ForeColor = SystemColors.AppWorkspace;
+            groupBox1.Location = new Point(58, 36);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(423, 274);
+            groupBox1.TabIndex = 31;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Sesión";
+            // 
+            // pictureBox4
+            // 
+            pictureBox4.Anchor = AnchorStyles.None;
+            pictureBox4.Image = (Image)resources.GetObject("pictureBox4.Image");
+            pictureBox4.Location = new Point(29, 139);
+            pictureBox4.Name = "pictureBox4";
+            pictureBox4.Size = new Size(32, 32);
+            pictureBox4.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox4.TabIndex = 31;
+            pictureBox4.TabStop = false;
             // 
             // LoginWF
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(784, 375);
-            Controls.Add(btnIniciarSesion);
+            Controls.Add(panel1);
             Controls.Add(panelFooter);
-            Controls.Add(txtUseKey);
             Controls.Add(panelLateral);
-            Controls.Add(txtUserName);
-            Controls.Add(pictureBox3);
-            Controls.Add(label5);
-            Controls.Add(label6);
-            Controls.Add(pictureBox2);
             FormBorderStyle = FormBorderStyle.None;
             Name = "LoginWF";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "LoginWF";
             panelLateral.ResumeLayout(false);
             panelLateral.PerformLayout();
@@ -232,8 +299,12 @@
             panelFooter.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -252,5 +323,9 @@
         private Label label6;
         private PictureBox pictureBox2;
         private Label label5;
+        private Panel panel1;
+        private GroupBox groupBox1;
+        private PictureBox pictureBox4;
+        private Label lblLoginDocente;
     }
 }

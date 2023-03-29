@@ -10,13 +10,10 @@ using System.Windows.Forms;
 
 namespace Esfe.SysAsistencia.UI.Components
 {
-
-    public partial class AsistenciaWF : Form
+    public partial class HomeWF : Form
     {
-        public Panel _panel_app;
-        public AsistenciaWF(Panel panel)
+        public HomeWF()
         {
-            _panel_app = panel;
             InitializeComponent();
         }
     }

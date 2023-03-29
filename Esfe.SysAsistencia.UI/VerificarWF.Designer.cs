@@ -1,6 +1,6 @@
 ﻿namespace Esfe.SysAsistencia.UI
 {
-    partial class MainWF
+    partial class VerificarWF
     {
         /// <summary>
         /// Required designer variable.
@@ -28,34 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            panelGeneral = new Panel();
             SuspendLayout();
             // 
-            // panelGeneral
-            // 
-            panelGeneral.Dock = DockStyle.Fill;
-            panelGeneral.Location = new Point(0, 0);
-            panelGeneral.Margin = new Padding(0);
-            panelGeneral.Name = "panelGeneral";
-            panelGeneral.Size = new Size(800, 450);
-            panelGeneral.TabIndex = 1;
-            // 
-            // MainWF
+            // VerificarWF
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.Control;
             ClientSize = new Size(800, 450);
-            Controls.Add(panelGeneral);
-            ForeColor = Color.White;
-            Name = "MainWF";
-            Opacity = 0.97D;
-            StartPosition = FormStartPosition.CenterScreen;
-            Text = "Log In";
+            Name = "VerificarWF";
+            Text = "VerificarWF";
+            FormClosing += VerificarWF_FormClosing;
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
-        public Panel panelGeneral;
     }
 }

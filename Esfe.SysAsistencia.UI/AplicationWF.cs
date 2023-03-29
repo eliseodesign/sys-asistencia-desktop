@@ -20,12 +20,22 @@ namespace Esfe.SysAsistencia.UI
         {
             _panelGeneral = panel;
             InitializeComponent();
-            buttons_list[0]= btnAsistencia;
-            buttons_list[1]=btnAlumnos;
-            buttons_list[2]=btnDocentes;
-            buttons_list[3]=btnGrupos;
-            
+            // bar superior 
+            Panels.AgregarPanel(panelBar, new BarWF());
+
+            buttons_list[0] = btnAsistencia;
+            buttons_list[1] = btnAlumnos;
+            buttons_list[2] = btnDocentes;
+            buttons_list[3] = btnGrupos;
+
             Panels.AgregarPanel(PanelApp, new DocentesWF(PanelApp));
+
+            if(State.TotalAccess == false)
+            {
+                btnAlumnos.Enabled = false;
+                btnDocentes.Enabled = false;
+                btnGrupos.Enabled = false;
+            }
         }
 
         private void btnCerrarSesion_Click(object sender, EventArgs e)
@@ -46,7 +56,7 @@ namespace Esfe.SysAsistencia.UI
             {
                 i.BackColor = flat_color;
             }
-            b.BackColor = pressed_color; 
+            b.BackColor = pressed_color;
         }
 
         //Botones del menu
@@ -73,5 +83,7 @@ namespace Esfe.SysAsistencia.UI
             Panels.AgregarPanel(PanelApp, new GruposWF(PanelApp));
             SetButtonsColors(btnGrupos);
         }
+
+
     }
 }
