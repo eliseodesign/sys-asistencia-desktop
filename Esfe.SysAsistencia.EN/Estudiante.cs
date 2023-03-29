@@ -10,10 +10,11 @@ namespace Esfe.SysAsistencia.EN
     {
         public int Id { get; set; }
         public string Nombres { get; set; }
-        public string Apellidos { get; set; }
-        public byte[] HuellaDigital { get; set; } 
-        public string Carrera {get; set;}
+        public string Apellidos { get; set;}
+        public string IdCarrera { get; set; }
+        public string IdGrupo {get; set; }
         public int Año {get; set;}
-        public int Grupo {get;set ;}
+        public string Cel { get; set; }
+        public byte[] HuellaDigital { get; set; } 
     }
 }
