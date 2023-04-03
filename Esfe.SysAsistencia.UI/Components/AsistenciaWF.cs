@@ -23,7 +23,7 @@ namespace Esfe.SysAsistencia.UI.Components
 
             var codigos = State.DocenteLoged.GrupoCodigos;
             cbxGrupo.DataSource = null;
-            cbxGrupo.DataSource = codigos
+            cbxGrupo.DataSource = codigos;
         }
 
         private void cbxGrupo_SelectedIndexChanged(object sender, EventArgs e)
