@@ -11,7 +11,6 @@ namespace Esfe.SysAsistencia.DAL
     public class EstudianteDAL
     {
         private static List<Estudiante> Estudiantes;
-
         private string Path { get; } = "estudiantes.json";
 
         public Estudiante Existente { get; set; }
@@ -30,8 +29,6 @@ namespace Esfe.SysAsistencia.DAL
         }
         public bool AgregarEstudiante(Estudiante estudiante)
         {
-            
-
             if (VerificarHuella(estudiante) != null)
             {
                 return false;
@@ -44,9 +41,8 @@ namespace Esfe.SysAsistencia.DAL
 
         public Estudiante VerificarHuella(Estudiante estudiante)
         {
-            Existente = Estudiantes.FirstOrDefault(h => h.Huella == estudiante.Huella);
+            return Estudiantes.FirstOrDefault(h => h.Huella == estudiante.Huella);
 
-            return Existente;
         }
 
         public List<Estudiante> ObtenerEstudiantes()

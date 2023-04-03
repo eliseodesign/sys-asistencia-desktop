@@ -24,16 +24,13 @@ namespace Esfe.SysAsistencia.DAL
                 ListaDocentes.Add(docente);
             
                 return true;
-
         }
 
         public Docente VerificarHuella(Docente docente)
         {
-            Existente = ListaDocentes.FirstOrDefault(h => h.Huella == docente.Huella);
+           return ListaDocentes.FirstOrDefault(h => h.Huella == docente.Huella);
 
-            return Existente;
         }
-
 
         public DocenteDAL()
         {
