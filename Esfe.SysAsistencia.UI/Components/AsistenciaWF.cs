@@ -12,7 +12,6 @@ using Esfe.SysAsistencia.UI.Helpers;
 
 namespace Esfe.SysAsistencia.UI.Components
 {
-
     public partial class AsistenciaWF : Form
     {
         public Panel _panel_app;
@@ -24,9 +23,7 @@ namespace Esfe.SysAsistencia.UI.Components
 
             var codigos = State.DocenteLoged.GrupoCodigos;
             cbxGrupo.DataSource = null;
-            cbxGrupo.DataSource = codigos;
-
-
+            cbxGrupo.DataSource = codigos
         }
 
         private void cbxGrupo_SelectedIndexChanged(object sender, EventArgs e)
@@ -34,7 +31,6 @@ namespace Esfe.SysAsistencia.UI.Components
             string grupo = cbxGrupo.SelectedValue.ToString();
             MessageBox.Show(grupo);
 
-            //var todosLosPinchesEstudiante = State.estudianteBL.ObtenerEstudiante().Where(e => e.CodigoGrupo == grupo).ToList();
             List<Estudiante> lista = new List<Estudiante>();
             foreach(var ee in State.estudianteBL.ObtenerEstudiante())
             {

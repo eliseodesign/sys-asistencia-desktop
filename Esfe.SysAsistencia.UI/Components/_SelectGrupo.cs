@@ -29,7 +29,6 @@ namespace Esfe.SysAsistencia.UI.Components
                 clbGruposCarrera.Items.Add(gg);
             }
         }
-
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             if (clbGruposCarrera.CheckedItems.Count > 0)
