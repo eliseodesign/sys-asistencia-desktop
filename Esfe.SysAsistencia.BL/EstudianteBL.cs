@@ -10,21 +10,26 @@ namespace Esfe.SysAsistencia.BL
 {
     public class EstudianteBL
     {
-        private EstudianteDAL estudianteDAL = new EstudianteDAL();
+        private EstudianteDAL oEstudianteDAL = new EstudianteDAL();
 
-        public void AgregarEstudiante(Estudiante estudiante)
+        public bool AgregarEstudiante(Estudiante Estudiante)
         {
-            estudianteDAL.AgregarEstudiante(estudiante);
+            return oEstudianteDAL.AgregarEstudiante(Estudiante);
         }
 
         public List<Estudiante> ObtenerEstudiante()
         {
-            return estudianteDAL.ObtenerEstudiantes();
+            return oEstudianteDAL.ObtenerEstudiantes();
         }
 
-        public bool ExisteEstudiatne(Estudiante estudiante)
+        public bool ExisteEstudiatne(Estudiante Estudiante)
         {
-            return estudianteDAL.ExisteEstudiante(estudiante);
+            return oEstudianteDAL.ExisteEstudiante(Estudiante);
         }
+        public void GuadarJson()
+        {
+            oEstudianteDAL.GuardarJson();
+        }
+
     }
 }

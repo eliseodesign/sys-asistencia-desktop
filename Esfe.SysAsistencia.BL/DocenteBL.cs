@@ -10,21 +10,36 @@ namespace Esfe.SysAsistencia.BL
 {
     public class DocenteBL
     {
-        private DocenteDAL docenteDAL = new DocenteDAL();
+        private DocenteDAL oDocenteDAL = new DocenteDAL();
 
-        public void AgregarDocente(Docente docente)
+        public bool AgregarDocente(Docente docente)
         {
-            docenteDAL.AgregarDocente(docente);
+            return oDocenteDAL.AgregarDocente(docente);
         }
 
         public List<Docente> ObtenerDocentes()
         {
-            return docenteDAL.ObtenerDocentes();
+            return oDocenteDAL.ObtenerDocentes();
         }
 
         public bool ExisteDocente(Docente buscar)
         {
-            return docenteDAL.ExisteDocente(buscar);
+            return oDocenteDAL.ExisteDocente(buscar);
+        }
+
+        public void EliminarDocente(Docente docente)
+        {
+            oDocenteDAL.EliminarDocente(docente);
+        }
+
+        public void ModificarDocente(Docente docente)
+        {
+            oDocenteDAL.ModificarDocente(docente);
+        }
+
+        public void GuadarJson()
+        {
+            oDocenteDAL.GuardarJson();
         }
     }
 }
