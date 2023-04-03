@@ -30,12 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BarWF));
             GuardarDatos = new PictureBox();
-            label1 = new Label();
+            txtLoginNombre = new Label();
             ((System.ComponentModel.ISupportInitialize)GuardarDatos).BeginInit();
             SuspendLayout();
             // 
             // GuardarDatos
             // 
+            GuardarDatos.Cursor = Cursors.Hand;
             GuardarDatos.Image = (Image)resources.GetObject("GuardarDatos.Image");
             GuardarDatos.Location = new Point(2, 0);
             GuardarDatos.Name = "GuardarDatos";
@@ -43,27 +44,30 @@
             GuardarDatos.Size = new Size(38, 42);
             GuardarDatos.TabIndex = 0;
             GuardarDatos.TabStop = false;
+            GuardarDatos.Click += GuardarDatos_Click;
             // 
-            // label1
+            // txtLoginNombre
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.ForeColor = SystemColors.ButtonFace;
-            label1.Location = new Point(584, 9);
-            label1.Name = "label1";
-            label1.Size = new Size(0, 21);
-            label1.TabIndex = 1;
+            txtLoginNombre.Anchor = AnchorStyles.Top;
+            txtLoginNombre.AutoSize = true;
+            txtLoginNombre.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            txtLoginNombre.ForeColor = SystemColors.ButtonFace;
+            txtLoginNombre.Location = new Point(686, 8);
+            txtLoginNombre.Name = "txtLoginNombre";
+            txtLoginNombre.Size = new Size(42, 21);
+            txtLoginNombre.TabIndex = 1;
+            txtLoginNombre.Text = "User";
             // 
-            // Bar
+            // BarWF
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(2, 24, 58);
             ClientSize = new Size(800, 38);
-            Controls.Add(label1);
+            Controls.Add(txtLoginNombre);
             Controls.Add(GuardarDatos);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "Bar";
+            Name = "BarWF";
             Text = "Bar";
             ((System.ComponentModel.ISupportInitialize)GuardarDatos).EndInit();
             ResumeLayout(false);
@@ -73,6 +77,6 @@
         #endregion
 
         private PictureBox GuardarDatos;
-        private Label label1;
+        private Label txtLoginNombre;
     }
 }

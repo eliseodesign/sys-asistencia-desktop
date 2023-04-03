@@ -32,9 +32,12 @@
             // 
             // VerificarWF
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(907, 616);
+            Margin = new Padding(5, 7, 5, 7);
+            MaximumSize = new Size(925, 663);
+            MinimumSize = new Size(925, 663);
             Name = "VerificarWF";
             Text = "VerificarWF";
             FormClosing += VerificarWF_FormClosing;

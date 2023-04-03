@@ -22,24 +22,19 @@ namespace Esfe.SysAsistencia.UI
             InitializeComponent();
             // bar superior 
             Panels.AgregarPanel(panelBar, new BarWF());
+            UserLoged();
 
             buttons_list[0] = btnAsistencia;
             buttons_list[1] = btnAlumnos;
             buttons_list[2] = btnDocentes;
             buttons_list[3] = btnGrupos;
 
-            Panels.AgregarPanel(PanelApp, new DocentesWF(PanelApp));
 
-            if(State.TotalAccess == false)
-            {
-                btnAlumnos.Enabled = false;
-                btnDocentes.Enabled = false;
-                btnGrupos.Enabled = false;
-            }
         }
 
         private void btnCerrarSesion_Click(object sender, EventArgs e)
         {
+            State.TotalAccess = false;
             Panels.SustituirPanel(_panelGeneral, new LoginWF(_panelGeneral));
         }
 
@@ -60,6 +55,23 @@ namespace Esfe.SysAsistencia.UI
         }
 
         //Botones del menu
+
+        //Loged
+        private void UserLoged() //En esta parte se le darán los privilegios al usuario
+        {
+            Panels.AgregarPanel(PanelApp, new HomeWF());
+            if (!State.TotalAccess)
+            {
+                btnAlumnos.Enabled = false;
+                btnDocentes.Enabled = false;
+                btnGrupos.Enabled = false;
+            }
+            else
+            {
+                btnAsistencia.Enabled = false;
+                //Nothing to do
+            }
+        }
         private void btnDocentes_Click(object sender, EventArgs e)
         {
             Panels.AgregarPanel(PanelApp, new DocentesWF(PanelApp));
@@ -84,6 +96,13 @@ namespace Esfe.SysAsistencia.UI
             SetButtonsColors(btnGrupos);
         }
 
-
+        private void lblAsitencia_Click(object sender, EventArgs e)
+        {
+            Panels.SustituirPanel(PanelApp, new HomeWF());
+            foreach (Button i in buttons_list)
+            {
+                i.BackColor = Color.FromArgb(0, 40, 100);
+            };
+        }
     }
 }

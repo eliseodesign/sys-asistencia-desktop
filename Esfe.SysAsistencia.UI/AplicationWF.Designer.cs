@@ -41,7 +41,7 @@
             panel2 = new Panel();
             btnAsistencia = new Button();
             label3 = new Label();
-            label1 = new Label();
+            lblAsitencia = new Label();
             label2 = new Label();
             label5 = new Label();
             panelBar = new Panel();
@@ -82,7 +82,7 @@
             mainLateral.Controls.Add(panel2);
             mainLateral.Controls.Add(btnAsistencia);
             mainLateral.Controls.Add(label3);
-            mainLateral.Controls.Add(label1);
+            mainLateral.Controls.Add(lblAsitencia);
             mainLateral.Controls.Add(label2);
             mainLateral.Controls.Add(label5);
             mainLateral.Dock = DockStyle.Left;
@@ -94,15 +94,16 @@
             // btnCerrarSesion
             // 
             btnCerrarSesion.Cursor = Cursors.Hand;
+            btnCerrarSesion.Dock = DockStyle.Bottom;
             btnCerrarSesion.FlatAppearance.BorderSize = 0;
             btnCerrarSesion.FlatStyle = FlatStyle.Flat;
             btnCerrarSesion.Font = new Font("Lucida Sans Unicode", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             btnCerrarSesion.ForeColor = Color.FromArgb(68, 158, 227);
             btnCerrarSesion.Image = Properties.Resources.salida;
             btnCerrarSesion.ImageAlign = ContentAlignment.MiddleLeft;
-            btnCerrarSesion.Location = new Point(12, 309);
+            btnCerrarSesion.Location = new Point(0, 321);
             btnCerrarSesion.Name = "btnCerrarSesion";
-            btnCerrarSesion.Size = new Size(157, 55);
+            btnCerrarSesion.Size = new Size(203, 55);
             btnCerrarSesion.TabIndex = 34;
             btnCerrarSesion.Text = "Cerrar Sesión";
             btnCerrarSesion.TextAlign = ContentAlignment.MiddleRight;
@@ -112,7 +113,7 @@
             // panel5
             // 
             panel5.BackColor = Color.FromArgb(46, 46, 46);
-            panel5.Location = new Point(0, 233);
+            panel5.Location = new Point(0, 244);
             panel5.Name = "panel5";
             panel5.Size = new Size(10, 29);
             panel5.TabIndex = 32;
@@ -125,7 +126,7 @@
             btnGrupos.FlatStyle = FlatStyle.Flat;
             btnGrupos.Font = new Font("Lucida Sans Unicode", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             btnGrupos.ForeColor = SystemColors.ButtonFace;
-            btnGrupos.Location = new Point(12, 233);
+            btnGrupos.Location = new Point(12, 244);
             btnGrupos.Name = "btnGrupos";
             btnGrupos.Size = new Size(191, 29);
             btnGrupos.TabIndex = 31;
@@ -136,7 +137,7 @@
             // panel4
             // 
             panel4.BackColor = Color.FromArgb(46, 46, 46);
-            panel4.Location = new Point(0, 198);
+            panel4.Location = new Point(0, 209);
             panel4.Name = "panel4";
             panel4.Size = new Size(10, 29);
             panel4.TabIndex = 30;
@@ -150,7 +151,7 @@
             btnDocentes.FlatStyle = FlatStyle.Flat;
             btnDocentes.Font = new Font("Lucida Sans Unicode", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             btnDocentes.ForeColor = SystemColors.ButtonFace;
-            btnDocentes.Location = new Point(12, 198);
+            btnDocentes.Location = new Point(12, 209);
             btnDocentes.Name = "btnDocentes";
             btnDocentes.Size = new Size(191, 29);
             btnDocentes.TabIndex = 29;
@@ -161,7 +162,7 @@
             // panel3
             // 
             panel3.BackColor = Color.FromArgb(46, 46, 46);
-            panel3.Location = new Point(0, 163);
+            panel3.Location = new Point(0, 174);
             panel3.Name = "panel3";
             panel3.Size = new Size(10, 29);
             panel3.TabIndex = 28;
@@ -174,7 +175,7 @@
             btnAlumnos.FlatStyle = FlatStyle.Flat;
             btnAlumnos.Font = new Font("Lucida Sans Unicode", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             btnAlumnos.ForeColor = SystemColors.ButtonFace;
-            btnAlumnos.Location = new Point(12, 163);
+            btnAlumnos.Location = new Point(12, 174);
             btnAlumnos.Name = "btnAlumnos";
             btnAlumnos.Size = new Size(191, 29);
             btnAlumnos.TabIndex = 27;
@@ -185,7 +186,7 @@
             // panel2
             // 
             panel2.BackColor = Color.FromArgb(46, 46, 46);
-            panel2.Location = new Point(0, 128);
+            panel2.Location = new Point(0, 139);
             panel2.Name = "panel2";
             panel2.Size = new Size(10, 29);
             panel2.TabIndex = 26;
@@ -198,7 +199,7 @@
             btnAsistencia.FlatStyle = FlatStyle.Flat;
             btnAsistencia.Font = new Font("Lucida Sans Unicode", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             btnAsistencia.ForeColor = SystemColors.ButtonFace;
-            btnAsistencia.Location = new Point(12, 128);
+            btnAsistencia.Location = new Point(12, 139);
             btnAsistencia.Name = "btnAsistencia";
             btnAsistencia.Size = new Size(191, 29);
             btnAsistencia.TabIndex = 25;
@@ -217,16 +218,18 @@
             label3.TabIndex = 5;
             label3.Text = "Esfe/Agape";
             // 
-            // label1
+            // lblAsitencia
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Lucida Sans Unicode", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.ForeColor = SystemColors.ButtonFace;
-            label1.Location = new Point(26, 38);
-            label1.Name = "label1";
-            label1.Size = new Size(159, 34);
-            label1.TabIndex = 4;
-            label1.Text = "Asistencia";
+            lblAsitencia.AutoSize = true;
+            lblAsitencia.Cursor = Cursors.Hand;
+            lblAsitencia.Font = new Font("Lucida Sans Unicode", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lblAsitencia.ForeColor = SystemColors.ButtonFace;
+            lblAsitencia.Location = new Point(26, 38);
+            lblAsitencia.Name = "lblAsitencia";
+            lblAsitencia.Size = new Size(159, 34);
+            lblAsitencia.TabIndex = 4;
+            lblAsitencia.Text = "Asistencia";
+            lblAsitencia.Click += lblAsitencia_Click;
             // 
             // label2
             // 
@@ -289,7 +292,7 @@
         private Panel panel2;
         private Button btnAsistencia;
         private Label label3;
-        private Label label1;
+        private Label lblAsitencia;
         private Label label2;
         private Label label5;
         private Panel panelBar;

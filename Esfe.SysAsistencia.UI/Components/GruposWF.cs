@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Esfe.SysAsistencia.UI.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,6 +18,19 @@ namespace Esfe.SysAsistencia.UI.Components
         {
             _panel_app = panel_app;
             InitializeComponent();
+            gridGrupos.DataSource = State.grupoBL.ObtenerGrupos();
+        }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            _DetailGrupo detailGrupo = new _DetailGrupo("Agregar Grupo", gridGrupos);
+            detailGrupo.ShowDialog();
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            _DetailGrupo detailGrupo = new _DetailGrupo("Editar Grupo", gridGrupos);
+            detailGrupo.ShowDialog();
         }
     }
 }

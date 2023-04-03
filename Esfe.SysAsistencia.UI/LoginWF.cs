@@ -36,7 +36,7 @@ namespace Esfe.SysAsistencia.UI
                 txtUseKey.Text == cordinador.Contrasenia
                 )
             {
-                State.TotalAccess = false;
+                State.TotalAccess = true;
                 Panels.SustituirPanel(_panelGeneral, new AplicationWF(_panelGeneral));
             }
             else
@@ -56,20 +56,22 @@ namespace Esfe.SysAsistencia.UI
             var verify = new VerificarWF(this);
             verify.ShowDialog();
 
-            
+
         }
 
         //Codigo para la verificacion
         public void LoginDocente(bool res)
         {
+            
             if (res)
             {
                 MessageBox.Show("Se ha iniciado sesión como Docente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Panels.SustituirPanel(_panelGeneral, new AplicationWF(_panelGeneral));
+                
             }
             else
             {
-                MessageBox.Show("Nmms usted no es docente mi loco", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("No se pudo iniciar como Docente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             }
         }

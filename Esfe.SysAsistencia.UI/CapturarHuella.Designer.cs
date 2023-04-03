@@ -28,18 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
+            SuspendLayout();
             // 
             // CapturarHuella
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(783, 454);
-            this.Name = "CapturarHuella";
-            this.Text = "CapturarHuella";
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(907, 616);
+            Margin = new Padding(5, 8, 5, 8);
+            MaximumSize = new Size(925, 663);
+            MinimumSize = new Size(925, 663);
+            Name = "CapturarHuella";
+            Text = "CapturarHuella";
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

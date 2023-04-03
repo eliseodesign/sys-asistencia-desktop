@@ -17,7 +17,7 @@ namespace Esfe.SysAsistencia.UI
     {
         private static MySingleton _instance = null;
         private DPFP.Template Template;
-
+        public bool TemplateIsNull = false;
         private MySingleton() { }
 
         public static MySingleton Instance
@@ -34,17 +34,6 @@ namespace Esfe.SysAsistencia.UI
         }
         // --------------- Declaraciones
 
-        public void SetColumnsToGrid(DataGridView grid, string[] columnNames, int gridCount = 2)
-        {
-            grid.AutoGenerateColumns = false;
-            grid.ColumnCount = gridCount;
-
-            for(int i=0; i < gridCount; i++)
-            {
-                grid.Columns[i].Name = columnNames[i];
-                grid.Columns[i].DataPropertyName = columnNames[i];
-                grid.Columns[i].Width = 100;
-            }
-        }
+        
     }
 }

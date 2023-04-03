@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Esfe.SysAsistencia.UI.Helpers;
 
 namespace Esfe.SysAsistencia.UI.Components
 {
@@ -14,9 +15,17 @@ namespace Esfe.SysAsistencia.UI.Components
     {
         public BarWF()
         {
+
             InitializeComponent();
+            if (State.DocenteLoged != null)
+                txtLoginNombre.Text = State.DocenteLoged.Nombres.ToString();
+            else
+                txtLoginNombre.Text = "Admin";
         }
 
-
+        private void GuardarDatos_Click(object sender, EventArgs e)
+        {
+            JsonData.GuardarDatos();
+        }
     }
 }

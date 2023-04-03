@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Esfe.SysAsistencia.UI.Helpers;
 
 namespace Esfe.SysAsistencia.UI.Components
 {
@@ -15,6 +16,19 @@ namespace Esfe.SysAsistencia.UI.Components
         public HomeWF()
         {
             InitializeComponent();
+            lblHora.Text = DateTime.Now.ToString("h:mm:ss");
+            lblFecha.Text = DateTime.Now.ToLongDateString();
+
+            lblDocentes.Text = State.CountDocentes.ToString();
+            lblEstudiantes.Text = State.CountEstudiantes.ToString();
+
         }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            lblHora.Text = DateTime.Now.ToString("h:mm:ss");
+            lblFecha.Text = DateTime.Now.ToLongDateString();
+        }
+
     }
 }

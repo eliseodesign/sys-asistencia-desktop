@@ -44,8 +44,8 @@
             pictureBox2 = new PictureBox();
             label5 = new Label();
             panel1 = new Panel();
-            lblLoginDocente = new Label();
             groupBox1 = new GroupBox();
+            lblLoginDocente = new Label();
             pictureBox4 = new PictureBox();
             panelLateral.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -144,7 +144,7 @@
             btnIniciarSesion.FlatStyle = FlatStyle.Flat;
             btnIniciarSesion.Font = new Font("Lucida Sans Unicode", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             btnIniciarSesion.ForeColor = SystemColors.ButtonFace;
-            btnIniciarSesion.Location = new Point(97, 184);
+            btnIniciarSesion.Location = new Point(101, 146);
             btnIniciarSesion.Name = "btnIniciarSesion";
             btnIniciarSesion.Size = new Size(231, 37);
             btnIniciarSesion.TabIndex = 28;
@@ -158,7 +158,7 @@
             txtUseKey.BackColor = SystemColors.Control;
             txtUseKey.BorderStyle = BorderStyle.None;
             txtUseKey.Font = new Font("Lucida Sans Unicode", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtUseKey.Location = new Point(74, 139);
+            txtUseKey.Location = new Point(78, 101);
             txtUseKey.Margin = new Padding(10, 3, 3, 3);
             txtUseKey.Name = "txtUseKey";
             txtUseKey.PasswordChar = '●';
@@ -172,7 +172,7 @@
             txtUserName.BackColor = SystemColors.Control;
             txtUserName.BorderStyle = BorderStyle.None;
             txtUserName.Font = new Font("Lucida Sans Unicode", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtUserName.Location = new Point(74, 89);
+            txtUserName.Location = new Point(78, 51);
             txtUserName.Margin = new Padding(10, 3, 3, 3);
             txtUserName.Name = "txtUserName";
             txtUserName.PlaceholderText = "Ingrese su usuario";
@@ -196,7 +196,7 @@
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label6.ForeColor = Color.DimGray;
-            label6.Location = new Point(67, 150);
+            label6.Location = new Point(71, 112);
             label6.Name = "label6";
             label6.Size = new Size(325, 21);
             label6.TabIndex = 30;
@@ -206,7 +206,7 @@
             // 
             pictureBox2.Anchor = AnchorStyles.None;
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(29, 89);
+            pictureBox2.Location = new Point(33, 51);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(32, 32);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
@@ -219,7 +219,7 @@
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label5.ForeColor = Color.DimGray;
-            label5.Location = new Point(67, 100);
+            label5.Location = new Point(71, 62);
             label5.Name = "label5";
             label5.Size = new Size(325, 21);
             label5.TabIndex = 29;
@@ -227,7 +227,6 @@
             // 
             // panel1
             // 
-            panel1.Controls.Add(lblLoginDocente);
             panel1.Controls.Add(groupBox1);
             panel1.Dock = DockStyle.Fill;
             panel1.ForeColor = SystemColors.ControlDarkDark;
@@ -237,22 +236,11 @@
             panel1.TabIndex = 31;
             panel1.Paint += panel1_Paint;
             // 
-            // lblLoginDocente
-            // 
-            lblLoginDocente.AutoSize = true;
-            lblLoginDocente.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            lblLoginDocente.ForeColor = Color.FromArgb(58, 163, 217);
-            lblLoginDocente.Location = new Point(201, 312);
-            lblLoginDocente.Name = "lblLoginDocente";
-            lblLoginDocente.Size = new Size(138, 19);
-            lblLoginDocente.TabIndex = 32;
-            lblLoginDocente.Text = "Iniciar como Docente";
-            lblLoginDocente.Click += lblLoginDocente_Click;
-            // 
             // groupBox1
             // 
             groupBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             groupBox1.AutoSize = true;
+            groupBox1.Controls.Add(lblLoginDocente);
             groupBox1.Controls.Add(pictureBox4);
             groupBox1.Controls.Add(pictureBox3);
             groupBox1.Controls.Add(btnIniciarSesion);
@@ -264,16 +252,29 @@
             groupBox1.ForeColor = SystemColors.AppWorkspace;
             groupBox1.Location = new Point(58, 36);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(423, 274);
+            groupBox1.Size = new Size(423, 280);
             groupBox1.TabIndex = 31;
             groupBox1.TabStop = false;
             groupBox1.Text = "Sesión";
+            // 
+            // lblLoginDocente
+            // 
+            lblLoginDocente.Anchor = AnchorStyles.None;
+            lblLoginDocente.AutoSize = true;
+            lblLoginDocente.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            lblLoginDocente.ForeColor = Color.FromArgb(58, 163, 217);
+            lblLoginDocente.Location = new Point(135, 227);
+            lblLoginDocente.Name = "lblLoginDocente";
+            lblLoginDocente.Size = new Size(138, 19);
+            lblLoginDocente.TabIndex = 32;
+            lblLoginDocente.Text = "Iniciar como Docente";
+            lblLoginDocente.Click += lblLoginDocente_Click;
             // 
             // pictureBox4
             // 
             pictureBox4.Anchor = AnchorStyles.None;
             pictureBox4.Image = (Image)resources.GetObject("pictureBox4.Image");
-            pictureBox4.Location = new Point(29, 139);
+            pictureBox4.Location = new Point(33, 101);
             pictureBox4.Name = "pictureBox4";
             pictureBox4.Size = new Size(32, 32);
             pictureBox4.SizeMode = PictureBoxSizeMode.Zoom;

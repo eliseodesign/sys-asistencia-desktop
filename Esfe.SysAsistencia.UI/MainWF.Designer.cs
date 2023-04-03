@@ -37,7 +37,7 @@
             panelGeneral.Location = new Point(0, 0);
             panelGeneral.Margin = new Padding(0);
             panelGeneral.Name = "panelGeneral";
-            panelGeneral.Size = new Size(800, 450);
+            panelGeneral.Size = new Size(934, 561);
             panelGeneral.TabIndex = 1;
             // 
             // MainWF
@@ -45,13 +45,14 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(934, 561);
             Controls.Add(panelGeneral);
             ForeColor = Color.White;
             Name = "MainWF";
             Opacity = 0.97D;
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Log In";
+            Tag = "2";
+            Text = "Sistema de Asistencia";
             ResumeLayout(false);
         }
 

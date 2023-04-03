@@ -1,4 +1,5 @@
 ﻿using Esfe.SysAsistencia.UI.Helpers;
+using Esfe.SysAsistencia.EN;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,6 +10,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Esfe.SysAsistencia.DAL;
 
 namespace Esfe.SysAsistencia.UI
 {
@@ -34,6 +36,7 @@ namespace Esfe.SysAsistencia.UI
             base.Text = "Verificación de Huella Digital";
             Verificator = new DPFP.Verification.Verification();     // Create a fingerprint template verificator
             UpdateStatus(0);
+            UpdateTitleAndDescription(1);
         }
 
         private void UpdateStatus(int FAR)
@@ -53,14 +56,15 @@ namespace Esfe.SysAsistencia.UI
             // TODO: move to a separate task
             if (features != null)
             {
+                Docente docenteVar = new Docente();
                 // Compare the feature set with our template
                 DPFP.Verification.Verification.Result result = new DPFP.Verification.Verification.Result();
-
                 DPFP.Template template = new DPFP.Template();
                 Stream stream;
-                var docentes = State.BL.ObtenerDocentes();
+                var docentes = State.docenteBL.ObtenerDocentes();
                 foreach (var emp in docentes)
                 {
+                    docenteVar = emp;
                     stream = new MemoryStream(emp.Huella);
                     template = new DPFP.Template(stream);
 
@@ -68,16 +72,26 @@ namespace Esfe.SysAsistencia.UI
                     UpdateStatus(result.FARAchieved);
                     if (result.Verified)
                     {
-                        MakeReport("The fingerprint was VERIFIED. " + emp.Nombres);
+                        MakeReport("Huella verificada " + emp.Nombres);
+                        MakeReport("Por favor cierre el formulario.");
+                        UpdateMuestras(1);
                         res = true;
+                        Stop();
                         break;
                     }
                 }
 
+                if (res)
+                {
+                    State.DocenteLoged = docenteVar;
+                    Stop();
 
-
+                }
+                else
+                {
+                    MakeReport("No se reconoce ninguna huella");
+                }
             }
-
         }
 
 
@@ -86,7 +100,13 @@ namespace Esfe.SysAsistencia.UI
             InitializeComponent();
             _padre = padre;
         }
-        
+
+        public VerificarWF(AplicationWF app)
+        {
+            InitializeComponent();
+
+        }
+
 
         private void VerificarWF_FormClosing(object sender, FormClosingEventArgs e)
         {
