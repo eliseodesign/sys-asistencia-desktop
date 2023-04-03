@@ -16,6 +16,7 @@ namespace Esfe.SysAsistencia.UI.Helpers
         public static EstudianteBL estudianteBL { get; set; } = new EstudianteBL();
         public static GrupoBL grupoBL { get; set; } = new GrupoBL();
 
+
         // ----------- propiedades globales de acceso ------------------------------
         public static bool TotalAccess { get; set; }
         public static Docente DocenteLoged { get; set; }
@@ -26,7 +27,6 @@ namespace Esfe.SysAsistencia.UI.Helpers
         //----------------- utilidades ---------------------------------------
         public static int CountDocentes = docenteBL.ObtenerDocentes().Count();
         public static int CountEstudiantes = estudianteBL.ObtenerEstudiante().Count();
-
 
 
         public static class InfoCarrera{
