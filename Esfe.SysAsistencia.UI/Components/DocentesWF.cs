@@ -203,7 +203,7 @@ namespace Esfe.SysAsistencia.UI.Components
                         Cel = Convert.ToString(txtTelefono.Text),
                         Dui = Convert.ToString(txtDui.Text),
                         Nit = Convert.ToString(txtNit.Text),
-                        carrera = txtCarrera.Text
+                        Carrera = txtCarrera.Text
 
                     };
 

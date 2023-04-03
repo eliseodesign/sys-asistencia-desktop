@@ -15,7 +15,7 @@ namespace Esfe.SysAsistencia.EN
         public string Direccion { get; set; }
         public string Cel { get; set; }
         public string Dui { get; set; }
-        public string carrera { get; set; }
+        public string Carrera { get; set; }
         public string Nit { get; set; }
         public byte[] Huella { get; set; }
     }

@@ -15,7 +15,7 @@ namespace Esfe.SysAsistencia.EN
         public string Año { get; set; }
         public string Turno { get; set; }
         public int NumGrupo { get; set; }
-        public int EstudaintesMax { get; set; }
+        public int EstudiantesMax { get; set; }
         public bool[] Horario { get; set; } = new bool[5];
         public int Jornada { get; set; } // 1. Diurna, 2. Nocturna 
 
