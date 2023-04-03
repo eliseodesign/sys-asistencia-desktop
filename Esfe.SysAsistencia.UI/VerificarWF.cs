@@ -22,8 +22,7 @@ namespace Esfe.SysAsistencia.UI
         public bool res = false;
         private DPFP.Template Template;
         private DPFP.Verification.Verification Verificator;
-        //Vaiables
-
+        
         public void Verify(DPFP.Template template)
         {
             Template = template;
@@ -94,7 +93,6 @@ namespace Esfe.SysAsistencia.UI
             }
         }
 
-
         public VerificarWF(LoginWF padre)
         {
             InitializeComponent();
@@ -106,7 +104,6 @@ namespace Esfe.SysAsistencia.UI
             InitializeComponent();
 
         }
-
 
         private void VerificarWF_FormClosing(object sender, FormClosingEventArgs e)
         {

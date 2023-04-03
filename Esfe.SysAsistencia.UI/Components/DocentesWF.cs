@@ -16,14 +16,13 @@ using Esfe.SysAsistencia.DAL;
 
 namespace Esfe.SysAsistencia.UI.Components
 {
-
     public partial class DocentesWF : Form
     {
         public DocenteBL docenteBL = new DocenteBL();
 
         public Panel _panel_app;
 
-        public List<string> ListGruposSelect = new List<string>();
+        public List<string> ListGruposSelect = new List<string>(); // nos servira para almacenar los grupos elegidos
 
         //  -------------------------- Variables para el lector --------------------------
         private DPFP.Template Template;
@@ -81,13 +80,8 @@ namespace Esfe.SysAsistencia.UI.Components
                 RefreshGrid();
                 MessageBox.Show("Se regitró al docente de forma exitosa", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-            //MySingleton.Instance.
-        }
 
         //Funcion para establacer un formato a la tabla
 
@@ -143,7 +137,6 @@ namespace Esfe.SysAsistencia.UI.Components
 
         // Ontemplate: Señal del Lector cuando se ha completado la captura
 
-
         private void OnTemplate(DPFP.Template template)
         {
             this.Invoke(new Function(delegate ()
@@ -166,7 +159,6 @@ namespace Esfe.SysAsistencia.UI.Components
                 {
                     MySingleton.Instance.TemplateIsNull = false;
                     MessageBox.Show("La huella no es valida.", "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
                 }
             }));
         }
@@ -195,7 +187,7 @@ namespace Esfe.SysAsistencia.UI.Components
             }
         }
 
-        //Editar registro
+        //EDITAR REGISTRO
         private void btnModificar_Click(object sender, EventArgs e)
         {
             result = MessageBox.Show("¿Desea modificar este registro?", "MODIFICAR", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
@@ -211,7 +203,7 @@ namespace Esfe.SysAsistencia.UI.Components
                         Cel = Convert.ToString(txtTelefono.Text),
                         Dui = Convert.ToString(txtDui.Text),
                         Nit = Convert.ToString(txtNit.Text),
-                        carrera = txtCarrera.Text
+                        Carrera = txtCarrera.Text
 
                     };
 
@@ -236,7 +228,7 @@ namespace Esfe.SysAsistencia.UI.Components
         }
 
 
-        //Eliminar Registro
+        //ELIMINAR REGISTRO
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             result = MessageBox.Show("¿Desea Eliminar este resgistro?", "ELIMINAR", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
@@ -280,10 +272,7 @@ namespace Esfe.SysAsistencia.UI.Components
             Template = null;
         }
 
-
-
-
-        //Validaciones
+        //VALIDACIONES
         private void txtTelefono_KeyPress(object sender, KeyPressEventArgs e)
         {
 
@@ -330,7 +319,6 @@ namespace Esfe.SysAsistencia.UI.Components
             if (!dui)
             {
                 error.SetError(txtDui, "¡Solo numeros!");
-
             }
             else
             {
@@ -344,23 +332,11 @@ namespace Esfe.SysAsistencia.UI.Components
             if (!nit)
             {
                 error.SetError(txtNit, "¡Solo numeros!");
-
             }
             else
             {
                 error.Clear();
             }
-
-        }
-
-        private void label8_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnGrupos_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void txtCarrera_SelectedValueChanged(object sender, EventArgs e)
@@ -370,8 +346,6 @@ namespace Esfe.SysAsistencia.UI.Components
                 new _SelectGrupo(State.InfoCarrera.idCarrera[txtCarrera.SelectedIndex - 1], ListGruposSelect).ShowDialog();
 
             };
-
-
         }
     }
 }

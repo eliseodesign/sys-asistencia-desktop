@@ -234,7 +234,6 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(534, 340);
             panel1.TabIndex = 31;
-            panel1.Paint += panel1_Paint;
             // 
             // groupBox1
             // 

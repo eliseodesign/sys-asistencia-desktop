@@ -10,21 +10,21 @@ namespace Esfe.SysAsistencia.BL
 {
     public class AsistenciaBL
     {
-        private AsistenciaDAL AsistenciaDAL = new AsistenciaDAL();
+        private AsistenciaDAL oAsistenciaDAL = new AsistenciaDAL();
 
         public void AgregarAsistencia(Asistencia Asistencia)
         {
-            AsistenciaDAL.AgregarAsistencia(Asistencia);
+            oAsistenciaDAL.AgregarAsistencia(Asistencia);
         }
 
         public List<Asistencia> ObtenerAsistencias()
         {
-            return AsistenciaDAL.ObtenerAsistencias();
+            return oAsistenciaDAL.ObtenerAsistencias();
         }
 
         public bool ExisteAsistencia(DateTime buscar)
         {
-            return AsistenciaDAL.ExisteAsistencia(buscar);
+            return oAsistenciaDAL.ExisteAsistencia(buscar);
         }
     }
 }

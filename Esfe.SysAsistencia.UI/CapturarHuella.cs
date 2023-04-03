@@ -21,6 +21,11 @@ namespace Esfe.SysAsistencia.UI
 
     public partial class CapturarHuella : CaptureForm
     {
+                public CapturarHuella()
+        {
+            InitializeComponent();
+
+        }
         public delegate void OnTemplateEventHandler(DPFP.Template template);
         public delegate void OnCompleteEventHandler(DPFP.Template template);
         private DPFP.Template Template;
@@ -101,9 +106,6 @@ namespace Esfe.SysAsistencia.UI
                             Start();
                             break;
                     }
-
-
-
                 }
         }
 
@@ -113,12 +115,7 @@ namespace Esfe.SysAsistencia.UI
             SetStatus(String.Format("Muestras de huellas necesarias: {0}", Enroller.FeaturesNeeded));
         }
 
-        public CapturarHuella()
-        {
-            InitializeComponent();
 
-
-        }
         private DPFP.Processing.Enrollment Enroller;
     }
 }

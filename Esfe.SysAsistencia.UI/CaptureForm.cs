@@ -19,27 +19,10 @@ namespace Esfe.SysAsistencia.UI
     public partial class CaptureForm : Form, DPFP.Capture.EventHandler
     {
 
-
         public CaptureForm()
         {
             InitializeComponent();
-            //this.Size = new Size(812, 509);
-            //this.MinimumSize = new Size(812, 509);
-            //this.MaximumSize = new Size(812, 509);
-            //this.lblMuestra1.MinimumSize = new Size(120, 160);
-            //this.lblMuestra1.MaximumSize = new Size(120, 160);
-            //this.lblMuestra2.MinimumSize = new Size(120, 160);
-            //this.lblMuestra2.MaximumSize = new Size(120, 160);
-            //this.lblMuestra3.MinimumSize = new Size(120, 160);
-            //this.lblMuestra3.MaximumSize = new Size(120, 160);
-            //this.lblMuestra4.MinimumSize = new Size(120, 160);
-            //this.lblMuestra4.MaximumSize = new Size(120, 160);
-            //this.StatusText.MaximumSize = new Size(878, 139);
-            //this.StatusText.MinimumSize = new Size(878, 139);
-
         }
-
-
 
         protected virtual void Init()
         {

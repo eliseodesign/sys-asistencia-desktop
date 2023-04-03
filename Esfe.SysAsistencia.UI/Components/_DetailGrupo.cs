@@ -15,12 +15,8 @@ namespace Esfe.SysAsistencia.UI.Components
     public partial class _DetailGrupo : Form
     {
         private DataGridView _gridGrupo;
-
-        
-
         public _DetailGrupo(string titulo, DataGridView gridGrupo)
         {
-           
             _gridGrupo = gridGrupo;
             InitializeComponent();
             lblTitulo.Text = titulo;
@@ -32,7 +28,6 @@ namespace Esfe.SysAsistencia.UI.Components
             numEstudiantes.Maximum = 30;
             numEstudiantes.Minimum = 15;
             numEstudiantes.ReadOnly = true;
-
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)

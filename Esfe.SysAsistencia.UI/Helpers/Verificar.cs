@@ -11,7 +11,6 @@ namespace Esfe.SysAsistencia.UI.Helpers
 {
     public class Verificar
     {
-        private DocenteBL pruebaxd = new DocenteBL();
         public static bool VerificarTipo<T>(IEnumerable<T> coleccion, Type tipo)
         {
             foreach (var elemento in coleccion)
@@ -41,29 +40,6 @@ namespace Esfe.SysAsistencia.UI.Helpers
                 return true;
 
             }
-
-
-            //if (Char.IsNumber(e.KeyChar))
-            //{
-            //    e.Handled = false;
-            //    return true;
-            //}
-            //else if (Char.IsControl(e.KeyChar))
-            //{
-            //    e.Handled = false;
-            //    return true;
-            //}
-            //else if (e.KeyChar == ' ' &&  e.KeyChar == '-')
-
-            //{
-            //    e.Handled = false;
-            //    return true;
-            //}
-            //else
-            //{
-            //    e.Handled = true;
-            //    return false;
-            //}
         }
 
         public static bool validarLetras(KeyPressEventArgs e)

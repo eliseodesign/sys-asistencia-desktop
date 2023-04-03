@@ -28,8 +28,6 @@ namespace Esfe.SysAsistencia.UI
             buttons_list[1] = btnAlumnos;
             buttons_list[2] = btnDocentes;
             buttons_list[3] = btnGrupos;
-
-
         }
 
         private void btnCerrarSesion_Click(object sender, EventArgs e)
@@ -38,11 +36,8 @@ namespace Esfe.SysAsistencia.UI
             Panels.SustituirPanel(_panelGeneral, new LoginWF(_panelGeneral));
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
 
-        }
-
+        //Botones del menu
         void SetButtonsColors(Button b)
         {
             var pressed_color = Color.FromArgb(60, 152, 222);
@@ -53,8 +48,6 @@ namespace Esfe.SysAsistencia.UI
             }
             b.BackColor = pressed_color;
         }
-
-        //Botones del menu
 
         //Loged
         private void UserLoged() //En esta parte se le darán los privilegios al usuario

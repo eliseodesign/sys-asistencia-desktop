@@ -21,7 +21,6 @@ namespace Esfe.SysAsistencia.UI.Components
 
             lblDocentes.Text = State.CountDocentes.ToString();
             lblEstudiantes.Text = State.CountEstudiantes.ToString();
-
         }
 
         private void timer_Tick(object sender, EventArgs e)

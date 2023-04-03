@@ -12,7 +12,6 @@ namespace Esfe.SysAsistencia.UI.Helpers
 {
     public static class JsonData
     {
-
         public static void GuardarDatos()
         {
             State.docenteBL.GuadarJson();// Obtener la lista de docentes desde tu instancia de DocenteBL

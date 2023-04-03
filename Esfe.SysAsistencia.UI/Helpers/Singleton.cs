@@ -31,9 +31,6 @@ namespace Esfe.SysAsistencia.UI
 
                 return _instance;
             }
-        }
-        // --------------- Declaraciones
-
-        
+        }       
     }
 }

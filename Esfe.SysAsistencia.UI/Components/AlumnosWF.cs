@@ -68,7 +68,6 @@ namespace Esfe.SysAsistencia.UI.Components
         //Refrescar Tabla
         void RefreshGrid()
         {
-
             var estudiantes = State.estudianteBL.ObtenerEstudiante();
             if (estudiantes.Count == 0) return; // si es cero, se retorna
             gridEstudiantes.DataSource = null;

@@ -169,7 +169,6 @@
             label8.Size = new Size(53, 18);
             label8.TabIndex = 19;
             label8.Text = "Huella";
-            label8.Click += label8_Click;
             // 
             // btnChangeHuella
             // 

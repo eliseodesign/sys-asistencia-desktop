@@ -74,7 +74,7 @@ namespace Esfe.SysAsistencia.DAL
         {
             Grupos.RemoveAll(grupo => grupo.Id == id);
         }
-        //// -------------------- json methos -----------------------------------
+        // -------------------- json methos -----------------------------------
         public void GuardarJson()
         {
 

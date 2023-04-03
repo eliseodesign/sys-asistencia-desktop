@@ -15,7 +15,6 @@ namespace Esfe.SysAsistencia.UI.Components
     {
         public BarWF()
         {
-
             InitializeComponent();
             if (State.DocenteLoged != null)
                 txtLoginNombre.Text = State.DocenteLoged.Nombres.ToString();
