@@ -67,7 +67,7 @@ namespace Esfe.SysAsistencia.UI.Components
                 Nit = txtNit.Text,
                 Huella = Template.Bytes,
                 GrupoCodigos = ListGruposSelect
-                
+
             };
 
             var result = State.docenteBL.AgregarDocente(docente);

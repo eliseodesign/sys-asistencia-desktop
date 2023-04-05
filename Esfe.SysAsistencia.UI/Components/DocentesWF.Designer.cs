@@ -223,6 +223,7 @@
             txtNit.Name = "txtNit";
             txtNit.Size = new Size(274, 27);
             txtNit.TabIndex = 14;
+            txtNit.KeyPress += txtTelefono_KeyPress;
             // 
             // label5
             // 
@@ -243,6 +244,7 @@
             txtDui.Name = "txtDui";
             txtDui.Size = new Size(185, 27);
             txtDui.TabIndex = 12;
+            txtDui.KeyPress += txtDui_KeyPress;
             // 
             // label4
             // 
@@ -263,6 +265,7 @@
             txtTelefono.Name = "txtTelefono";
             txtTelefono.Size = new Size(186, 27);
             txtTelefono.TabIndex = 10;
+            txtTelefono.KeyPress += txtNit_KeyPress;
             // 
             // label3
             // 
@@ -283,6 +286,7 @@
             txtApellidos.Name = "txtApellidos";
             txtApellidos.Size = new Size(273, 27);
             txtApellidos.TabIndex = 8;
+            txtApellidos.KeyPress += txtApellidos_KeyPress;
             // 
             // label1
             // 
@@ -303,6 +307,7 @@
             txtNombres.Name = "txtNombres";
             txtNombres.Size = new Size(274, 27);
             txtNombres.TabIndex = 2;
+            txtNombres.KeyPress += txtNombres_KeyPress;
             // 
             // panel2
             // 
