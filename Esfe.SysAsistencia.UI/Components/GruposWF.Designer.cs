@@ -35,8 +35,8 @@
             label8 = new Label();
             label7 = new Label();
             label6 = new Label();
-            comboBox2 = new ComboBox();
-            comboBox1 = new ComboBox();
+            cbxAño = new ComboBox();
+            cbxCarrera = new ComboBox();
             gridGrupos = new DataGridView();
             panel1 = new Panel();
             label5 = new Label();
@@ -76,8 +76,8 @@
             panel2.Controls.Add(label8);
             panel2.Controls.Add(label7);
             panel2.Controls.Add(label6);
-            panel2.Controls.Add(comboBox2);
-            panel2.Controls.Add(comboBox1);
+            panel2.Controls.Add(cbxAño);
+            panel2.Controls.Add(cbxCarrera);
             panel2.Controls.Add(gridGrupos);
             panel2.Dock = DockStyle.Fill;
             panel2.Location = new Point(248, 0);
@@ -128,21 +128,23 @@
             label6.Text = "      Filtrar";
             label6.TextAlign = ContentAlignment.MiddleRight;
             // 
-            // comboBox2
+            // cbxAño
             // 
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(171, 100);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(158, 23);
-            comboBox2.TabIndex = 4;
+            cbxAño.FormattingEnabled = true;
+            cbxAño.Location = new Point(171, 100);
+            cbxAño.Name = "cbxAño";
+            cbxAño.Size = new Size(158, 23);
+            cbxAño.TabIndex = 4;
+            cbxAño.SelectedIndexChanged += actualizarGrid;
             // 
-            // comboBox1
+            // cbxCarrera
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(19, 100);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(146, 23);
-            comboBox1.TabIndex = 3;
+            cbxCarrera.FormattingEnabled = true;
+            cbxCarrera.Location = new Point(19, 100);
+            cbxCarrera.Name = "cbxCarrera";
+            cbxCarrera.Size = new Size(146, 23);
+            cbxCarrera.TabIndex = 3;
+            cbxCarrera.SelectedIndexChanged += actualizarGrid;
             // 
             // gridGrupos
             // 
@@ -267,7 +269,7 @@
         private Label label8;
         private Label label7;
         private Label label6;
-        private ComboBox comboBox2;
-        private ComboBox comboBox1;
+        private ComboBox cbxAño;
+        private ComboBox cbxCarrera;
     }
 }
