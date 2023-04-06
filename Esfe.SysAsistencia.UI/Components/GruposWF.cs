@@ -47,42 +47,29 @@ namespace Esfe.SysAsistencia.UI.Components
 
         private void actualizarGrid(object sender, EventArgs e)
         {
-            // creamos un list para filtrar los grupos
-            List<Grupo> gruposFiltrados = new List<Grupo>();
+            List<Grupo> gruposFiltrados = FiltrarGrupos();
 
-            // validamos de esta manera ya que agregamos a los cbxs un nuevo elemento y si obtenemos el indice al extraer el valor del array corespondiente podría dar error
-            if (cbxCarrera.SelectedIndex <= 0 && cbxAño.SelectedIndex <= 0)
-            {
-                gruposFiltrados = State.grupoBL.ObtenerGrupos();
-            }
-            else if (cbxCarrera.SelectedIndex > 0 && cbxAño.SelectedIndex == 0)
-            {
-                string carrera = State.InfoCarrera.idCarrera[cbxCarrera.SelectedIndex -1];
-
-                gruposFiltrados = State.grupoBL
-                    .ObtenerGrupos()
-                    .Where(x => x.Carrera == carrera).ToList();
-
-            }
-            else if (cbxCarrera.SelectedIndex == 0 && cbxAño.SelectedIndex > 0)
-            {
-                string año = State.InfoCarrera.idAño[cbxAño.SelectedIndex - 1];
-
-                gruposFiltrados = State.grupoBL
-                    .ObtenerGrupos()
-                    .Where(x => x.Año == año).ToList();
-            }
-            else if(cbxCarrera.SelectedIndex > 0 && cbxAño.SelectedIndex > 0)
-            {
-                string carrera = State.InfoCarrera.idCarrera[cbxCarrera.SelectedIndex - 1];
-                string año = State.InfoCarrera.idAño[cbxAño.SelectedIndex - 1];
-                gruposFiltrados = State.grupoBL
-                    .ObtenerGrupos()
-                    .Where(x =>x.Carrera == carrera && x.Año == año).ToList();
-            }
             gridGrupos.DataSource = null;
             gridGrupos.DataSource = gruposFiltrados;
         }
+
+        private List<Grupo> FiltrarGrupos()
+        {
+            string? carrera = null;
+            string? año = null;
+
+            if (cbxCarrera.SelectedIndex > 0)
+                carrera = State.InfoCarrera.idCarrera[cbxCarrera.SelectedIndex - 1];
+
+            if (cbxAño.SelectedIndex > 0)
+                año = State.InfoCarrera.idAño[cbxAño.SelectedIndex - 1];
+
+            return State.grupoBL
+                .ObtenerGrupos()
+                .Where(x => (carrera == null || x.Carrera == carrera) && (año == null || x.Año == año))
+                .ToList();
+        }
+
 
     }
 }
