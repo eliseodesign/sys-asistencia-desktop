@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Esfe.SysAsistencia.DAL
@@ -41,14 +42,22 @@ namespace Esfe.SysAsistencia.DAL
             return Grupos.FirstOrDefault(grupo => grupo.Id == id);
         }
 
-        public void ActualizarGrupo(Grupo grupo)
+        public bool ActualizarGrupo(Grupo update)
         {
-            var grupoActual = ObtenerGrupoPorId(grupo.Id);
-            if (grupoActual != null)
+            var grupo = ObtenerGrupoPorId(update.Id);
+
+            if (grupo != null)
             {
-             
-                
+               // comentado porque es lo que le da identidad a cada grupo
+                //grupo.Codigo = update.Codigo;
+                //grupo.Carrera = update.Carrera;
+                //grupo.Año = update.Año;
+                grupo.Turno = update.Turno;
+                grupo.EstudiantesMax = update.EstudiantesMax;
+
+                return true;
             }
+            return false;
         }
 
         public string AgregarGrupo(Grupo grupo)

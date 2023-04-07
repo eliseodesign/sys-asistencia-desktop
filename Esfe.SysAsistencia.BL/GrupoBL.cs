@@ -26,9 +26,9 @@ namespace Esfe.SysGrupo.BL
             return oGrupoDAL.ObtenerGrupoPorId(id);
         }
 
-        public void ActualizarGrupo(Grupo grupo)
+        public bool ActualizarGrupo(Grupo grupo)
         {
-            oGrupoDAL.ActualizarGrupo(grupo);
+            return oGrupoDAL.ActualizarGrupo(grupo);
         }
         public void EliminarGrupo(int id)
         {

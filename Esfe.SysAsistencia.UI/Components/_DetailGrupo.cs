@@ -14,14 +14,88 @@ namespace Esfe.SysAsistencia.UI.Components
 {
     public partial class _DetailGrupo : Form
     {
+        Grupo oGrupo = new Grupo();
         public _DetailGrupo()
         {
-
             InitializeComponent();
+            cargarCBX();
             lblTitulo.Text = "Nuevo Grupo";
             btnGuardar.Text = "Guardar";
             imgEdit.Visible = false;
+        }
 
+        public _DetailGrupo(string codigo)
+        {
+            InitializeComponent();
+            cargarCBX();
+            imgAgregar.Visible = false;
+            lblTitulo.Text = "Editar " + codigo;
+            btnGuardar.Text = "Editar";
+
+            cbxCarrera.Enabled = false;
+            cbxAño.Enabled = false;
+
+            oGrupo = State.grupoBL
+                .ObtenerGrupos()
+                .FirstOrDefault(x => x.Codigo == codigo);
+
+            if (oGrupo == null)
+            {
+                MessageBox.Show("ERROR - GRUPO NO ENCONTRADO");
+                return;
+            }
+
+            //MessageBox.Show(Array.IndexOf(State.InfoCarrera.idAño, oGrupo.Año).ToString() 
+            //    + Array.IndexOf(State.InfoCarrera.idCarrera, oGrupo.Carrera)
+            //    + Array.IndexOf(State.InfoCarrera.turnos, oGrupo.Turno)
+            //    );
+
+            cbxAño.SelectedIndex = Array.IndexOf(State.InfoCarrera.idAño, oGrupo.Año);
+            cbxCarrera.SelectedIndex = Array.IndexOf(State.InfoCarrera.idCarrera, oGrupo.Carrera);
+            cbxTurno.SelectedIndex = Array.IndexOf(State.InfoCarrera.turnos, oGrupo.Turno);
+
+            numEstudiantes.Value = oGrupo.EstudiantesMax;
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            if(imgAgregar.Visible == true)
+            {
+                var grupo = new Grupo()
+                {
+                    Año = State.InfoCarrera.idAño[cbxAño.SelectedIndex],
+                    Carrera = State.InfoCarrera.idCarrera[cbxCarrera.SelectedIndex],
+                    Turno = State.InfoCarrera.turnos[cbxTurno.SelectedIndex],
+                    EstudiantesMax = Convert.ToInt32(numEstudiantes.Value)
+                };
+
+                string codigo = State.grupoBL.AgregarGrupo(grupo);
+
+                MessageBox.Show($"Se a creado el grupo {codigo}");
+                this.Close();
+            }
+            else if(imgEdit.Visible == true)
+            {
+                oGrupo.EstudiantesMax = Convert.ToInt32(numEstudiantes.Value);
+                oGrupo.Turno = State.InfoCarrera.turnos[cbxTurno.SelectedIndex];
+
+                var si = State.grupoBL.ActualizarGrupo(oGrupo);
+                if (si == false)
+                {
+                     MessageBox.Show("Ocurrio un error!!!");
+                }
+
+                this.Close();
+            }
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void cargarCBX()
+        {
             cbxCarrera.DataSource = State.InfoCarrera.carreras;
             cbxAño.DataSource = State.InfoCarrera.años;
             cbxTurno.DataSource = State.InfoCarrera.turnos;
@@ -29,37 +103,6 @@ namespace Esfe.SysAsistencia.UI.Components
             numEstudiantes.Maximum = 30;
             numEstudiantes.Minimum = 15;
             numEstudiantes.ReadOnly = true;
-        }
-
-        public _DetailGrupo(string codigo)
-        {
-            InitializeComponent();
-            imgAgregar.Visible = false;
-            lblTitulo.Text = "Editar " + codigo;
-            btnGuardar.Text = "Editar";
-
-            cbxCarrera.Enabled = false;
-            cbxAño.Enabled = false;
-        }
-
-        private void btnGuardar_Click(object sender, EventArgs e)
-        {
-            var grupo = new Grupo()
-            {
-                Año = State.InfoCarrera.idAño[cbxAño.SelectedIndex],
-                Carrera = State.InfoCarrera.idCarrera[cbxCarrera.SelectedIndex],
-                Turno = cbxTurno.SelectedItem.ToString()
-            };
-
-            string codigo = State.grupoBL.AgregarGrupo(grupo);
-
-            MessageBox.Show($"Se a creado el grupo {codigo}");
-            this.Close();
-        }
-
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
     }
 }

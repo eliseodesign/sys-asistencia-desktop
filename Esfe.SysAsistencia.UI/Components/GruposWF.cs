@@ -83,16 +83,31 @@ namespace Esfe.SysAsistencia.UI.Components
         {
             if (gridGrupos.Columns[e.ColumnIndex].Name == "Editar")
             {
-                string Codigo = gridGrupos.CurrentRow.
-                    Cells["Codigo"].Value.ToString();
+                string Codigo = gridGrupos.CurrentRow.Cells["Codigo"].Value.ToString();
 
-                MessageBox.Show(Codigo.ToString());
                 _DetailGrupo detailGrupo = new _DetailGrupo(Codigo);
                 detailGrupo.ShowDialog();
                 
-                //CargarGrid();
+                refreshGrid();
+            } 
+            else if (gridGrupos.Columns[e.ColumnIndex].Name == "Eliminar")
+            {
+                if (MessageBox.Show(
+                    "¿Está seguro que desea eliminar este grupo?",
+                    "Confirmación de eliminación", 
+                    MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    int id = Convert.ToInt32(gridGrupos.CurrentRow.Cells["Id"].Value);
+                    State.grupoBL.EliminarGrupo(id);
+                    refreshGrid();
+                }
+                else
+                {
+                    return;
+                }
+
             }
-      
+
         }
 
         private void refreshGrid()
