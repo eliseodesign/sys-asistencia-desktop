@@ -83,10 +83,11 @@ namespace Esfe.SysAsistencia.UI.Components
         {
             if (gridGrupos.Columns[e.ColumnIndex].Name == "Editar")
             {
-                int Id = Convert.ToInt32(gridGrupos.CurrentRow.
-                    Cells["Id"].Value.ToString());
-                MessageBox.Show(Id.ToString());
-                _DetailGrupo detailGrupo = new _DetailGrupo(Id);
+                string Codigo = gridGrupos.CurrentRow.
+                    Cells["Codigo"].Value.ToString();
+
+                MessageBox.Show(Codigo.ToString());
+                _DetailGrupo detailGrupo = new _DetailGrupo(Codigo);
                 detailGrupo.ShowDialog();
                 
                 //CargarGrid();

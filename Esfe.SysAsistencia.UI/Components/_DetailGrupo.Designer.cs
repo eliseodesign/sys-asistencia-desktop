@@ -39,9 +39,13 @@
             label7 = new Label();
             cbxCarrera = new ComboBox();
             btnGuardar = new Button();
-            btnEliminar = new Button();
+            btnCancelar = new Button();
+            imgEdit = new PictureBox();
+            imgAgregar = new PictureBox();
             groupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numEstudiantes).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)imgEdit).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)imgAgregar).BeginInit();
             SuspendLayout();
             // 
             // lblTitulo
@@ -49,7 +53,7 @@
             lblTitulo.AutoSize = true;
             lblTitulo.Font = new Font("Segoe UI Semibold", 20F, FontStyle.Bold, GraphicsUnit.Point);
             lblTitulo.ForeColor = Color.Black;
-            lblTitulo.Location = new Point(168, 9);
+            lblTitulo.Location = new Point(177, 9);
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(152, 37);
             lblTitulo.TabIndex = 1;
@@ -67,7 +71,7 @@
             groupBox.Controls.Add(label7);
             groupBox.Controls.Add(cbxCarrera);
             groupBox.Controls.Add(btnGuardar);
-            groupBox.Controls.Add(btnEliminar);
+            groupBox.Controls.Add(btnCancelar);
             groupBox.Font = new Font("Lucida Sans Unicode", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             groupBox.ForeColor = SystemColors.AppWorkspace;
             groupBox.Location = new Point(12, 74);
@@ -175,31 +179,59 @@
             btnGuardar.UseVisualStyleBackColor = false;
             btnGuardar.Click += btnGuardar_Click;
             // 
-            // btnEliminar
+            // btnCancelar
             // 
-            btnEliminar.BackColor = Color.Salmon;
-            btnEliminar.FlatStyle = FlatStyle.Flat;
-            btnEliminar.ForeColor = SystemColors.Control;
-            btnEliminar.Location = new Point(18, 228);
-            btnEliminar.Margin = new Padding(3, 2, 3, 2);
-            btnEliminar.Name = "btnEliminar";
-            btnEliminar.Size = new Size(186, 39);
-            btnEliminar.TabIndex = 0;
-            btnEliminar.Text = "Cancelar";
-            btnEliminar.UseVisualStyleBackColor = false;
+            btnCancelar.BackColor = Color.Salmon;
+            btnCancelar.FlatStyle = FlatStyle.Flat;
+            btnCancelar.ForeColor = SystemColors.Control;
+            btnCancelar.Location = new Point(18, 228);
+            btnCancelar.Margin = new Padding(3, 2, 3, 2);
+            btnCancelar.Name = "btnCancelar";
+            btnCancelar.Size = new Size(186, 39);
+            btnCancelar.TabIndex = 0;
+            btnCancelar.Text = "Cancelar";
+            btnCancelar.UseVisualStyleBackColor = false;
+            btnCancelar.Click += btnCancelar_Click;
+            // 
+            // imgEdit
+            // 
+            imgEdit.Image = Properties.Resources.editVer;
+            imgEdit.Location = new Point(124, 12);
+            imgEdit.Name = "imgEdit";
+            imgEdit.Size = new Size(35, 35);
+            imgEdit.SizeMode = PictureBoxSizeMode.Zoom;
+            imgEdit.TabIndex = 11;
+            imgEdit.TabStop = false;
+            // 
+            // imgAgregar
+            // 
+            imgAgregar.Image = Properties.Resources.agregar_documento__2_;
+            imgAgregar.Location = new Point(124, 12);
+            imgAgregar.Name = "imgAgregar";
+            imgAgregar.Size = new Size(35, 35);
+            imgAgregar.SizeMode = PictureBoxSizeMode.Zoom;
+            imgAgregar.TabIndex = 12;
+            imgAgregar.TabStop = false;
             // 
             // _DetailGrupo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.ControlLight;
             ClientSize = new Size(490, 400);
+            Controls.Add(imgAgregar);
+            Controls.Add(imgEdit);
             Controls.Add(groupBox);
             Controls.Add(lblTitulo);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "_DetailGrupo";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "_DetailGrupo";
             groupBox.ResumeLayout(false);
             groupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)numEstudiantes).EndInit();
+            ((System.ComponentModel.ISupportInitialize)imgEdit).EndInit();
+            ((System.ComponentModel.ISupportInitialize)imgAgregar).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -215,8 +247,10 @@
         private Label label7;
         private ComboBox cbxCarrera;
         private Button btnGuardar;
-        private Button btnEliminar;
+        private Button btnCancelar;
         private Label label3;
         private ComboBox cbxTurno;
+        private PictureBox imgEdit;
+        private PictureBox imgAgregar;
     }
 }

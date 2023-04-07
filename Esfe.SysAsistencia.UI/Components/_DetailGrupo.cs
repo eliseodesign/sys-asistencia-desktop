@@ -18,8 +18,9 @@ namespace Esfe.SysAsistencia.UI.Components
         {
 
             InitializeComponent();
-            lblTitulo.Text = "Agregar Grupo";
+            lblTitulo.Text = "Nuevo Grupo";
             btnGuardar.Text = "Guardar";
+            imgEdit.Visible = false;
 
             cbxCarrera.DataSource = State.InfoCarrera.carreras;
             cbxAño.DataSource = State.InfoCarrera.años;
@@ -30,12 +31,15 @@ namespace Esfe.SysAsistencia.UI.Components
             numEstudiantes.ReadOnly = true;
         }
 
-        public _DetailGrupo(int id)
+        public _DetailGrupo(string codigo)
         {
             InitializeComponent();
-            lblTitulo.Text = "Editar Grupo";
-            lblTitulo.ForeColor = Color.FromArgb(255, 193, 7);
+            imgAgregar.Visible = false;
+            lblTitulo.Text = "Editar " + codigo;
             btnGuardar.Text = "Editar";
+
+            cbxCarrera.Enabled = false;
+            cbxAño.Enabled = false;
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -50,9 +54,12 @@ namespace Esfe.SysAsistencia.UI.Components
             string codigo = State.grupoBL.AgregarGrupo(grupo);
 
             MessageBox.Show($"Se a creado el grupo {codigo}");
-
+            this.Close();
         }
 
-
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
