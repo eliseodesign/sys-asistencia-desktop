@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             lblTitulo = new Label();
-            groupBox1 = new GroupBox();
+            groupBox = new GroupBox();
             label3 = new Label();
             cbxTurno = new ComboBox();
             label2 = new Label();
@@ -40,7 +40,7 @@
             cbxCarrera = new ComboBox();
             btnGuardar = new Button();
             btnEliminar = new Button();
-            groupBox1.SuspendLayout();
+            groupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numEstudiantes).BeginInit();
             SuspendLayout();
             // 
@@ -55,29 +55,29 @@
             lblTitulo.TabIndex = 1;
             lblTitulo.Text = "_____  ______";
             // 
-            // groupBox1
+            // groupBox
             // 
-            groupBox1.Anchor = AnchorStyles.Left;
-            groupBox1.Controls.Add(label3);
-            groupBox1.Controls.Add(cbxTurno);
-            groupBox1.Controls.Add(label2);
-            groupBox1.Controls.Add(numEstudiantes);
-            groupBox1.Controls.Add(label1);
-            groupBox1.Controls.Add(cbxAño);
-            groupBox1.Controls.Add(label7);
-            groupBox1.Controls.Add(cbxCarrera);
-            groupBox1.Controls.Add(btnGuardar);
-            groupBox1.Controls.Add(btnEliminar);
-            groupBox1.Font = new Font("Lucida Sans Unicode", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            groupBox1.ForeColor = SystemColors.AppWorkspace;
-            groupBox1.Location = new Point(12, 74);
-            groupBox1.Margin = new Padding(3, 2, 3, 2);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new Padding(3, 2, 3, 2);
-            groupBox1.Size = new Size(460, 288);
-            groupBox1.TabIndex = 10;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Datos del grupo";
+            groupBox.Anchor = AnchorStyles.Left;
+            groupBox.Controls.Add(label3);
+            groupBox.Controls.Add(cbxTurno);
+            groupBox.Controls.Add(label2);
+            groupBox.Controls.Add(numEstudiantes);
+            groupBox.Controls.Add(label1);
+            groupBox.Controls.Add(cbxAño);
+            groupBox.Controls.Add(label7);
+            groupBox.Controls.Add(cbxCarrera);
+            groupBox.Controls.Add(btnGuardar);
+            groupBox.Controls.Add(btnEliminar);
+            groupBox.Font = new Font("Lucida Sans Unicode", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            groupBox.ForeColor = SystemColors.AppWorkspace;
+            groupBox.Location = new Point(12, 74);
+            groupBox.Margin = new Padding(3, 2, 3, 2);
+            groupBox.Name = "groupBox";
+            groupBox.Padding = new Padding(3, 2, 3, 2);
+            groupBox.Size = new Size(460, 288);
+            groupBox.TabIndex = 10;
+            groupBox.TabStop = false;
+            groupBox.Text = "Datos del grupo";
             // 
             // label3
             // 
@@ -163,38 +163,42 @@
             // 
             // btnGuardar
             // 
-            btnGuardar.ForeColor = SystemColors.ControlDarkDark;
-            btnGuardar.Location = new Point(115, 217);
+            btnGuardar.BackColor = Color.FromArgb(58, 163, 217);
+            btnGuardar.FlatStyle = FlatStyle.Flat;
+            btnGuardar.ForeColor = SystemColors.ButtonFace;
+            btnGuardar.Location = new Point(244, 228);
             btnGuardar.Margin = new Padding(3, 2, 3, 2);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(87, 32);
+            btnGuardar.Size = new Size(186, 39);
             btnGuardar.TabIndex = 1;
-            btnGuardar.Text = "Guardar";
-            btnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.Text = "Okey";
+            btnGuardar.UseVisualStyleBackColor = false;
             btnGuardar.Click += btnGuardar_Click;
             // 
             // btnEliminar
             // 
-            btnEliminar.ForeColor = SystemColors.ControlDarkDark;
-            btnEliminar.Location = new Point(18, 217);
+            btnEliminar.BackColor = Color.Salmon;
+            btnEliminar.FlatStyle = FlatStyle.Flat;
+            btnEliminar.ForeColor = SystemColors.Control;
+            btnEliminar.Location = new Point(18, 228);
             btnEliminar.Margin = new Padding(3, 2, 3, 2);
             btnEliminar.Name = "btnEliminar";
-            btnEliminar.Size = new Size(91, 32);
+            btnEliminar.Size = new Size(186, 39);
             btnEliminar.TabIndex = 0;
-            btnEliminar.Text = "Eliminar";
-            btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.Text = "Cancelar";
+            btnEliminar.UseVisualStyleBackColor = false;
             // 
             // _DetailGrupo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(490, 400);
-            Controls.Add(groupBox1);
+            Controls.Add(groupBox);
             Controls.Add(lblTitulo);
             Name = "_DetailGrupo";
             Text = "_DetailGrupo";
-            groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
+            groupBox.ResumeLayout(false);
+            groupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)numEstudiantes).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -203,7 +207,7 @@
         #endregion
 
         private Label lblTitulo;
-        private GroupBox groupBox1;
+        private GroupBox groupBox;
         private Label label2;
         private NumericUpDown numEstudiantes;
         private Label label1;

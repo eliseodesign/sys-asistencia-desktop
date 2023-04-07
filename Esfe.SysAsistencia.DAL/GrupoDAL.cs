@@ -31,9 +31,9 @@ namespace Esfe.SysAsistencia.DAL
             return Grupos;
         }
 
-        public bool ExisteGrupo(int numGrupo)
+        public bool ExisteGrupo(string codigo)
         {
-            return Grupos.Exists(grupo => grupo.NumGrupo == numGrupo);
+            return Grupos.Exists(grupo => grupo.Codigo == codigo);
         }
 
         public Grupo ObtenerGrupoPorId(int id)
@@ -46,8 +46,8 @@ namespace Esfe.SysAsistencia.DAL
             var grupoActual = ObtenerGrupoPorId(grupo.Id);
             if (grupoActual != null)
             {
-                grupoActual.NumGrupo = grupo.NumGrupo;
-                grupoActual.DocenteId = grupo.DocenteId;
+             
+                
             }
         }
 

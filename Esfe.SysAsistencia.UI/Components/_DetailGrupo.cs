@@ -14,12 +14,12 @@ namespace Esfe.SysAsistencia.UI.Components
 {
     public partial class _DetailGrupo : Form
     {
-        private DataGridView _gridGrupo;
-        public _DetailGrupo(string titulo, DataGridView gridGrupo)
+        public _DetailGrupo()
         {
-            _gridGrupo = gridGrupo;
+
             InitializeComponent();
-            lblTitulo.Text = titulo;
+            lblTitulo.Text = "Agregar Grupo";
+            btnGuardar.Text = "Guardar";
 
             cbxCarrera.DataSource = State.InfoCarrera.carreras;
             cbxAño.DataSource = State.InfoCarrera.años;
@@ -30,26 +30,29 @@ namespace Esfe.SysAsistencia.UI.Components
             numEstudiantes.ReadOnly = true;
         }
 
+        public _DetailGrupo(int id)
+        {
+            InitializeComponent();
+            lblTitulo.Text = "Editar Grupo";
+            lblTitulo.ForeColor = Color.FromArgb(255, 193, 7);
+            btnGuardar.Text = "Editar";
+        }
+
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             var grupo = new Grupo()
             {
                 Año = State.InfoCarrera.idAño[cbxAño.SelectedIndex],
                 Carrera = State.InfoCarrera.idCarrera[cbxCarrera.SelectedIndex],
-                Turno = cbxTurno.SelectedText
+                Turno = cbxTurno.SelectedItem.ToString()
             };
 
             string codigo = State.grupoBL.AgregarGrupo(grupo);
 
             MessageBox.Show($"Se a creado el grupo {codigo}");
-            RefrescarGrid();
-        }
-
-        private void RefrescarGrid()
-        {
-            _gridGrupo.DataSource = null;
-            _gridGrupo.DataSource = State.grupoBL.ObtenerGrupos();
 
         }
+
+
     }
 }

@@ -18,9 +18,9 @@ namespace Esfe.SysAsistencia.UI.Components
         public GruposWF(Panel panel_app)
         {
             _panel_app = panel_app;
-            InitializeComponent() ;
+            InitializeComponent();
 
-            
+
             List<string> carreras = State.InfoCarrera.carreras.ToList();
             carreras.Insert(0, "Todas");
             cbxCarrera.DataSource = carreras;
@@ -29,21 +29,17 @@ namespace Esfe.SysAsistencia.UI.Components
             años.Insert(0, "Todos");
             cbxAño.DataSource = años;
 
-            gridGrupos.DataSource = null;
-            gridGrupos.DataSource = State.grupoBL.ObtenerGrupos();
+            configGrid();
+            refreshGrid();
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            _DetailGrupo detailGrupo = new _DetailGrupo("Agregar Grupo", gridGrupos);
+            _DetailGrupo detailGrupo = new _DetailGrupo();
             detailGrupo.ShowDialog();
+            refreshGrid();
         }
 
-        private void btnEditar_Click(object sender, EventArgs e)
-        {
-            _DetailGrupo detailGrupo = new _DetailGrupo("Editar Grupo", gridGrupos);
-            detailGrupo.ShowDialog();
-        }
 
         private void actualizarGrid(object sender, EventArgs e)
         {
@@ -70,6 +66,56 @@ namespace Esfe.SysAsistencia.UI.Components
                 .ToList();
         }
 
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+            // cuando carge xd
 
+            DGVDisenio.Formato(gridGrupos, 1);
+
+        }
+
+        private void gridGrupos_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void gridGrupos_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (gridGrupos.Columns[e.ColumnIndex].Name == "Editar")
+            {
+                int Id = Convert.ToInt32(gridGrupos.CurrentRow.
+                    Cells["Id"].Value.ToString());
+                MessageBox.Show(Id.ToString());
+                _DetailGrupo detailGrupo = new _DetailGrupo(Id);
+                detailGrupo.ShowDialog();
+                
+                //CargarGrid();
+            }
+      
+        }
+
+        private void refreshGrid()
+        {
+            gridGrupos.DataSource = null;
+            gridGrupos.DataSource = State.grupoBL.ObtenerGrupos();
+        }
+        private void configGrid()
+        {
+            gridGrupos.AutoGenerateColumns = false;
+            gridGrupos.ReadOnly = true;
+
+            gridGrupos.Columns["Id"].DisplayIndex = 0;
+            gridGrupos.Columns["Codigo"].DisplayIndex = 1;
+            gridGrupos.Columns["Carrera"].DisplayIndex = 2;
+            gridGrupos.Columns["Año"].DisplayIndex = 3;
+            gridGrupos.Columns["EstudiantesMax"].DisplayIndex = 4;
+            gridGrupos.Columns["Turno"].DisplayIndex = 5;
+            gridGrupos.Columns["Editar"].DisplayIndex = 6;
+            gridGrupos.Columns["Editar"].Width = 75;
+            gridGrupos.Columns["Eliminar"].DisplayIndex = 7;
+            gridGrupos.Columns["Eliminar"].Width = 75;
+
+            gridGrupos.Columns["DocenteId"].Visible = false;
+        }
     }
 }
