@@ -16,21 +16,17 @@ namespace Esfe.SysAsistencia.UI.Components
     {
         Grupo oGrupo = new Grupo();
 
-
-
         public _DetailGrupo()
-        {
-
-        }
-        public _DetailGrupo(string msg = "Nuevo Grupo") : this()
         {
             InitializeComponent();
             cargarCBX();
+        }
+        public _DetailGrupo(string msg = "Nuevo Grupo") : this()
+        {
             lblTitulo.Text = msg;
             btnGuardar.Text = "Guardar";
             imgEdit.Visible = false;
         }
-
         public _DetailGrupo(int id) : this()
         {
             oGrupo = State.grupoBL
@@ -42,8 +38,6 @@ namespace Esfe.SysAsistencia.UI.Components
                 MessageBox.Show("ERROR - GRUPO NO ENCONTRADO");
                 return;
             }
-            InitializeComponent();
-            cargarCBX();
             imgAgregar.Visible = false;
             lblTitulo.Text = "Editar " + oGrupo.Codigo;
             btnGuardar.Text = "Editar";
@@ -51,29 +45,34 @@ namespace Esfe.SysAsistencia.UI.Components
             cbxCarrera.Enabled = false;
             cbxAño.Enabled = false;
 
-
             cbxAño.SelectedIndex = Array.IndexOf(State.InfoCarrera.idAño, oGrupo.Año);
             cbxCarrera.SelectedIndex = Array.IndexOf(State.InfoCarrera.idCarrera, oGrupo.Carrera);
             cbxTurno.SelectedIndex = Array.IndexOf(State.InfoCarrera.turnos, oGrupo.Turno);
 
             numEstudiantes.Value = oGrupo.EstudiantesMax;
+
+            var CheckBoxDays = new CheckBox[5] { lun, mar, mie, jue, vie };
+            for(int i = 0; i < oGrupo.Horario.Length; i++)
+            {
+                if (oGrupo.Horario[i] == true)
+                {
+                    CheckBoxDays[i].Checked = true;
+                }
+            }
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             if (imgAgregar.Visible == true)
             {
-                var days = obtenerPresencial();
-
-
                 var grupo = new Grupo()
                 {
                     Año = State.InfoCarrera.idAño[cbxAño.SelectedIndex],
                     Carrera = State.InfoCarrera.idCarrera[cbxCarrera.SelectedIndex],
                     Turno = State.InfoCarrera.turnos[cbxTurno.SelectedIndex],
                     EstudiantesMax = Convert.ToInt32(numEstudiantes.Value),
-                    Horario = days
-                };
+                    Horario = obtenerPresencial()
+            };
 
                 string codigo = State.grupoBL.AgregarGrupo(grupo);
 
@@ -84,6 +83,7 @@ namespace Esfe.SysAsistencia.UI.Components
             {
                 oGrupo.EstudiantesMax = Convert.ToInt32(numEstudiantes.Value);
                 oGrupo.Turno = State.InfoCarrera.turnos[cbxTurno.SelectedIndex];
+                oGrupo.Horario = obtenerPresencial();
 
                 var si = State.grupoBL.ActualizarGrupo(oGrupo);
                 if (si == false)
@@ -111,7 +111,6 @@ namespace Esfe.SysAsistencia.UI.Components
             numEstudiantes.ReadOnly = true;
         }
 
-
         private bool[] obtenerPresencial()
         {
             var CheckBoxDays = new CheckBox[5] { lun, mar, mie, jue, vie };
@@ -120,15 +119,9 @@ namespace Esfe.SysAsistencia.UI.Components
             for (int i = 0; i < CheckBoxDays.Length; i++)   
             {
                 if (CheckBoxDays[i] ==null)
-                {
-                    MessageBox.Show("null carajo");
-                    
-                }
+                    MessageBox.Show("Error");
                 else if (CheckBoxDays[i].Checked)
-                {
                     day[i] = true;
-                    
-                }
             }
             return day;
         }

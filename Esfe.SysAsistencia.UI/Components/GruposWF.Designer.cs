@@ -173,7 +173,6 @@
             gridGrupos.Size = new Size(554, 282);
             gridGrupos.TabIndex = 2;
             gridGrupos.CellClick += gridGrupos_CellClick;
-            gridGrupos.Click += gridGrupos_Click;
             // 
             // Editar
             // 

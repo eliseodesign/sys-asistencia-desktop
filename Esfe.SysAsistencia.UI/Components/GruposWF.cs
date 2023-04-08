@@ -40,7 +40,6 @@ namespace Esfe.SysAsistencia.UI.Components
             refreshGrid();
         }
 
-
         private void actualizarGrid(object sender, EventArgs e)
         {
             List<Grupo> gruposFiltrados = FiltrarGrupos();
@@ -68,15 +67,8 @@ namespace Esfe.SysAsistencia.UI.Components
 
         private void panel2_Paint(object sender, PaintEventArgs e)
         {
-            // cuando carge xd
-
+            // cuando carge
             DGVDisenio.Formato(gridGrupos, 1);
-
-        }
-
-        private void gridGrupos_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void gridGrupos_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -84,10 +76,8 @@ namespace Esfe.SysAsistencia.UI.Components
             if (gridGrupos.Columns[e.ColumnIndex].Name == "Editar")
             {
                 int Id = Convert.ToInt32(gridGrupos.CurrentRow.Cells["Id"].Value);
-
                 _DetailGrupo detailGrupo = new _DetailGrupo(Id);
                 detailGrupo.ShowDialog();
-                
                 refreshGrid();
             } 
             else if (gridGrupos.Columns[e.ColumnIndex].Name == "Eliminar")
@@ -105,9 +95,7 @@ namespace Esfe.SysAsistencia.UI.Components
                 {
                     return;
                 }
-
             }
-
         }
 
         private void refreshGrid()
