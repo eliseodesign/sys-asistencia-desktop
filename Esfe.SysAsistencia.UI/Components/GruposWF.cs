@@ -120,18 +120,22 @@ namespace Esfe.SysAsistencia.UI.Components
             gridGrupos.AutoGenerateColumns = false;
             gridGrupos.ReadOnly = true;
 
+            int i = 0;
             gridGrupos.Columns["Id"].DisplayIndex = 0;
             gridGrupos.Columns["Codigo"].DisplayIndex = 1;
-            gridGrupos.Columns["Carrera"].DisplayIndex = 2;
-            gridGrupos.Columns["Año"].DisplayIndex = 3;
-            gridGrupos.Columns["EstudiantesMax"].DisplayIndex = 4;
-            gridGrupos.Columns["Turno"].DisplayIndex = 5;
-            gridGrupos.Columns["Editar"].DisplayIndex = 6;
+            //gridGrupos.Columns["Carrera"].DisplayIndex = 2;
+            //gridGrupos.Columns["Año"].DisplayIndex = 3;
+            gridGrupos.Columns["EstudiantesMax"].DisplayIndex = 2;
+            gridGrupos.Columns["Turno"].DisplayIndex = 3;
+            gridGrupos.Columns["Presencial"].DisplayIndex = 4;
+            gridGrupos.Columns["Editar"].DisplayIndex = 5;
             gridGrupos.Columns["Editar"].Width = 75;
-            gridGrupos.Columns["Eliminar"].DisplayIndex = 7;
+            gridGrupos.Columns["Eliminar"].DisplayIndex = 6;
             gridGrupos.Columns["Eliminar"].Width = 75;
 
             gridGrupos.Columns["DocenteId"].Visible = false;
+            gridGrupos.Columns["Carrera"].Visible = false;
+            gridGrupos.Columns["Año"].Visible = false;
         }
     }
 }

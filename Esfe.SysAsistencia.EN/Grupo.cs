@@ -16,7 +16,25 @@ namespace Esfe.SysAsistencia.EN
         public string Turno { get; set; }//
         public int EstudiantesMax { get; set; } //
         public bool[] Horario { get; set; } = new bool[5];
-        //public int Jornada { get; set; } // 1. Diurna, 2. Nocturna 
+
+        public string Presencial
+        {
+            get
+            {
+                string[] diasSemana = new string[] { "Lun", "Mar", "Mie", "Jue", "Vie" };
+                string diasPresenciales = "";
+
+                for (int i = 0; i < Horario.Length; i++)
+                {
+                    if (Horario[i])
+                    {
+                        diasPresenciales += diasSemana[i] + ", ";
+                    }
+                }
+
+                return diasPresenciales.Trim();
+            }
+        }
 
     }
 }

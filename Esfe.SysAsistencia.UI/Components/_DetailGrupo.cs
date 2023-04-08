@@ -15,13 +15,12 @@ namespace Esfe.SysAsistencia.UI.Components
     public partial class _DetailGrupo : Form
     {
         Grupo oGrupo = new Grupo();
-        
-       
-        CheckBox[] CheckBoxDays; 
+
+
 
         public _DetailGrupo()
         {
-            CheckBoxDays = new CheckBox[5] { lun, mar, mie, jue, vie };
+
         }
         public _DetailGrupo(string msg = "Nuevo Grupo") : this()
         {
@@ -37,7 +36,12 @@ namespace Esfe.SysAsistencia.UI.Components
             oGrupo = State.grupoBL
                 .ObtenerGrupos()
                 .FirstOrDefault(x => x.Id == id);
-            
+
+            if (oGrupo == null)
+            {
+                MessageBox.Show("ERROR - GRUPO NO ENCONTRADO");
+                return;
+            }
             InitializeComponent();
             cargarCBX();
             imgAgregar.Visible = false;
@@ -47,17 +51,6 @@ namespace Esfe.SysAsistencia.UI.Components
             cbxCarrera.Enabled = false;
             cbxAño.Enabled = false;
 
-
-            if (oGrupo == null)
-            {
-                MessageBox.Show("ERROR - GRUPO NO ENCONTRADO");
-                return;
-            }
-
-            //MessageBox.Show(Array.IndexOf(State.InfoCarrera.idAño, oGrupo.Año).ToString() 
-            //    + Array.IndexOf(State.InfoCarrera.idCarrera, oGrupo.Carrera)
-            //    + Array.IndexOf(State.InfoCarrera.turnos, oGrupo.Turno)
-            //    );
 
             cbxAño.SelectedIndex = Array.IndexOf(State.InfoCarrera.idAño, oGrupo.Año);
             cbxCarrera.SelectedIndex = Array.IndexOf(State.InfoCarrera.idCarrera, oGrupo.Carrera);
@@ -70,12 +63,16 @@ namespace Esfe.SysAsistencia.UI.Components
         {
             if (imgAgregar.Visible == true)
             {
+                var days = obtenerPresencial();
+
+
                 var grupo = new Grupo()
                 {
                     Año = State.InfoCarrera.idAño[cbxAño.SelectedIndex],
                     Carrera = State.InfoCarrera.idCarrera[cbxCarrera.SelectedIndex],
                     Turno = State.InfoCarrera.turnos[cbxTurno.SelectedIndex],
-                    EstudiantesMax = Convert.ToInt32(numEstudiantes.Value)
+                    EstudiantesMax = Convert.ToInt32(numEstudiantes.Value),
+                    Horario = days
                 };
 
                 string codigo = State.grupoBL.AgregarGrupo(grupo);
@@ -115,15 +112,25 @@ namespace Esfe.SysAsistencia.UI.Components
         }
 
 
-        private void changePresencial()
+        private bool[] obtenerPresencial()
         {
-            foreach(CheckBox ch in CheckBoxDays)
-            {
-                if (ch.Checked == true)
-                {
+            var CheckBoxDays = new CheckBox[5] { lun, mar, mie, jue, vie };
+            bool[] day = new bool[5] { false, false, false, false, false};
 
+            for (int i = 0; i < CheckBoxDays.Length; i++)   
+            {
+                if (CheckBoxDays[i] ==null)
+                {
+                    MessageBox.Show("null carajo");
+                    
+                }
+                else if (CheckBoxDays[i].Checked)
+                {
+                    day[i] = true;
+                    
                 }
             }
+            return day;
         }
     }
 }
