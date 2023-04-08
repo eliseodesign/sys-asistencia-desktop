@@ -35,7 +35,7 @@ namespace Esfe.SysAsistencia.UI.Components
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            _DetailGrupo detailGrupo = new _DetailGrupo();
+            _DetailGrupo detailGrupo = new _DetailGrupo("Nuevo Grupo");
             detailGrupo.ShowDialog();
             refreshGrid();
         }
@@ -83,9 +83,9 @@ namespace Esfe.SysAsistencia.UI.Components
         {
             if (gridGrupos.Columns[e.ColumnIndex].Name == "Editar")
             {
-                string Codigo = gridGrupos.CurrentRow.Cells["Codigo"].Value.ToString();
+                int Id = Convert.ToInt32(gridGrupos.CurrentRow.Cells["Id"].Value);
 
-                _DetailGrupo detailGrupo = new _DetailGrupo(Codigo);
+                _DetailGrupo detailGrupo = new _DetailGrupo(Id);
                 detailGrupo.ShowDialog();
                 
                 refreshGrid();

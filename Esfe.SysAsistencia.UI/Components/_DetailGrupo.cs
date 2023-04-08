@@ -15,29 +15,38 @@ namespace Esfe.SysAsistencia.UI.Components
     public partial class _DetailGrupo : Form
     {
         Grupo oGrupo = new Grupo();
+        
+       
+        CheckBox[] CheckBoxDays; 
+
         public _DetailGrupo()
+        {
+            CheckBoxDays = new CheckBox[5] { lun, mar, mie, jue, vie };
+        }
+        public _DetailGrupo(string msg = "Nuevo Grupo") : this()
         {
             InitializeComponent();
             cargarCBX();
-            lblTitulo.Text = "Nuevo Grupo";
+            lblTitulo.Text = msg;
             btnGuardar.Text = "Guardar";
             imgEdit.Visible = false;
         }
 
-        public _DetailGrupo(string codigo)
+        public _DetailGrupo(int id) : this()
         {
+            oGrupo = State.grupoBL
+                .ObtenerGrupos()
+                .FirstOrDefault(x => x.Id == id);
+            
             InitializeComponent();
             cargarCBX();
             imgAgregar.Visible = false;
-            lblTitulo.Text = "Editar " + codigo;
+            lblTitulo.Text = "Editar " + oGrupo.Codigo;
             btnGuardar.Text = "Editar";
 
             cbxCarrera.Enabled = false;
             cbxAño.Enabled = false;
 
-            oGrupo = State.grupoBL
-                .ObtenerGrupos()
-                .FirstOrDefault(x => x.Codigo == codigo);
 
             if (oGrupo == null)
             {
@@ -59,7 +68,7 @@ namespace Esfe.SysAsistencia.UI.Components
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if(imgAgregar.Visible == true)
+            if (imgAgregar.Visible == true)
             {
                 var grupo = new Grupo()
                 {
@@ -74,7 +83,7 @@ namespace Esfe.SysAsistencia.UI.Components
                 MessageBox.Show($"Se a creado el grupo {codigo}");
                 this.Close();
             }
-            else if(imgEdit.Visible == true)
+            else if (imgEdit.Visible == true)
             {
                 oGrupo.EstudiantesMax = Convert.ToInt32(numEstudiantes.Value);
                 oGrupo.Turno = State.InfoCarrera.turnos[cbxTurno.SelectedIndex];
@@ -82,7 +91,7 @@ namespace Esfe.SysAsistencia.UI.Components
                 var si = State.grupoBL.ActualizarGrupo(oGrupo);
                 if (si == false)
                 {
-                     MessageBox.Show("Ocurrio un error!!!");
+                    MessageBox.Show("Ocurrio un error!!!");
                 }
 
                 this.Close();
@@ -103,6 +112,18 @@ namespace Esfe.SysAsistencia.UI.Components
             numEstudiantes.Maximum = 30;
             numEstudiantes.Minimum = 15;
             numEstudiantes.ReadOnly = true;
+        }
+
+
+        private void changePresencial()
+        {
+            foreach(CheckBox ch in CheckBoxDays)
+            {
+                if (ch.Checked == true)
+                {
+
+                }
+            }
         }
     }
 }
