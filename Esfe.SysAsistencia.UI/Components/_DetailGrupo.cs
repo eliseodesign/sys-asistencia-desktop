@@ -16,10 +16,13 @@ namespace Esfe.SysAsistencia.UI.Components
     {
         Grupo oGrupo = new Grupo();
 
+        CheckBox[] CheckBoxDays = new CheckBox[5];
+
         public _DetailGrupo()
         {
             InitializeComponent();
             cargarCBX();
+            CheckBoxDays = new CheckBox[5] { lun, mar, mie, jue, vie };
         }
         public _DetailGrupo(string msg = "Nuevo Grupo") : this()
         {
@@ -51,8 +54,7 @@ namespace Esfe.SysAsistencia.UI.Components
 
             numEstudiantes.Value = oGrupo.EstudiantesMax;
 
-            var CheckBoxDays = new CheckBox[5] { lun, mar, mie, jue, vie };
-            for(int i = 0; i < oGrupo.Horario.Length; i++)
+            for (int i = 0; i < oGrupo.Horario.Length; i++)
             {
                 if (oGrupo.Horario[i] == true)
                 {
@@ -60,7 +62,7 @@ namespace Esfe.SysAsistencia.UI.Components
                 }
             }
         }
-
+        // EVENTOS 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             if (imgAgregar.Visible == true)
@@ -72,7 +74,7 @@ namespace Esfe.SysAsistencia.UI.Components
                     Turno = State.InfoCarrera.turnos[cbxTurno.SelectedIndex],
                     EstudiantesMax = Convert.ToInt32(numEstudiantes.Value),
                     Horario = obtenerPresencial()
-            };
+                };
 
                 string codigo = State.grupoBL.AgregarGrupo(grupo);
 
@@ -100,6 +102,13 @@ namespace Esfe.SysAsistencia.UI.Components
             this.Close();
         }
 
+        private void changeLbl(object sender, EventArgs e)
+        {
+            CheckBox checkBox = (CheckBox)sender;
+            lblPresencial.Text = CheckBoxDays.Count(x => x.Checked == true) + " presencial";
+            lblVirtual.Text = CheckBoxDays.Count(x => x.Checked == false) + " virtual";
+
+        }
         private void cargarCBX()
         {
             cbxCarrera.DataSource = State.InfoCarrera.carreras;
@@ -113,12 +122,11 @@ namespace Esfe.SysAsistencia.UI.Components
 
         private bool[] obtenerPresencial()
         {
-            var CheckBoxDays = new CheckBox[5] { lun, mar, mie, jue, vie };
-            bool[] day = new bool[5] { false, false, false, false, false};
+            bool[] day = new bool[5] { false, false, false, false, false };
 
-            for (int i = 0; i < CheckBoxDays.Length; i++)   
+            for (int i = 0; i < CheckBoxDays.Length; i++)
             {
-                if (CheckBoxDays[i] ==null)
+                if (CheckBoxDays[i] == null)
                     MessageBox.Show("Error");
                 else if (CheckBoxDays[i].Checked)
                     day[i] = true;

@@ -30,8 +30,8 @@
         {
             lblTitulo = new Label();
             groupBox = new GroupBox();
-            label8 = new Label();
-            label6 = new Label();
+            lblVirtual = new Label();
+            lblPresencial = new Label();
             vie = new CheckBox();
             jue = new CheckBox();
             mie = new CheckBox();
@@ -71,8 +71,8 @@
             // groupBox
             // 
             groupBox.Anchor = AnchorStyles.Left;
-            groupBox.Controls.Add(label8);
-            groupBox.Controls.Add(label6);
+            groupBox.Controls.Add(lblVirtual);
+            groupBox.Controls.Add(lblPresencial);
             groupBox.Controls.Add(vie);
             groupBox.Controls.Add(jue);
             groupBox.Controls.Add(mie);
@@ -101,27 +101,27 @@
             groupBox.TabStop = false;
             groupBox.Text = "Datos del grupo";
             // 
-            // label8
+            // lblVirtual
             // 
-            label8.AutoSize = true;
-            label8.Font = new Font("Lucida Sans Unicode", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label8.ForeColor = SystemColors.ControlDarkDark;
-            label8.Location = new Point(367, 214);
-            label8.Name = "label8";
-            label8.Size = new Size(67, 18);
-            label8.TabIndex = 34;
-            label8.Text = "5 virtual";
+            lblVirtual.AutoSize = true;
+            lblVirtual.Font = new Font("Lucida Sans Unicode", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lblVirtual.ForeColor = Color.FromArgb(58, 163, 217);
+            lblVirtual.Location = new Point(367, 214);
+            lblVirtual.Name = "lblVirtual";
+            lblVirtual.Size = new Size(67, 18);
+            lblVirtual.TabIndex = 34;
+            lblVirtual.Text = "5 virtual";
             // 
-            // label6
+            // lblPresencial
             // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Lucida Sans Unicode", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label6.ForeColor = SystemColors.ControlDarkDark;
-            label6.Location = new Point(244, 214);
-            label6.Name = "label6";
-            label6.Size = new Size(96, 18);
-            label6.TabIndex = 33;
-            label6.Text = "0 presencial";
+            lblPresencial.AutoSize = true;
+            lblPresencial.Font = new Font("Lucida Sans Unicode", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lblPresencial.ForeColor = Color.FromArgb(58, 163, 217);
+            lblPresencial.Location = new Point(244, 214);
+            lblPresencial.Name = "lblPresencial";
+            lblPresencial.Size = new Size(96, 18);
+            lblPresencial.TabIndex = 33;
+            lblPresencial.Text = "0 presencial";
             // 
             // vie
             // 
@@ -131,6 +131,7 @@
             vie.Size = new Size(15, 14);
             vie.TabIndex = 32;
             vie.UseVisualStyleBackColor = true;
+            vie.CheckedChanged += changeLbl;
             // 
             // jue
             // 
@@ -140,6 +141,7 @@
             jue.Size = new Size(15, 14);
             jue.TabIndex = 31;
             jue.UseVisualStyleBackColor = true;
+            jue.CheckedChanged += changeLbl;
             // 
             // mie
             // 
@@ -149,6 +151,7 @@
             mie.Size = new Size(15, 14);
             mie.TabIndex = 30;
             mie.UseVisualStyleBackColor = true;
+            mie.CheckedChanged += changeLbl;
             // 
             // mar
             // 
@@ -158,6 +161,7 @@
             mar.Size = new Size(15, 14);
             mar.TabIndex = 29;
             mar.UseVisualStyleBackColor = true;
+            mar.CheckedChanged += changeLbl;
             // 
             // lun
             // 
@@ -167,6 +171,7 @@
             lun.Size = new Size(15, 14);
             lun.TabIndex = 28;
             lun.UseVisualStyleBackColor = true;
+            lun.CheckedChanged += changeLbl;
             // 
             // label5
             // 
@@ -366,7 +371,7 @@
         private CheckBox lun;
         private Label label5;
         private Label label4;
-        private Label label8;
-        private Label label6;
+        private Label lblVirtual;
+        private Label lblPresencial;
     }
 }

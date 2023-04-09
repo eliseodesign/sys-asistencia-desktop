@@ -20,7 +20,6 @@ namespace Esfe.SysAsistencia.UI.Components
             _panel_app = panel_app;
             InitializeComponent();
 
-
             List<string> carreras = State.InfoCarrera.carreras.ToList();
             carreras.Insert(0, "Todas");
             cbxCarrera.DataSource = carreras;
@@ -68,23 +67,29 @@ namespace Esfe.SysAsistencia.UI.Components
         private void panel2_Paint(object sender, PaintEventArgs e)
         {
             // cuando carge
-            DGVDisenio.Formato(gridGrupos, 1);
+            DgvDesing.Formato(gridGrupos, 1);
+            gridGrupos.Columns["Id"].Width = 50;
+            gridGrupos.Columns["Presencial"].Width = 200;
+            gridGrupos.Columns["Editar"].Width = 55;
+            gridGrupos.Columns["Eliminar"].Width = 55;
         }
 
         private void gridGrupos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+
+
             if (gridGrupos.Columns[e.ColumnIndex].Name == "Editar")
             {
                 int Id = Convert.ToInt32(gridGrupos.CurrentRow.Cells["Id"].Value);
                 _DetailGrupo detailGrupo = new _DetailGrupo(Id);
                 detailGrupo.ShowDialog();
                 refreshGrid();
-            } 
+            }
             else if (gridGrupos.Columns[e.ColumnIndex].Name == "Eliminar")
             {
                 if (MessageBox.Show(
                     "¿Está seguro que desea eliminar este grupo?",
-                    "Confirmación de eliminación", 
+                    "Confirmación de eliminación",
                     MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     int id = Convert.ToInt32(gridGrupos.CurrentRow.Cells["Id"].Value);
@@ -101,7 +106,13 @@ namespace Esfe.SysAsistencia.UI.Components
         private void refreshGrid()
         {
             gridGrupos.DataSource = null;
-            gridGrupos.DataSource = State.grupoBL.ObtenerGrupos();
+            List<Grupo> listaGrupos = State.grupoBL.ObtenerGrupos();
+            if (listaGrupos.Count == 1)
+            {
+                //this.Refresh(); 
+                OnLoad(EventArgs.Empty);
+            }
+            gridGrupos.DataSource = listaGrupos;
         }
         private void configGrid()
         {
@@ -124,6 +135,11 @@ namespace Esfe.SysAsistencia.UI.Components
             gridGrupos.Columns["DocenteId"].Visible = false;
             gridGrupos.Columns["Carrera"].Visible = false;
             gridGrupos.Columns["Año"].Visible = false;
+        }
+
+        private void gridGrupos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

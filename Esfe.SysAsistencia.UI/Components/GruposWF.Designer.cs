@@ -77,12 +77,12 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI Semibold", 20F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.ForeColor = Color.Black;
-            label1.Location = new Point(17, 0);
+            label1.ForeColor = Color.FromArgb(0, 40, 100);
+            label1.Location = new Point(27, 16);
             label1.Name = "label1";
-            label1.Size = new Size(94, 37);
+            label1.Size = new Size(106, 37);
             label1.TabIndex = 0;
-            label1.Text = "Grupo";
+            label1.Text = "Grupos";
             // 
             // btnAgregar
             // 
@@ -93,7 +93,7 @@
             btnAgregar.ForeColor = SystemColors.ActiveCaptionText;
             btnAgregar.Image = (Image)resources.GetObject("btnAgregar.Image");
             btnAgregar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnAgregar.Location = new Point(286, 459);
+            btnAgregar.Location = new Point(286, 434);
             btnAgregar.Name = "btnAgregar";
             btnAgregar.Size = new Size(285, 32);
             btnAgregar.TabIndex = 1;
@@ -103,12 +103,13 @@
             // 
             // label8
             // 
+            label8.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label8.AutoSize = true;
             label8.Cursor = Cursors.Hand;
             label8.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label8.ForeColor = SystemColors.ActiveCaptionText;
             label8.ImageAlign = ContentAlignment.MiddleLeft;
-            label8.Location = new Point(169, 93);
+            label8.Location = new Point(412, 55);
             label8.Name = "label8";
             label8.Size = new Size(41, 21);
             label8.TabIndex = 7;
@@ -117,12 +118,13 @@
             // 
             // label7
             // 
+            label7.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label7.AutoSize = true;
             label7.Cursor = Cursors.Hand;
             label7.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label7.ForeColor = SystemColors.ActiveCaptionText;
             label7.ImageAlign = ContentAlignment.MiddleLeft;
-            label7.Location = new Point(17, 93);
+            label7.Location = new Point(260, 55);
             label7.Name = "label7";
             label7.Size = new Size(65, 21);
             label7.TabIndex = 6;
@@ -131,13 +133,14 @@
             // 
             // label6
             // 
+            label6.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label6.AutoSize = true;
             label6.Cursor = Cursors.Hand;
             label6.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label6.ForeColor = SystemColors.ActiveCaptionText;
             label6.Image = (Image)resources.GetObject("label6.Image");
             label6.ImageAlign = ContentAlignment.MiddleLeft;
-            label6.Location = new Point(15, 61);
+            label6.Location = new Point(495, 16);
             label6.Name = "label6";
             label6.Size = new Size(75, 21);
             label6.TabIndex = 5;
@@ -146,33 +149,48 @@
             // 
             // cbxAño
             // 
+            cbxAño.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            cbxAño.BackColor = Color.FromArgb(0, 40, 100);
+            cbxAño.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbxAño.FlatStyle = FlatStyle.Flat;
+            cbxAño.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            cbxAño.ForeColor = SystemColors.Menu;
             cbxAño.FormattingEnabled = true;
-            cbxAño.Location = new Point(169, 117);
+            cbxAño.ImeMode = ImeMode.NoControl;
+            cbxAño.Location = new Point(412, 79);
             cbxAño.Name = "cbxAño";
-            cbxAño.Size = new Size(158, 23);
+            cbxAño.Size = new Size(158, 28);
             cbxAño.TabIndex = 4;
             cbxAño.SelectedIndexChanged += actualizarGrid;
             // 
             // cbxCarrera
             // 
+            cbxCarrera.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            cbxCarrera.BackColor = Color.FromArgb(0, 40, 100);
+            cbxCarrera.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbxCarrera.FlatStyle = FlatStyle.Flat;
+            cbxCarrera.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            cbxCarrera.ForeColor = SystemColors.Menu;
             cbxCarrera.FormattingEnabled = true;
-            cbxCarrera.Location = new Point(17, 117);
+            cbxCarrera.Location = new Point(260, 79);
             cbxCarrera.Name = "cbxCarrera";
-            cbxCarrera.Size = new Size(146, 23);
+            cbxCarrera.Size = new Size(146, 28);
             cbxCarrera.TabIndex = 3;
             cbxCarrera.SelectedIndexChanged += actualizarGrid;
             // 
             // gridGrupos
             // 
             gridGrupos.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            gridGrupos.BackgroundColor = Color.FromArgb(220, 230, 241);
             gridGrupos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             gridGrupos.Columns.AddRange(new DataGridViewColumn[] { Editar, Eliminar });
-            gridGrupos.Location = new Point(17, 154);
+            gridGrupos.Location = new Point(27, 128);
             gridGrupos.Name = "gridGrupos";
             gridGrupos.RowTemplate.Height = 25;
-            gridGrupos.Size = new Size(554, 282);
+            gridGrupos.Size = new Size(544, 282);
             gridGrupos.TabIndex = 2;
             gridGrupos.CellClick += gridGrupos_CellClick;
+            gridGrupos.CellContentClick += gridGrupos_CellContentClick;
             // 
             // Editar
             // 

@@ -28,10 +28,14 @@ namespace Esfe.SysAsistencia.EN
                 {
                     if (Horario[i])
                     {
-                        diasPresenciales += diasSemana[i] + ", ";
+                        diasPresenciales += ", " + diasSemana[i];
                     }
                 }
 
+                if (diasPresenciales.Length > 0)
+                {
+                    return diasPresenciales = diasPresenciales.Substring(1);
+                }
                 return diasPresenciales.Trim();
             }
         }

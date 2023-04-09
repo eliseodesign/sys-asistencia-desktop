@@ -8,27 +8,30 @@ using System.Windows.Forms;
 
 namespace Esfe.SysAsistencia.UI.Helpers
 {
-    public static class DGVDisenio
+    public static class DgvDesing
     {
         //Método para dar formato al DataGridView, recibimos dos paramateros uno tipo DataGrid y otro int para la selección del color.
-        public static void Formato(DataGridView pData, int color)
+        public static void Formato(DataGridView pData, int color,bool border = true)
         {
             //Font para las filas
             pData.RowsDefaultCellStyle.Font = new Font("Open Sans", 10f, FontStyle.Regular);
             //Font para las columnas
-            pData.ColumnHeadersDefaultCellStyle.Font = new Font("Lato", 12f, FontStyle.Bold);
+            pData.ColumnHeadersDefaultCellStyle.Font = new Font("Lato", 10f, FontStyle.Regular);
             //Ancho de columnas
             pData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             //Alto de las filas
             pData.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             //No se agrege columnas automaticamente
             pData.AutoGenerateColumns = false;
-            //Quitamos el borde
-            pData.BorderStyle = BorderStyle.None;
-            pData.EnableHeadersVisualStyles = false;
-            pData.RowHeadersVisible = false;
-            pData.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            //Color de letra de las columnas
+            if(border == true)
+            {
+                //Quitamos el borde
+                pData.BorderStyle = BorderStyle.None;
+                pData.EnableHeadersVisualStyles = false;
+                pData.RowHeadersVisible = false;
+                pData.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            }
+                //Color de letra de las columnas
             pData.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
 
             switch (color)
@@ -44,6 +47,7 @@ namespace Esfe.SysAsistencia.UI.Helpers
                     pData.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(220, 230, 241);
                     pData.AlternatingRowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(119, 174, 223);
                     pData.AlternatingRowsDefaultCellStyle.Padding = new Padding(0, 3, 0, 3);
+
                     break;
                 case 2:
                     //Columna
