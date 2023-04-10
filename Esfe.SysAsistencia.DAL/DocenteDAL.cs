@@ -16,6 +16,11 @@ namespace Esfe.SysAsistencia.DAL
         public Docente Existente { get; set; }
         public bool AgregarDocente(Docente docente)
         {
+            Docente exist = ListaDocentes.FirstOrDefault(d => d.Id == docente.Id);
+            if (exist!= null)
+            {
+                ActualizarDocente(exist, docente); return true;
+            }
             if (VerificarHuella(docente) != null)
             {
                 return false;
@@ -56,13 +61,20 @@ namespace Esfe.SysAsistencia.DAL
             return ListaDocentes.Exists(docente => (docente.Nombres == buscar.Nombres || docente.Apellidos == buscar.Apellidos));
         }
 
-        public void ActualizarDocente(Docente docenteActualizado)
+        public void ActualizarDocente(Docente docente, Docente docenteActualizado)
         {
-            var index = ListaDocentes.FindIndex(d => d.Id == docenteActualizado.Id);
-            if (index != -1)
-            {
-                ListaDocentes[index] = docenteActualizado;
-            }
+            docente.Nombres = docenteActualizado.Nombres;
+            docente.Apellidos = docenteActualizado.Apellidos;
+            docente.Direccion = docenteActualizado.Direccion;
+            docente.Cel = docenteActualizado.Cel;
+            docente.Dui = docenteActualizado.Dui;
+            docente.Carrera = docenteActualizado.Carrera;
+            docente.Nit = docenteActualizado.Nit;
+            docente.Huella = docenteActualizado.Huella;
+
+            // Actualizamos los códigos de grupo del docente
+            docente.GrupoCodigos.Clear();
+            docente.GrupoCodigos.AddRange(docenteActualizado.GrupoCodigos);
         }
 
         public void EliminarDocente(Docente docente)

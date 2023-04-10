@@ -42,11 +42,11 @@
             label7 = new Label();
             cbxCarrera = new ComboBox();
             label6 = new Label();
-            txtNit = new TextBox();
+            txtTelefono = new TextBox();
             label5 = new Label();
             txtDui = new TextBox();
             label4 = new Label();
-            txtTelefono = new TextBox();
+            txtNit = new TextBox();
             label3 = new Label();
             txtApellidos = new TextBox();
             label1 = new Label();
@@ -79,6 +79,7 @@
             panel3.Name = "panel3";
             panel3.Size = new Size(724, 528);
             panel3.TabIndex = 11;
+            panel3.Paint += panel3_Paint;
             // 
             // panel2
             // 
@@ -92,6 +93,7 @@
             // gridEstudiantes
             // 
             gridEstudiantes.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            gridEstudiantes.BackgroundColor = Color.FromArgb(220, 230, 241);
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = SystemColors.Control;
             dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
@@ -115,6 +117,7 @@
             gridEstudiantes.RowTemplate.Height = 25;
             gridEstudiantes.Size = new Size(388, 504);
             gridEstudiantes.TabIndex = 21;
+            gridEstudiantes.SelectionChanged += gridDocentes_SelectionChanged;
             // 
             // groupBox1
             // 
@@ -126,11 +129,11 @@
             groupBox1.Controls.Add(label7);
             groupBox1.Controls.Add(cbxCarrera);
             groupBox1.Controls.Add(label6);
-            groupBox1.Controls.Add(txtNit);
+            groupBox1.Controls.Add(txtTelefono);
             groupBox1.Controls.Add(label5);
             groupBox1.Controls.Add(txtDui);
             groupBox1.Controls.Add(label4);
-            groupBox1.Controls.Add(txtTelefono);
+            groupBox1.Controls.Add(txtNit);
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(txtApellidos);
             groupBox1.Controls.Add(label1);
@@ -224,14 +227,17 @@
             label6.TabIndex = 15;
             label6.Text = "NIT";
             // 
-            // txtNit
+            // txtTelefono
             // 
-            txtNit.Font = new Font("Lucida Sans Unicode", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            txtNit.Location = new Point(13, 155);
-            txtNit.Margin = new Padding(3, 2, 3, 2);
-            txtNit.Name = "txtNit";
-            txtNit.Size = new Size(274, 27);
-            txtNit.TabIndex = 14;
+            txtTelefono.Font = new Font("Lucida Sans Unicode", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            txtTelefono.Location = new Point(13, 155);
+            txtTelefono.Margin = new Padding(3, 2, 3, 2);
+            txtTelefono.MaxLength = 9;
+            txtTelefono.Name = "txtTelefono";
+            txtTelefono.Size = new Size(274, 27);
+            txtTelefono.TabIndex = 14;
+            txtTelefono.TextChanged += txtTelefono_TextChanged;
+            txtTelefono.KeyPress += textBox_Press;
             // 
             // label5
             // 
@@ -249,9 +255,12 @@
             txtDui.Font = new Font("Lucida Sans Unicode", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             txtDui.Location = new Point(101, 239);
             txtDui.Margin = new Padding(3, 2, 3, 2);
+            txtDui.MaxLength = 10;
             txtDui.Name = "txtDui";
             txtDui.Size = new Size(185, 27);
             txtDui.TabIndex = 12;
+            txtDui.TextChanged += txtDui_TextChanged;
+            txtDui.KeyPress += textBox_Press;
             // 
             // label4
             // 
@@ -264,14 +273,17 @@
             label4.TabIndex = 11;
             label4.Text = "Teléfono";
             // 
-            // txtTelefono
+            // txtNit
             // 
-            txtTelefono.Font = new Font("Lucida Sans Unicode", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            txtTelefono.Location = new Point(101, 197);
-            txtTelefono.Margin = new Padding(3, 2, 3, 2);
-            txtTelefono.Name = "txtTelefono";
-            txtTelefono.Size = new Size(186, 27);
-            txtTelefono.TabIndex = 10;
+            txtNit.Font = new Font("Lucida Sans Unicode", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            txtNit.Location = new Point(101, 197);
+            txtNit.Margin = new Padding(3, 2, 3, 2);
+            txtNit.MaxLength = 17;
+            txtNit.Name = "txtNit";
+            txtNit.Size = new Size(186, 27);
+            txtNit.TabIndex = 10;
+            txtNit.TextChanged += txtNit_TextChanged;
+            txtNit.KeyPress += textBox_Press;
             // 
             // label3
             // 
@@ -292,6 +304,7 @@
             txtApellidos.Name = "txtApellidos";
             txtApellidos.Size = new Size(273, 27);
             txtApellidos.TabIndex = 8;
+            txtApellidos.KeyPress += textBox_Press;
             // 
             // label1
             // 
@@ -312,6 +325,7 @@
             txtNombres.Name = "txtNombres";
             txtNombres.Size = new Size(274, 27);
             txtNombres.TabIndex = 2;
+            txtNombres.KeyPress += textBox_Press;
             // 
             // btnGuardar
             // 
@@ -347,7 +361,6 @@
             Margin = new Padding(3, 2, 3, 2);
             Name = "AlumnosWF";
             Text = "AlumnosWF";
-            Load += AlumnosWF_Load;
             panel1.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel2.ResumeLayout(false);
@@ -367,11 +380,11 @@
         private Label label7;
         private ComboBox cbxCarrera;
         private Label label6;
-        private TextBox txtNit;
+        private TextBox txtTelefono;
         private Label label5;
         private TextBox txtDui;
         private Label label4;
-        private TextBox txtTelefono;
+        private TextBox txtNit;
         private Label label3;
         private TextBox txtApellidos;
         private Label label1;

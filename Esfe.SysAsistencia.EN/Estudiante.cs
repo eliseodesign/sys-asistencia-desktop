@@ -15,7 +15,6 @@ namespace Esfe.SysAsistencia.EN
         public string Dui { get; set; }
         public string Nit { get; set; }
         public string IdCarrera { get; set; }
-        public string IdGrupo { get; set; }
         public int Año { get; set; }
         public string Cel { get; set; }
         public byte[] Huella { get; set; }

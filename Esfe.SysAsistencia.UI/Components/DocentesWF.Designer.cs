@@ -32,7 +32,6 @@
             panel3 = new Panel();
             panel4 = new Panel();
             groupBox1 = new GroupBox();
-            btnModificar = new Button();
             btnEliminar = new Button();
             btnGuardar = new Button();
             label8 = new Label();
@@ -40,11 +39,11 @@
             label7 = new Label();
             txtCarrera = new ComboBox();
             label6 = new Label();
-            txtNit = new TextBox();
+            txtTelefono = new TextBox();
             label5 = new Label();
             txtDui = new TextBox();
             label4 = new Label();
-            txtTelefono = new TextBox();
+            txtNit = new TextBox();
             label3 = new Label();
             txtApellidos = new TextBox();
             label1 = new Label();
@@ -95,7 +94,6 @@
             // groupBox1
             // 
             groupBox1.Anchor = AnchorStyles.Left;
-            groupBox1.Controls.Add(btnModificar);
             groupBox1.Controls.Add(btnEliminar);
             groupBox1.Controls.Add(btnGuardar);
             groupBox1.Controls.Add(label8);
@@ -103,11 +101,11 @@
             groupBox1.Controls.Add(label7);
             groupBox1.Controls.Add(txtCarrera);
             groupBox1.Controls.Add(label6);
-            groupBox1.Controls.Add(txtNit);
+            groupBox1.Controls.Add(txtTelefono);
             groupBox1.Controls.Add(label5);
             groupBox1.Controls.Add(txtDui);
             groupBox1.Controls.Add(label4);
-            groupBox1.Controls.Add(txtTelefono);
+            groupBox1.Controls.Add(txtNit);
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(txtApellidos);
             groupBox1.Controls.Add(label1);
@@ -123,25 +121,13 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Editar";
             // 
-            // btnModificar
-            // 
-            btnModificar.ForeColor = SystemColors.ControlDarkDark;
-            btnModificar.Location = new Point(204, 424);
-            btnModificar.Margin = new Padding(3, 2, 3, 2);
-            btnModificar.Name = "btnModificar";
-            btnModificar.Size = new Size(87, 32);
-            btnModificar.TabIndex = 23;
-            btnModificar.Text = "Editar";
-            btnModificar.UseVisualStyleBackColor = true;
-            btnModificar.Click += btnModificar_Click;
-            // 
             // btnEliminar
             // 
             btnEliminar.ForeColor = SystemColors.ControlDarkDark;
             btnEliminar.Location = new Point(14, 424);
             btnEliminar.Margin = new Padding(3, 2, 3, 2);
             btnEliminar.Name = "btnEliminar";
-            btnEliminar.Size = new Size(91, 32);
+            btnEliminar.Size = new Size(130, 32);
             btnEliminar.TabIndex = 21;
             btnEliminar.Text = "Eliminar";
             btnEliminar.UseVisualStyleBackColor = true;
@@ -150,10 +136,10 @@
             // btnGuardar
             // 
             btnGuardar.ForeColor = SystemColors.ControlDarkDark;
-            btnGuardar.Location = new Point(111, 424);
+            btnGuardar.Location = new Point(150, 424);
             btnGuardar.Margin = new Padding(3, 2, 3, 2);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(87, 32);
+            btnGuardar.Size = new Size(136, 32);
             btnGuardar.TabIndex = 22;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = true;
@@ -215,15 +201,16 @@
             label6.TabIndex = 15;
             label6.Text = "NIT";
             // 
-            // txtNit
+            // txtTelefono
             // 
-            txtNit.Font = new Font("Lucida Sans Unicode", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            txtNit.Location = new Point(13, 155);
-            txtNit.Margin = new Padding(3, 2, 3, 2);
-            txtNit.Name = "txtNit";
-            txtNit.Size = new Size(274, 27);
-            txtNit.TabIndex = 14;
-            txtNit.KeyPress += txtTelefono_KeyPress;
+            txtTelefono.Font = new Font("Lucida Sans Unicode", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            txtTelefono.Location = new Point(13, 155);
+            txtTelefono.Margin = new Padding(3, 2, 3, 2);
+            txtTelefono.MaxLength = 9;
+            txtTelefono.Name = "txtTelefono";
+            txtTelefono.Size = new Size(274, 27);
+            txtTelefono.TabIndex = 14;
+            txtTelefono.KeyPress += textBox_Press;
             // 
             // label5
             // 
@@ -241,10 +228,12 @@
             txtDui.Font = new Font("Lucida Sans Unicode", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             txtDui.Location = new Point(101, 239);
             txtDui.Margin = new Padding(3, 2, 3, 2);
+            txtDui.MaxLength = 10;
             txtDui.Name = "txtDui";
             txtDui.Size = new Size(185, 27);
             txtDui.TabIndex = 12;
-            txtDui.KeyPress += txtDui_KeyPress;
+            txtDui.TextChanged += txtDui_TextChanged;
+            txtDui.KeyPress += textBox_Press;
             // 
             // label4
             // 
@@ -257,15 +246,17 @@
             label4.TabIndex = 11;
             label4.Text = "Teléfono";
             // 
-            // txtTelefono
+            // txtNit
             // 
-            txtTelefono.Font = new Font("Lucida Sans Unicode", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            txtTelefono.Location = new Point(101, 197);
-            txtTelefono.Margin = new Padding(3, 2, 3, 2);
-            txtTelefono.Name = "txtTelefono";
-            txtTelefono.Size = new Size(186, 27);
-            txtTelefono.TabIndex = 10;
-            txtTelefono.KeyPress += txtNit_KeyPress;
+            txtNit.Font = new Font("Lucida Sans Unicode", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            txtNit.Location = new Point(101, 197);
+            txtNit.Margin = new Padding(3, 2, 3, 2);
+            txtNit.MaxLength = 17;
+            txtNit.Name = "txtNit";
+            txtNit.Size = new Size(186, 27);
+            txtNit.TabIndex = 10;
+            txtNit.TextChanged += txtNit_TextChanged;
+            txtNit.KeyPress += textBox_Press;
             // 
             // label3
             // 
@@ -286,7 +277,7 @@
             txtApellidos.Name = "txtApellidos";
             txtApellidos.Size = new Size(273, 27);
             txtApellidos.TabIndex = 8;
-            txtApellidos.KeyPress += txtApellidos_KeyPress;
+            txtApellidos.KeyPress += textBox_Press;
             // 
             // label1
             // 
@@ -307,7 +298,7 @@
             txtNombres.Name = "txtNombres";
             txtNombres.Size = new Size(274, 27);
             txtNombres.TabIndex = 2;
-            txtNombres.KeyPress += txtNombres_KeyPress;
+            txtNombres.KeyPress += textBox_Press;
             // 
             // panel2
             // 
@@ -321,6 +312,7 @@
             // gridDocentes
             // 
             gridDocentes.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            gridDocentes.BackgroundColor = Color.FromArgb(220, 230, 241);
             gridDocentes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             gridDocentes.Location = new Point(16, 12);
             gridDocentes.Name = "gridDocentes";
@@ -375,16 +367,15 @@
         private Label label7;
         private ComboBox txtCarrera;
         private Label label6;
-        private TextBox txtNit;
+        private TextBox txtTelefono;
         private Label label5;
         private TextBox txtDui;
         private Label label4;
-        private TextBox txtTelefono;
+        private TextBox txtNit;
         private Label label3;
         private TextBox txtApellidos;
         private Label label1;
         private TextBox txtNombres;
-        private Button btnModificar;
         private Button btnEliminar;
         private Button btnGuardar;
     }

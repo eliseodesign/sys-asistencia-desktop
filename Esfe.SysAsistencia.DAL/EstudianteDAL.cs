@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -26,9 +27,16 @@ namespace Esfe.SysAsistencia.DAL
             {
                 Estudiantes = new List<Estudiante>();
             }
+            
         }
         public bool AgregarEstudiante(Estudiante estudiante)
         {
+            var exist = Estudiantes.FirstOrDefault(e => e.Id == estudiante.Id);
+            if(exist != null)
+            {
+                EditarEstudiante(exist, estudiante);
+                return true;
+            }
             if (VerificarHuella(estudiante) != null)
             {
                 return false;
@@ -37,6 +45,18 @@ namespace Esfe.SysAsistencia.DAL
             Estudiantes.Add(estudiante);
 
             return true;
+        }
+        private void EditarEstudiante(Estudiante estudiante, Estudiante estudianteActualizado)
+        {
+            estudiante.CodigoGrupo = estudianteActualizado.CodigoGrupo;
+            estudiante.Nombres = estudianteActualizado.Nombres;
+            estudiante.Apellidos = estudianteActualizado.Apellidos;
+            estudiante.Dui = estudianteActualizado.Dui;
+            estudiante.Nit = estudianteActualizado.Nit;
+            estudiante.IdCarrera = estudianteActualizado.IdCarrera;
+            estudiante.Año = estudianteActualizado.Año;
+            estudiante.Cel = estudianteActualizado.Cel;
+            estudiante.Huella = estudianteActualizado.Huella;
         }
 
         public Estudiante VerificarHuella(Estudiante estudiante)
