@@ -284,7 +284,6 @@
         private Panel mainLateral;
         private Button btnCerrarSesion;
         private Panel panel5;
-        private Button btnGrupos;
         private Panel panel4;
         private Button btnDocentes;
         private Panel panel3;
@@ -296,5 +295,6 @@
         private Label label2;
         private Label label5;
         private Panel panelBar;
+        public Button btnGrupos;
     }
 }

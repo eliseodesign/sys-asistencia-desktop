@@ -14,10 +14,10 @@ namespace Esfe.SysAsistencia.UI.Components
 {
     public partial class GruposWF : Form
     {
-        public Panel _panel_app;
-        public GruposWF(Panel panel_app)
+        public AplicationWF padre;
+        public GruposWF(AplicationWF form)
         {
-            _panel_app = panel_app;
+            padre = form;
             InitializeComponent();
 
             List<string> carreras = State.InfoCarrera.carreras.ToList();
@@ -37,6 +37,12 @@ namespace Esfe.SysAsistencia.UI.Components
             _DetailGrupo detailGrupo = new _DetailGrupo("Nuevo Grupo");
             detailGrupo.ShowDialog();
             refreshGrid();
+            List<Grupo> listaGrupos = State.grupoBL.ObtenerGrupos();
+            if (listaGrupos.Count == 1)
+            {
+                MessageBox.Show(":(");
+                padre.btnGrupos.PerformClick();
+            }
         }
 
         private void actualizarGrid(object sender, EventArgs e)
@@ -100,6 +106,7 @@ namespace Esfe.SysAsistencia.UI.Components
                 {
                     return;
                 }
+                
             }
         }
 
@@ -107,11 +114,7 @@ namespace Esfe.SysAsistencia.UI.Components
         {
             gridGrupos.DataSource = null;
             List<Grupo> listaGrupos = State.grupoBL.ObtenerGrupos();
-            if (listaGrupos.Count == 1)
-            {
-                //this.Refresh(); 
-                OnLoad(EventArgs.Empty);
-            }
+            
             gridGrupos.DataSource = listaGrupos;
         }
         private void configGrid()

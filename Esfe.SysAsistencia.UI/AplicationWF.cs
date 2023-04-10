@@ -85,7 +85,7 @@ namespace Esfe.SysAsistencia.UI
 
         private void btnGrupos_Click(object sender, EventArgs e)
         {
-            Panels.AgregarPanel(PanelApp, new GruposWF(PanelApp));
+            Panels.AgregarPanel(PanelApp, new GruposWF(this));
             SetButtonsColors(btnGrupos);
         }
 
