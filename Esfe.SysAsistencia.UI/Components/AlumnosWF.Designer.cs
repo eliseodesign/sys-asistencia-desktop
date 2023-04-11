@@ -32,6 +32,7 @@
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             panel1 = new Panel();
             panel3 = new Panel();
+            label9 = new Label();
             panel2 = new Panel();
             gridEstudiantes = new DataGridView();
             groupBox1 = new GroupBox();
@@ -72,6 +73,7 @@
             // 
             // panel3
             // 
+            panel3.Controls.Add(label9);
             panel3.Controls.Add(panel2);
             panel3.Controls.Add(groupBox1);
             panel3.Dock = DockStyle.Fill;
@@ -80,6 +82,17 @@
             panel3.Size = new Size(724, 528);
             panel3.TabIndex = 11;
             panel3.Paint += panel3_Paint;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI Semibold", 20F, FontStyle.Bold, GraphicsUnit.Point);
+            label9.ForeColor = Color.FromArgb(0, 40, 100);
+            label9.Location = new Point(12, 12);
+            label9.Name = "label9";
+            label9.Size = new Size(126, 37);
+            label9.TabIndex = 12;
+            label9.Text = "Alumnos";
             // 
             // panel2
             // 
@@ -121,7 +134,6 @@
             // 
             // groupBox1
             // 
-            groupBox1.Anchor = AnchorStyles.Left;
             groupBox1.Controls.Add(cbxGrupo);
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(label8);
@@ -142,11 +154,11 @@
             groupBox1.Controls.Add(btnEliminar);
             groupBox1.Font = new Font("Lucida Sans Unicode", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             groupBox1.ForeColor = SystemColors.AppWorkspace;
-            groupBox1.Location = new Point(12, 41);
+            groupBox1.Location = new Point(12, 67);
             groupBox1.Margin = new Padding(3, 2, 3, 2);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(3, 2, 3, 2);
-            groupBox1.Size = new Size(303, 465);
+            groupBox1.Size = new Size(303, 449);
             groupBox1.TabIndex = 10;
             groupBox1.TabStop = false;
             groupBox1.Text = "Editar";
@@ -329,26 +341,30 @@
             // 
             // btnGuardar
             // 
-            btnGuardar.ForeColor = SystemColors.ControlDarkDark;
-            btnGuardar.Location = new Point(152, 415);
+            btnGuardar.BackColor = Color.SkyBlue;
+            btnGuardar.FlatStyle = FlatStyle.Flat;
+            btnGuardar.ForeColor = SystemColors.ActiveCaptionText;
+            btnGuardar.Location = new Point(152, 403);
             btnGuardar.Margin = new Padding(3, 2, 3, 2);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(134, 32);
             btnGuardar.TabIndex = 1;
             btnGuardar.Text = "Guardar";
-            btnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.UseVisualStyleBackColor = false;
             btnGuardar.Click += btnGuardar_Click;
             // 
             // btnEliminar
             // 
-            btnEliminar.ForeColor = SystemColors.ControlDarkDark;
-            btnEliminar.Location = new Point(13, 415);
+            btnEliminar.BackColor = Color.Salmon;
+            btnEliminar.FlatStyle = FlatStyle.Flat;
+            btnEliminar.ForeColor = SystemColors.ActiveCaptionText;
+            btnEliminar.Location = new Point(13, 403);
             btnEliminar.Margin = new Padding(3, 2, 3, 2);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.Size = new Size(134, 32);
             btnEliminar.TabIndex = 0;
             btnEliminar.Text = "Eliminar";
-            btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.UseVisualStyleBackColor = false;
             // 
             // AlumnosWF
             // 
@@ -363,6 +379,7 @@
             Text = "AlumnosWF";
             panel1.ResumeLayout(false);
             panel3.ResumeLayout(false);
+            panel3.PerformLayout();
             panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)gridEstudiantes).EndInit();
             groupBox1.ResumeLayout(false);
@@ -395,5 +412,6 @@
         private Label label2;
         private Panel panel2;
         private DataGridView gridEstudiantes;
+        private Label label9;
     }
 }
