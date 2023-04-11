@@ -110,7 +110,7 @@ namespace Esfe.SysAsistencia.UI
                 return;
             }
 
-            Panels.AgregarPanel(PanelApp, new AsistenciaWF(PanelApp));
+            Panels.AgregarPanel(PanelApp, new AsistenciaWF());
             SetButtonsColors(btnAsistencia);
         }
 

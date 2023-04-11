@@ -22,6 +22,20 @@ namespace Esfe.SysAsistencia.BL
             return oEstudianteDAL.ObtenerEstudiantes();
         }
 
+        public List<Estudiante> ObtenenerEstudiantesByGroup(string grupo)
+        {
+            List<Estudiante> lista = new List<Estudiante>();
+            foreach (var ee in oEstudianteDAL.ObtenerEstudiantes())
+            {
+                if (ee.CodigoGrupo == grupo)
+                {
+                    lista.Add(ee);
+                }
+            }
+
+            return lista;
+        }
+
         public bool EliminarEstudiante(int id)
         {
             return oEstudianteDAL.EliminarEstudiante(id);

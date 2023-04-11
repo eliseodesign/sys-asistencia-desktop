@@ -114,15 +114,14 @@ namespace Esfe.SysAsistencia.UI
         {
             //InitializeComponent();
             _padre = padre;
-            cbxPersons.Hide();
-
             base.FormClosing += new FormClosingEventHandler(VerificarWF_FormClosing);
 
-            //foreach (var doc in State.docenteBL.ObtenerDocentes())
-            //{
-            //    cbxPersons.Items.Add(doc.Nombres);
-            //}
-            //cbxPersons.SelectedIndexChanged += new EventHandler(verifyWhitout);
+            //ELIMINAR-->
+            foreach (var doc in State.docenteBL.ObtenerDocentes())
+            {
+                cbxPersons.Items.Add(doc.Nombres);
+            }
+            cbxPersons.SelectedIndexChanged += new EventHandler(verifyWhitout);
 
         }
 
