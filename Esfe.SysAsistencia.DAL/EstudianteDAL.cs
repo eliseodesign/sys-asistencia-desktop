@@ -59,6 +59,16 @@ namespace Esfe.SysAsistencia.DAL
             estudiante.Huella = estudianteActualizado.Huella;
         }
 
+        public bool EliminarEstudiante(int id)
+        {
+            var eliminar = Estudiantes.FirstOrDefault(i => i.Id == id);
+            if(eliminar != null)
+            {
+                Estudiantes.Remove(eliminar);
+                return true;
+            }
+            return false;
+        }
         public Estudiante VerificarHuella(Estudiante estudiante)
         {
             return Estudiantes.FirstOrDefault(h => h.Huella == estudiante.Huella);

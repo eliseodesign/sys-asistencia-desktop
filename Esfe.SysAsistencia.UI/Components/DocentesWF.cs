@@ -61,11 +61,11 @@ namespace Esfe.SysAsistencia.UI.Components
                 MessageBox.Show("Los datos son obligatorios", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            //else if (Template == null)
-            //{
-            //    MessageBox.Show("Aún no se ha registrado una huella", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //    return;
-            //}
+            else if (Template == null)
+            {
+                MessageBox.Show("Aún no se ha registrado una huella", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             var docente = new Docente()
             {
                 Id = ID,

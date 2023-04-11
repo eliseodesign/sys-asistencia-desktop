@@ -44,8 +44,17 @@ namespace Esfe.SysAsistencia.UI.Components
         //Signals
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            //Validacion de campos
-
+            // Validacion de campos
+            if (string.IsNullOrEmpty(txtNombres.Text) || string.IsNullOrEmpty(txtApellidos.Text) || string.IsNullOrEmpty(txtDui.Text))
+            {
+                MessageBox.Show("Los datos son obligatorios", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else if (Template == null)
+            {
+                MessageBox.Show("Aún no se ha registrado una huella", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             //Creacion del Alumno
             var estudiante = new Estudiante()
             {
@@ -60,17 +69,34 @@ namespace Esfe.SysAsistencia.UI.Components
                 CodigoGrupo = cbxGrupo.SelectedValue.ToString(),
 
             };
-
-            //Agregar alumno al BL
-            var result = State.estudianteBL.AgregarEstudiante(estudiante);
-            if (!result)
+            if(ID == 0)
             {
-                MessageBox.Show("No se puede registrar con la misma huella!", "ERROR GRAVE!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+              
+                //Agregar alumno al BL
+                var result = State.estudianteBL.AgregarEstudiante(estudiante);
+                if (!result)
+                {
+                    MessageBox.Show("No se puede registrar con la misma huella!", "ERROR GRAVE!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    RefreshGrid();
+                    MessageBox.Show("Se regitró al estudiante de forma exitosa", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
             }
             else
             {
-                RefreshGrid();
-                MessageBox.Show("Se regitró al estudiante de forma exitosa", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                var result = State.estudianteBL.AgregarEstudiante(estudiante);
+                if (!result)
+                {
+                    MessageBox.Show("No se puede registrar con la misma huella!", "ERROR GRAVE!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    RefreshGrid();
+                    MessageBox.Show("Se edito el estudiante de forma exitosa", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
             ID = 0;
         }
@@ -275,63 +301,71 @@ namespace Esfe.SysAsistencia.UI.Components
         }
 
 
-        //private void btnEliminar_Click(object sender, EventArgs e)
-        //{
-        //    if (ID == 0)
-        //    {
-        //        result = MessageBox.Show("Primero Seleccione un docente", "ELIMINAR", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
-        //        return;
-        //    }
-        //    result = MessageBox.Show("¿Desea Eliminar este resgistro?", "ELIMINAR", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
-        //    if (result == DialogResult.Yes)
-        //    {
-        //        try
-        //        {
-        //            //Eliminar registros del datagriedview
-        //            var delete = new Docente()
-        //            {
-        //                //Captura el Id de la linea seleccionada
-        //                Id = Convert.ToInt32(gridEstudiantes.CurrentRow.Cells[0].Value)
-        //            };
-        //            if (delete != null)
-        //            {
-        //                EstudianteBL.Eli(delete);
-        //                var updateList = docenteBL.ObtenerDocentes();
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (ID <= 0 )
+            {
+                result = MessageBox.Show("Primero Seleccione un alumno", "ERROR");
+                return;
+            }
+            result = MessageBox.Show("¿Desea Eliminar este resgistro?", "ELIMINAR", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+            if (result == DialogResult.Yes)
+            {
+                try
+                {
+                    //Eliminar registros del datagriedview
 
-        //                gridDocentes.DataSource = null;
-        //                gridDocentes.DataSource = updateList;
-        //                MessageBox.Show("Se elimaron los datos!", "Exitosamente", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //                LimpiarDatos();
-        //            }
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            MessageBox.Show(ex.Message);
-        //        }
-        //    }
-        //}
+                    bool eliminado = State.estudianteBL.EliminarEstudiante(ID);
+                    if (eliminado == true)
+                    {
+                        MessageBox.Show("El estudiante a sido eliminado");
+                        RefreshGrid();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error al eliminar estudiante");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
 
         private void gridDocentes_SelectionChanged(object sender, EventArgs e)
         {
             if (gridEstudiantes != null && gridEstudiantes.SelectedRows.Count > 0)
             {
 
-                //DataGridViewRow row = gridEstudiantes.SelectedRows[0];
+                DataGridViewRow row = gridEstudiantes.SelectedRows[0];
 
-                //if (row != null)
-                //{
+                if (row != null)
+                {
 
-                //    int id = Convert.ToInt32(row.Cells[0].Value);
-                //    //if (row.Cells[0].Value != null) ID = Convert.ToInt32(row.Cells[0].Value);
-                //    //if (row.Cells[1].Value != null) txtNombres.Text = row.Cells[1].Value.ToString();
-                //    //if (row.Cells[2].Value != null) txtApellidos.Text = row.Cells[2].Value.ToString();
-                //    //if (row.Cells[3].Value != null) txtTelefono.Text = row.Cells[3].Value.ToString();
+                    int id = Convert.ToInt32(row.Cells[0].Value);
+                    
+                    //if (row.Cells[0].Value != null) ID = Convert.ToInt32(row.Cells[0].Value);
+                    //if (row.Cells[1].Value != null) txtNombres.Text = row.Cells[1].Value.ToString();
+                    //if (row.Cells[2].Value != null) txtApellidos.Text = row.Cells[2].Value.ToString();
+                    //if (row.Cells[3].Value != null) txtTelefono.Text = row.Cells[3].Value.ToString();
 
-                //    var estudiante = State.estudianteBL.ObtenerEstudiante().FirstOrDefault(x => x.Id == id);
-                //    txtNombres.Text = estudiante.Nombres;
-                //    txtApellidos.Text = estudiante.Apellidos;
-                //    txtTelefono.Text = estudiantze.Cel;
-                //}
+                    var estudiante = State.estudianteBL.ObtenerEstudiante().FirstOrDefault(x => x.Id == id);
+                    if(estudiante!= null)
+                    {
+                        ID = id;
+                        txtNombres.Text = estudiante.Nombres;
+                        txtApellidos.Text = estudiante.Apellidos;
+                        txtTelefono.Text = estudiante.Cel;
+                        txtDui.Text = estudiante.Dui;
+                        txtNit.Text = estudiante.Nit;
+                        cbxCarrera.Text = estudiante.IdCarrera;
+                        cbxGrupo.Text = estudiante.CodigoGrupo;
+                        
+
+                        
+                    }
+                }
             }
         }
         private void panel3_Paint(object sender, PaintEventArgs e)

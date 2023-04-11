@@ -22,6 +22,10 @@ namespace Esfe.SysAsistencia.BL
             return oEstudianteDAL.ObtenerEstudiantes();
         }
 
+        public bool EliminarEstudiante(int id)
+        {
+            return oEstudianteDAL.EliminarEstudiante(id);
+        }
         public bool ExisteEstudiatne(Estudiante Estudiante)
         {
             return oEstudianteDAL.ExisteEstudiante(Estudiante);
