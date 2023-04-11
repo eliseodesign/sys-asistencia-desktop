@@ -32,6 +32,11 @@ namespace Esfe.SysAsistencia.UI
 
         private void btnCerrarSesion_Click(object sender, EventArgs e)
         {
+            if (!MySingleton.Instance.IsAsistenciaFinished)
+            {
+                MessageBox.Show("La asistencia aún está activa", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             State.TotalAccess = false;
             Panels.SustituirPanel(_panelGeneral, new LoginWF(_panelGeneral));
         }

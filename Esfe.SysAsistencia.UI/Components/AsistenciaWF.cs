@@ -110,9 +110,9 @@ namespace Esfe.SysAsistencia.UI.Components
             foreach (var a in asis)
             {
 
-                Str += "\n ================= " + 
+                Str += "\n ================= " +
                     "\n Alumno ID: " + a.AlumnoId.ToString() +
-                    "\n Nombre: " + State.estudianteBL.ObtenerEstudiante().FirstOrDefault(e=>e.Id == a.AlumnoId).Nombres +
+                    "\n Nombre: " + State.estudianteBL.ObtenerEstudiante().FirstOrDefault(e => e.Id == a.AlumnoId).Nombres +
                     "\n Fecha: " + a.Fecha.ToString() +
                     "\n Criterio: " + a.Criterio.ToString();
             }

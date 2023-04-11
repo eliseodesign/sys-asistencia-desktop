@@ -117,7 +117,13 @@ namespace Esfe.SysAsistencia.UI.Components
         //Verificar la huella
         protected override void Process(DPFP.Sample Sample)
         {
-            if (!asistenciaEnable) return;
+            if (asistenciaEnable == false)
+            {
+                Stop();
+                return;
+            }
+                
+                
 
             base.Process(Sample);
             // Process the sample and create a feature set for the enrollment purpose.

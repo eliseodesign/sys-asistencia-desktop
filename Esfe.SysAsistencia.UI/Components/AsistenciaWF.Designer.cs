@@ -67,9 +67,10 @@
             // 
             // panelVerificar
             // 
-            panelVerificar.Location = new Point(464, 12);
+            panelVerificar.Dock = DockStyle.Right;
+            panelVerificar.Location = new Point(464, 0);
             panelVerificar.Name = "panelVerificar";
-            panelVerificar.Size = new Size(248, 430);
+            panelVerificar.Size = new Size(255, 451);
             panelVerificar.TabIndex = 4;
             // 
             // label2
@@ -84,7 +85,6 @@
             // 
             // cbxGrupo
             // 
-            cbxGrupo.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             cbxGrupo.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxGrupo.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             cbxGrupo.FormattingEnabled = true;
@@ -96,6 +96,7 @@
             // 
             // gridAsistencia
             // 
+            gridAsistencia.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             gridAsistencia.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             gridAsistencia.Location = new Point(12, 89);
             gridAsistencia.Name = "gridAsistencia";
