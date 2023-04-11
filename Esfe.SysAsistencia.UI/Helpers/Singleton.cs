@@ -10,6 +10,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DPFP;
+using Esfe.SysAsistencia.UI.Components;
 
 namespace Esfe.SysAsistencia.UI
 {
@@ -19,6 +21,9 @@ namespace Esfe.SysAsistencia.UI
         private DPFP.Template Template;
         public bool TemplateIsNull = false;
         public bool IsAsistenciaFinished = true;
+
+        public VerificarAsistenciaWF AsistenciasVerifyOBJ;
+        
         private MySingleton() { }
 
         public static MySingleton Instance
@@ -34,7 +39,7 @@ namespace Esfe.SysAsistencia.UI
             }
         }       
 
-
+        
 
     }
 }

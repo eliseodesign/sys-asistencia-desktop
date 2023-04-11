@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DPFP;
 using DPFP.Capture;
+using DPFP.Verification;
 using Esfe.SysAsistencia.BL;
 using Esfe.SysAsistencia.DAL;
 using System.Drawing;
@@ -31,7 +32,7 @@ namespace Esfe.SysAsistencia.UI.Components
         Panel _panel_asistencia;
         string GrupoCarreraSelected = "";
         private Control _control;
-
+        
 
         enum ASISTENCIA_STATE
         {
@@ -57,7 +58,8 @@ namespace Esfe.SysAsistencia.UI.Components
             lblHuella.Text = "Deshabilitado";
             lblHuella.Image = Properties.Resources.huella_verificar;
             lblName.Text = "";
-            
+            MySingleton.Instance.AsistenciasVerifyOBJ = this;
+            StopLector();
         }
 
         //Funcion del SDK
@@ -70,8 +72,8 @@ namespace Esfe.SysAsistencia.UI.Components
         protected override void Init()
         {
             base.Init();
-            Stop();
             Verificator = new DPFP.Verification.Verification();     // Create a fingerprint template verificator
+            this.StopLector();
         }
 
 
@@ -122,9 +124,6 @@ namespace Esfe.SysAsistencia.UI.Components
                 Stop();
                 return;
             }
-                
-                
-
             base.Process(Sample);
             // Process the sample and create a feature set for the enrollment purpose.
             DPFP.FeatureSet features = ExtractFeatures(Sample, DPFP.Processing.DataPurpose.Verification);
@@ -182,6 +181,19 @@ namespace Esfe.SysAsistencia.UI.Components
                     }
                 }
             });
+        }
+
+        public void StopLector()
+        {
+            base.Stop();
+            Stop();
+
+            asistenciaEnable = false;
+            btnEnableAsis.BackColor = Color.FromArgb(90, 200, 90);
+            btnEnableAsis.Text = "Asistencias Terminadas";
+            _padre_asistencia.cbxGrupo.Enabled = true;
+            MySingleton.Instance.IsAsistenciaFinished = true;
+
         }
 
         void CreateAsistencia()
@@ -292,8 +304,8 @@ namespace Esfe.SysAsistencia.UI.Components
                 btnEnableAsis.Text = "Asistencias Terminadas";
                 _padre_asistencia.cbxGrupo.Enabled = true;
                 MySingleton.Instance.IsAsistenciaFinished = true;
-                CreateAsistencia(); ;
                 Stop();
+                CreateAsistencia();
                 MessageBox.Show("La asistencia del Día se ha guardado de forma exitosa. ", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 

@@ -37,7 +37,12 @@ namespace Esfe.SysAsistencia.UI
                 MessageBox.Show("La asistencia aún está activa", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            
             State.TotalAccess = false;
+            if (MySingleton.Instance.AsistenciasVerifyOBJ != null)
+            {
+                MySingleton.Instance.AsistenciasVerifyOBJ.StopLector();
+            }
             Panels.SustituirPanel(_panelGeneral, new LoginWF(_panelGeneral));
         }
 
