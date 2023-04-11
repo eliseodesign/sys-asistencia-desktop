@@ -20,6 +20,7 @@
             base.Dispose(disposing);
         }
 
+
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -32,14 +33,14 @@
             // 
             // CapturarHuella
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(907, 616);
+            ClientSize = new Size(795, 468);
             Margin = new Padding(5, 8, 5, 8);
-            MaximumSize = new Size(925, 663);
-            MinimumSize = new Size(925, 663);
+            MaximumSize = new Size(811, 507);
+            MinimumSize = new Size(811, 507);
             Name = "CapturarHuella";
-            Text = "CapturarHuella";
+            Text = "Capturar Huella";
             ResumeLayout(false);
             PerformLayout();
         }

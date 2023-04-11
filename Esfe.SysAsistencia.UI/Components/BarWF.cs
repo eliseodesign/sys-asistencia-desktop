@@ -17,14 +17,28 @@ namespace Esfe.SysAsistencia.UI.Components
         {
             InitializeComponent();
             if (State.DocenteLoged != null)
-                txtLoginNombre.Text = State.DocenteLoged.Nombres.ToString();
+                txtLoginNombre.Text = State.DocenteLoged.Nombres.ToString() + "     ";
             else
-                txtLoginNombre.Text = "Admin";
+                txtLoginNombre.Text = "Admin     ";
+
+            SetHourBar();
         }
 
         private void GuardarDatos_Click(object sender, EventArgs e)
         {
             JsonData.GuardarDatos();
+        }
+
+        private void timeHour_Tick(object sender, EventArgs e)
+        {
+            SetHourBar();
+        }
+
+        void SetHourBar()
+        {
+            DateTime currentTime = DateTime.Now;
+            string timeString = currentTime.ToString("h:mm tt");
+            lblHour.Text = timeString;
         }
     }
 }

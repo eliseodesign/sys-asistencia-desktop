@@ -18,6 +18,7 @@ namespace Esfe.SysAsistencia.UI
         private static MySingleton _instance = null;
         private DPFP.Template Template;
         public bool TemplateIsNull = false;
+        public bool IsAsistenciaFinished = true;
         private MySingleton() { }
 
         public static MySingleton Instance
@@ -32,5 +33,8 @@ namespace Esfe.SysAsistencia.UI
                 return _instance;
             }
         }       
+
+
+
     }
 }

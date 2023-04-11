@@ -21,9 +21,9 @@ namespace Esfe.SysAsistencia.UI
 
     public partial class CapturarHuella : CaptureForm
     {
-                public CapturarHuella()
+        public CapturarHuella()
         {
-            InitializeComponent();
+            cbxPersons.Hide(); //Borrar para final
 
         }
         public delegate void OnTemplateEventHandler(DPFP.Template template);
@@ -40,7 +40,6 @@ namespace Esfe.SysAsistencia.UI
             base.Init();
             base.Text = "Registrar una nueva Huella";
             Enroller = new DPFP.Processing.Enrollment();// Create an enrollment.
-            Verificator = new DPFP.Verification.Verification();
             UpdateStatus();
             UpdateTitleAndDescription(0);
         }
@@ -94,7 +93,6 @@ namespace Esfe.SysAsistencia.UI
                         case DPFP.Processing.Enrollment.Status.Ready:   // report success and stop capturing
 
                             OnTemplate(Enroller.Template);
-                            //SetPrompt("Click Close, and then click Fingerprint Verification.");
                             Stop();
                             break;
 

@@ -67,30 +67,65 @@ namespace Esfe.SysAsistencia.UI
         }
         private void btnDocentes_Click(object sender, EventArgs e)
         {
+
+            if (!MySingleton.Instance.IsAsistenciaFinished)
+            {
+                MessageBox.Show("La asistencia aún está activa", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             Panels.AgregarPanel(PanelApp, new DocentesWF(PanelApp));
             SetButtonsColors(btnDocentes);
         }
 
         private void btnAlumnos_Click(object sender, EventArgs e)
         {
+
+            if (!MySingleton.Instance.IsAsistenciaFinished)
+            {
+                MessageBox.Show("La asistencia aún está activa", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             Panels.AgregarPanel(PanelApp, new AlumnosWF(PanelApp));
             SetButtonsColors(btnAlumnos);
         }
 
         private void btnAsistencia_Click(object sender, EventArgs e)
         {
+
+            if (!MySingleton.Instance.IsAsistenciaFinished)
+            {
+                MessageBox.Show("La asistencia aún está activa", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             Panels.AgregarPanel(PanelApp, new AsistenciaWF(PanelApp));
             SetButtonsColors(btnAsistencia);
         }
 
         private void btnGrupos_Click(object sender, EventArgs e)
         {
+
+            if (!MySingleton.Instance.IsAsistenciaFinished)
+            {
+                MessageBox.Show("La asistencia aún está activa", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             Panels.AgregarPanel(PanelApp, new GruposWF(this));
             SetButtonsColors(btnGrupos);
         }
 
         private void lblAsitencia_Click(object sender, EventArgs e)
         {
+
+            if (!MySingleton.Instance.IsAsistenciaFinished)
+            {
+                MessageBox.Show("La asistencia aún está activa", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             Panels.SustituirPanel(PanelApp, new HomeWF());
             foreach (Button i in buttons_list)
             {

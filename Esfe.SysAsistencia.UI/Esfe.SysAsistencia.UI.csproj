@@ -20,6 +20,9 @@
     <Reference Include="DPFPEngNET">
       <HintPath>..\..\..\..\..\..\..\..\..\Program Files\DigitalPersona\One Touch SDK\.NET\Bin\DPFPEngNET.dll</HintPath>
     </Reference>
+    <Reference Include="DPFPGuiNET">
+      <HintPath>..\..\..\..\..\..\..\Program Files\DigitalPersona\One Touch SDK\.NET\Bin\DPFPGuiNET.dll</HintPath>
+    </Reference>
     <Reference Include="DPFPShrNET">
       <HintPath>..\..\..\..\..\..\..\..\..\Program Files\DigitalPersona\One Touch SDK\.NET\Bin\DPFPShrNET.dll</HintPath>
     </Reference>

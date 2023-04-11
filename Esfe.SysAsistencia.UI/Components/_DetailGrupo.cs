@@ -32,13 +32,11 @@ namespace Esfe.SysAsistencia.UI.Components
         }
         public _DetailGrupo(int id) : this()
         {
-            oGrupo = State.grupoBL
-                .ObtenerGrupos()
-                .FirstOrDefault(x => x.Id == id);
+            oGrupo = State.grupoBL.ObtenerGrupos().FirstOrDefault(x => x.Id == id);
 
             if (oGrupo == null)
             {
-                MessageBox.Show("ERROR - GRUPO NO ENCONTRADO");
+                MessageBox.Show("¡No se pudo encontrar el grupo!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             imgAgregar.Visible = false;
@@ -52,7 +50,10 @@ namespace Esfe.SysAsistencia.UI.Components
             cbxCarrera.SelectedIndex = Array.IndexOf(State.InfoCarrera.idCarrera, oGrupo.Carrera);
             cbxTurno.SelectedIndex = Array.IndexOf(State.InfoCarrera.turnos, oGrupo.Turno);
 
-            numEstudiantes.Value = oGrupo.EstudiantesMax;
+            if (oGrupo.EstudiantesMax > 0)
+            {
+                numEstudiantes.Value = oGrupo.EstudiantesMax;
+            }
 
             for (int i = 0; i < oGrupo.Horario.Length; i++)
             {
@@ -67,33 +68,49 @@ namespace Esfe.SysAsistencia.UI.Components
         {
             if (imgAgregar.Visible == true)
             {
-                var grupo = new Grupo()
+                if(CheckBoxDays.Count(x=>x.Checked == true) >= 3)
                 {
-                    Año = State.InfoCarrera.idAño[cbxAño.SelectedIndex],
-                    Carrera = State.InfoCarrera.idCarrera[cbxCarrera.SelectedIndex],
-                    Turno = State.InfoCarrera.turnos[cbxTurno.SelectedIndex],
-                    EstudiantesMax = Convert.ToInt32(numEstudiantes.Value),
-                    Horario = obtenerPresencial()
-                };
+                    var grupo = new Grupo()
+                    {
+                        Año = State.InfoCarrera.idAño[cbxAño.SelectedIndex],
+                        Carrera = State.InfoCarrera.idCarrera[cbxCarrera.SelectedIndex],
+                        Turno = State.InfoCarrera.turnos[cbxTurno.SelectedIndex],
+                        EstudiantesMax = Convert.ToInt32(numEstudiantes.Value),
+                        Horario = obtenerPresencial()
+                    };
 
-                string codigo = State.grupoBL.AgregarGrupo(grupo);
+                    string codigo = State.grupoBL.AgregarGrupo(grupo);
 
-                MessageBox.Show($"Se a creado el grupo {codigo}");
-                this.Close();
+                    MessageBox.Show($"Se creó el gurpo {codigo} de forma exitosa", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Deben haber 3 días marcados como Presenciales!", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                }
             }
             else if (imgEdit.Visible == true)
             {
-                oGrupo.EstudiantesMax = Convert.ToInt32(numEstudiantes.Value);
-                oGrupo.Turno = State.InfoCarrera.turnos[cbxTurno.SelectedIndex];
-                oGrupo.Horario = obtenerPresencial();
-
-                var si = State.grupoBL.ActualizarGrupo(oGrupo);
-                if (si == false)
+                if (CheckBoxDays.Count(x => x.Checked == true) >= 3)
                 {
-                    MessageBox.Show("Ocurrio un error!!!");
-                }
+                    oGrupo.EstudiantesMax = Convert.ToInt32(numEstudiantes.Value);
+                    oGrupo.Turno = State.InfoCarrera.turnos[cbxTurno.SelectedIndex];
+                    oGrupo.Horario = obtenerPresencial();
 
-                this.Close();
+                    var si = State.grupoBL.ActualizarGrupo(oGrupo);
+                    if (si == false)
+                    {
+                        MessageBox.Show("Ocurrio un error!!!");
+                    }
+
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Deben haber 3 días marcados como Presenciales!", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                }
             }
         }
 
@@ -105,8 +122,20 @@ namespace Esfe.SysAsistencia.UI.Components
         private void changeLbl(object sender, EventArgs e)
         {
             CheckBox checkBox = (CheckBox)sender;
-            lblPresencial.Text = CheckBoxDays.Count(x => x.Checked == true) + " presencial";
-            lblVirtual.Text = CheckBoxDays.Count(x => x.Checked == false) + " virtual";
+            var count = CheckBoxDays.Count(x => x.Checked == true);
+
+            if (count <= 3)
+            {
+                lblPresencial.Text = CheckBoxDays.Count(x => x.Checked == true) + " presencial";
+                lblVirtual.Text = CheckBoxDays.Count(x => x.Checked == false) + " virtual";
+
+            }
+            else
+            {
+                checkBox.Checked = false;
+            }
+
+
 
         }
         private void cargarCBX()

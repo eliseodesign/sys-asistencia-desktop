@@ -22,6 +22,7 @@ namespace Esfe.SysAsistencia.UI
         public CaptureForm()
         {
             InitializeComponent();
+
         }
 
         protected virtual void Init()
@@ -97,7 +98,7 @@ namespace Esfe.SysAsistencia.UI
         public void OnComplete(object Capture, string ReaderSerialNumber, DPFP.Sample Sample)
         {
             MakeReport("Muestra de la huella Capturada");
-            
+
             Process(Sample);
         }
 
@@ -226,5 +227,14 @@ namespace Esfe.SysAsistencia.UI
 
         private DPFP.Capture.Capture Capturer;
 
+        private void btnScan_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbxPersons_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

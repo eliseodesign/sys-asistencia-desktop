@@ -315,7 +315,7 @@ namespace Esfe.SysAsistencia.UI.Components
         {
             if (gridEstudiantes != null && gridEstudiantes.SelectedRows.Count > 0)
             {
-                
+
                 //DataGridViewRow row = gridEstudiantes.SelectedRows[0];
 
                 //if (row != null)
@@ -330,7 +330,7 @@ namespace Esfe.SysAsistencia.UI.Components
                 //    var estudiante = State.estudianteBL.ObtenerEstudiante().FirstOrDefault(x => x.Id == id);
                 //    txtNombres.Text = estudiante.Nombres;
                 //    txtApellidos.Text = estudiante.Apellidos;
-                //    txtTelefono.Text = estudiante.Cel;
+                //    txtTelefono.Text = estudiantze.Cel;
                 //}
             }
         }

@@ -29,7 +29,5 @@ namespace Esfe.SysAsistencia.UI.Components
             lblFecha.Text = DateTime.Now.ToLongDateString();
         }
 
- 
-
     }
 }

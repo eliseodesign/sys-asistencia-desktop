@@ -48,7 +48,7 @@ namespace Esfe.SysAsistencia.DAL
 
             if (grupo != null)
             {
-               // comentado porque es lo que le da identidad a cada grupo
+                // comentado porque es lo que le da identidad a cada grupo
                 //grupo.Codigo = update.Codigo;
                 //grupo.Carrera = update.Carrera;
                 //grupo.Año = update.Año;

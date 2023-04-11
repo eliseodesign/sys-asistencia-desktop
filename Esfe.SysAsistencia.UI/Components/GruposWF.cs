@@ -76,8 +76,8 @@ namespace Esfe.SysAsistencia.UI.Components
             DgvDesing.Formato(gridGrupos, 1);
             gridGrupos.Columns["Id"].Width = 50;
             gridGrupos.Columns["Presencial"].Width = 200;
-            gridGrupos.Columns["Editar"].Width = 55;
-            gridGrupos.Columns["Eliminar"].Width = 55;
+            gridGrupos.Columns["Editar"].Width = 90;
+            gridGrupos.Columns["Eliminar"].Width = 90;
         }
 
         private void gridGrupos_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -106,7 +106,7 @@ namespace Esfe.SysAsistencia.UI.Components
                 {
                     return;
                 }
-                
+
             }
         }
 
@@ -114,7 +114,7 @@ namespace Esfe.SysAsistencia.UI.Components
         {
             gridGrupos.DataSource = null;
             List<Grupo> listaGrupos = State.grupoBL.ObtenerGrupos();
-            
+
             gridGrupos.DataSource = listaGrupos;
         }
         private void configGrid()
@@ -128,12 +128,12 @@ namespace Esfe.SysAsistencia.UI.Components
             //gridGrupos.Columns["Carrera"].DisplayIndex = 2;
             //gridGrupos.Columns["Año"].DisplayIndex = 3;
             gridGrupos.Columns["EstudiantesMax"].DisplayIndex = 2;
+            gridGrupos.Columns["EstudiantesMax"].DataPropertyName = "EstudiantesMax";
+            gridGrupos.Columns["EstudiantesMax"].Name = "AlumnosMax";
             gridGrupos.Columns["Turno"].DisplayIndex = 3;
             gridGrupos.Columns["Presencial"].DisplayIndex = 4;
             gridGrupos.Columns["Editar"].DisplayIndex = 5;
-            gridGrupos.Columns["Editar"].Width = 75;
             gridGrupos.Columns["Eliminar"].DisplayIndex = 6;
-            gridGrupos.Columns["Eliminar"].Width = 75;
 
             gridGrupos.Columns["DocenteId"].Visible = false;
             gridGrupos.Columns["Carrera"].Visible = false;

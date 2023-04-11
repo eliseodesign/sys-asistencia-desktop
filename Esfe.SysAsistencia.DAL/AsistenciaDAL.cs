@@ -25,10 +25,20 @@ namespace Esfe.SysAsistencia.DAL
                 Asistencias = new List<Asistencia>();
             }
         }
-        public void AgregarAsistencia(Asistencia asistencia)
+        public bool AgregarAsistencia(Asistencia asistencia)
         {
-            asistencia.Id = Asistencias.Select(d => d.Id).DefaultIfEmpty(0).Max() + 1;
-            Asistencias.Add(asistencia);
+            var res = true;
+            if(ObtenerAsistencias().Select(g=>g.Id) != null)
+            {
+                asistencia.Id = Asistencias.Select(d => d.Id).DefaultIfEmpty(0).Max() + 1;
+                Asistencias.Add(asistencia);
+            }
+            else
+            {
+                res = false;
+            }
+
+            return res;
         }
 
         public List<Asistencia> ObtenerAsistencias()

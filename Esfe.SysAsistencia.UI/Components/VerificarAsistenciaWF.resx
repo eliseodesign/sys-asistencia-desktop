@@ -57,19 +57,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="GuardarDatos.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1
-        MAAA6mAAADqYAAAXcJy6UTwAAAAHdElNRQfnAx0JNi3hVIKHAAABE0lEQVRIS+2VSw4BQRRFGRqQ0FYg
-        kUhswcDAwAqsxU5E+21DYh8SA+mB34wQ8+fe+gihpbo0A3GTE/Wq+r0TpLszIlIAI3AAaWQDqhkbFGO1
-        LXIGW72UE1g6cgTMDqz08kaCxR5weACagJmowyfBWQ40QN3UPcC0QRb0VWUlei2RudhFUNOXyNTUV4Gp
-        7ySpCxisKVlz8yMCBnXETR9BCXRBx9ReggXg7+jCHDCJBD5xEhRBy5NATTZB/ShIM5zJwd8V4JN3aeVN
-        cq8E7/zJNk0XAR96s4TYB6WTIPZGiwt7dOtfEBP26NZfFCR6ZcaFPbpVzSgDztzzYAgY35e+hT0MZ3AW
-        E1KQBwPAb5JWOCsUkfwF5M9i5XM0Rl8AAAAASUVORK5CYII=
-</value>
-  </data>
-  <metadata name="timeHour.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
 </root>

@@ -11,7 +11,6 @@ namespace Esfe.SysAsistencia.UI.Helpers
 {
     public class Verificar
     {
-
         public static bool VerificarTipo<T>(IEnumerable<T> coleccion, Type tipo)
         {
             foreach (var elemento in coleccion)

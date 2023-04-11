@@ -12,9 +12,9 @@ namespace Esfe.SysAsistencia.BL
     {
         private AsistenciaDAL oAsistenciaDAL = new AsistenciaDAL();
 
-        public void AgregarAsistencia(Asistencia Asistencia)
+        public bool AgregarAsistencia(Asistencia Asistencia)
         {
-            oAsistenciaDAL.AgregarAsistencia(Asistencia);
+            return oAsistenciaDAL.AgregarAsistencia(Asistencia);
         }
 
         public List<Asistencia> ObtenerAsistencias()

@@ -15,6 +15,7 @@ namespace Esfe.SysAsistencia.UI.Helpers
         public static DocenteBL docenteBL { get; set; } = new DocenteBL();
         public static EstudianteBL estudianteBL { get; set; } = new EstudianteBL();
         public static GrupoBL grupoBL { get; set; } = new GrupoBL();
+        public static AsistenciaBL asistenciaBL { get; set; } = new AsistenciaBL();
 
 
         // ----------- propiedades globales de acceso ------------------------------

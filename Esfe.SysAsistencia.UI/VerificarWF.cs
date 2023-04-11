@@ -19,10 +19,10 @@ namespace Esfe.SysAsistencia.UI
 
         //Vaiables
         LoginWF _padre;
-        public bool res = false;
+        public bool respuestaVerifiation = false;
         private DPFP.Template Template;
         private DPFP.Verification.Verification Verificator;
-        
+
         public void Verify(DPFP.Template template)
         {
             Template = template;
@@ -42,11 +42,28 @@ namespace Esfe.SysAsistencia.UI
         {
             // Show "False accept rate" value
             SetStatus(String.Format("False Accept Rate (FAR) = {0}", FAR));
+
+        }
+
+        private void verifyWhitout(object sender, EventArgs e)
+        {
+
+            this.CancelButton.PerformClick();
+            foreach (var doc in State.docenteBL.ObtenerDocentes())
+            {
+                if (doc.Nombres == cbxPersons.Text)
+                {
+                    State.DocenteLoged = doc;
+                }
+            }
+
+            _padre.LoginDocente(true);
         }
 
         protected override void Process(DPFP.Sample Sample)
         {
             base.Process(Sample);
+
 
             // Process the sample and create a feature set for the enrollment purpose.
             DPFP.FeatureSet features = ExtractFeatures(Sample, DPFP.Processing.DataPurpose.Verification);
@@ -74,13 +91,13 @@ namespace Esfe.SysAsistencia.UI
                         MakeReport("Huella verificada " + emp.Nombres);
                         MakeReport("Por favor cierre el formulario.");
                         UpdateMuestras(1);
-                        res = true;
+                        respuestaVerifiation = true;
                         Stop();
                         break;
                     }
                 }
 
-                if (res)
+                if (respuestaVerifiation)
                 {
                     State.DocenteLoged = docenteVar;
                     Stop();
@@ -93,21 +110,37 @@ namespace Esfe.SysAsistencia.UI
             }
         }
 
-        public VerificarWF(LoginWF padre)
+        public VerificarWF(LoginWF padre, bool initWhitoutScanner = false)
         {
-            InitializeComponent();
+            //InitializeComponent();
             _padre = padre;
+            cbxPersons.Hide();
+
+            base.FormClosing += new FormClosingEventHandler(VerificarWF_FormClosing);
+
+            //foreach (var doc in State.docenteBL.ObtenerDocentes())
+            //{
+            //    cbxPersons.Items.Add(doc.Nombres);
+            //}
+            //cbxPersons.SelectedIndexChanged += new EventHandler(verifyWhitout);
+
         }
 
         public VerificarWF(AplicationWF app)
         {
-            InitializeComponent();
+
 
         }
 
         private void VerificarWF_FormClosing(object sender, FormClosingEventArgs e)
         {
-            _padre.LoginDocente(res);
+
+            _padre.LoginDocente(respuestaVerifiation);
+        }
+
+        private void VerificarWF_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

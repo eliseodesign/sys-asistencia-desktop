@@ -29,7 +29,8 @@
         private void InitializeComponent()
         {
             PanelAsistencia = new Panel();
-            flowLayoutPanel1 = new FlowLayoutPanel();
+            button1 = new Button();
+            panelVerificar = new Panel();
             label2 = new Label();
             cbxGrupo = new ComboBox();
             gridAsistencia = new DataGridView();
@@ -40,7 +41,8 @@
             // 
             // PanelAsistencia
             // 
-            PanelAsistencia.Controls.Add(flowLayoutPanel1);
+            PanelAsistencia.Controls.Add(button1);
+            PanelAsistencia.Controls.Add(panelVerificar);
             PanelAsistencia.Controls.Add(label2);
             PanelAsistencia.Controls.Add(cbxGrupo);
             PanelAsistencia.Controls.Add(gridAsistencia);
@@ -53,19 +55,28 @@
             PanelAsistencia.Size = new Size(719, 451);
             PanelAsistencia.TabIndex = 1;
             // 
-            // flowLayoutPanel1
+            // button1
             // 
-            flowLayoutPanel1.BackColor = Color.Green;
-            flowLayoutPanel1.Location = new Point(382, 9);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(330, 430);
-            flowLayoutPanel1.TabIndex = 4;
+            button1.Location = new Point(278, 52);
+            button1.Name = "button1";
+            button1.Size = new Size(180, 31);
+            button1.TabIndex = 5;
+            button1.Text = "Asistencia del Día";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
+            // panelVerificar
+            // 
+            panelVerificar.Location = new Point(464, 12);
+            panelVerificar.Name = "panelVerificar";
+            panelVerificar.Size = new Size(248, 430);
+            panelVerificar.TabIndex = 4;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(12, 91);
+            label2.Location = new Point(15, 53);
             label2.Name = "label2";
             label2.Size = new Size(66, 25);
             label2.TabIndex = 3;
@@ -77,19 +88,19 @@
             cbxGrupo.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxGrupo.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             cbxGrupo.FormattingEnabled = true;
-            cbxGrupo.Location = new Point(83, 92);
+            cbxGrupo.Location = new Point(86, 54);
             cbxGrupo.Name = "cbxGrupo";
-            cbxGrupo.Size = new Size(202, 29);
+            cbxGrupo.Size = new Size(177, 29);
             cbxGrupo.TabIndex = 2;
             cbxGrupo.SelectedIndexChanged += cbxGrupo_SelectedIndexChanged;
             // 
             // gridAsistencia
             // 
             gridAsistencia.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            gridAsistencia.Location = new Point(12, 138);
+            gridAsistencia.Location = new Point(12, 89);
             gridAsistencia.Name = "gridAsistencia";
             gridAsistencia.RowTemplate.Height = 25;
-            gridAsistencia.Size = new Size(365, 301);
+            gridAsistencia.Size = new Size(446, 350);
             gridAsistencia.TabIndex = 1;
             // 
             // txtTitle
@@ -123,10 +134,11 @@
 
         private Panel PanelAsistencia;
         private Label label1;
-        private FlowLayoutPanel flowLayoutPanel1;
         private Label label2;
-        private ComboBox cbxGrupo;
-        private DataGridView gridAsistencia;
         private Label txtTitle;
+        private Panel panelVerificar;
+        public ComboBox cbxGrupo;
+        public DataGridView gridAsistencia;
+        private Button button1;
     }
 }
