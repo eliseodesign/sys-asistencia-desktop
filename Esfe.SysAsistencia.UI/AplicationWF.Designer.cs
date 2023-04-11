@@ -99,14 +99,13 @@
             btnCerrarSesion.FlatStyle = FlatStyle.Flat;
             btnCerrarSesion.Font = new Font("Lucida Sans Unicode", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             btnCerrarSesion.ForeColor = Color.FromArgb(68, 158, 227);
-            //btnCerrarSesion.Image = Properties.Resources.salida;
             btnCerrarSesion.ImageAlign = ContentAlignment.MiddleLeft;
             btnCerrarSesion.Location = new Point(0, 321);
             btnCerrarSesion.Name = "btnCerrarSesion";
             btnCerrarSesion.Size = new Size(203, 55);
             btnCerrarSesion.TabIndex = 34;
             btnCerrarSesion.Text = "Cerrar Sesión";
-            btnCerrarSesion.TextAlign = ContentAlignment.MiddleRight;
+            btnCerrarSesion.TextAlign = ContentAlignment.MiddleLeft;
             btnCerrarSesion.UseVisualStyleBackColor = true;
             btnCerrarSesion.Click += btnCerrarSesion_Click;
             // 
