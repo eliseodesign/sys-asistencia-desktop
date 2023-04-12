@@ -9,8 +9,18 @@ using System.Threading.Tasks;
 
 namespace Esfe.SysAsistencia.UI.Helpers
 {
+    /// <summary>
+    /// Clase que proporciona métodos para verificaciones y validaciones en la interfaz de usuario de la aplicación de asistencia.
+    /// </summary>
     public class Verificar
     {
+        /// <summary>
+        /// Verifica si una colección de elementos es del tipo especificado.
+        /// </summary>
+        /// <typeparam name="T">Tipo de elementos en la colección</typeparam>
+        /// <param name="coleccion">Colección de elementos</param>
+        /// <param name="tipo">Tipo a verificar</param>
+        /// <returns>true si todos los elementos de la colección son del tipo especificado, false en caso contrario</returns>
         public static bool VerificarTipo<T>(IEnumerable<T> coleccion, Type tipo)
         {
             foreach (var elemento in coleccion)

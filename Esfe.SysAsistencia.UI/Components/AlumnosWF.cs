@@ -12,9 +12,18 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Esfe.SysAsistencia.DAL;
 using static DPFP.Verification.Verification;
+using Microsoft.Win32;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Esfe.SysAsistencia.UI.Components
 {
+    /// <summary>
+    //  La clase "AlumnosWF" es un formulario de Windows Forms que permite registrar 
+    // y gestionar estudiantes en un sistema de asistencia.El formulario contiene
+    // una serie de controles como cuadros de texto(txtNombres, txtApellidos, txtDui,
+    // txtNit, txtTelefono), cuadros combinados(cbxCarrera, cbxGrupo), un botón de 
+    // guardar(btnGuardar) 
+    /// </summary>
     public partial class AlumnosWF : Form
     {
         //  -------------------------- Variables para el lector --------------------------

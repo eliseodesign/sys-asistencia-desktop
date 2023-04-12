@@ -12,6 +12,10 @@ using System.Windows.Forms;
 
 namespace Esfe.SysAsistencia.UI.Components
 {
+    /// <summary>
+    /// Clase que representa la ventana de gestión de Grupos en la aplicación de Asistencia.
+    /// Permite visualizar, agregar, editar y eliminar grupos de estudiantes.
+    /// </summary>
     public partial class GruposWF : Form
     {
         public AplicationWF padre;
@@ -32,6 +36,10 @@ namespace Esfe.SysAsistencia.UI.Components
             refreshGrid();
         }
 
+        /// <summary>
+        /// Maneja el evento de clic en el botón "Agregar".
+        /// Abre la ventana de detalle de grupo para agregar un nuevo grupo y refresca la lista de grupos.
+        /// </summary>
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             _DetailGrupo detailGrupo = new _DetailGrupo("Nuevo Grupo");
@@ -45,6 +53,10 @@ namespace Esfe.SysAsistencia.UI.Components
             }
         }
 
+        /// <summary>
+        /// Maneja el evento de cambio en la selección de carrera o año.
+        /// Filtra la lista de grupos según la selección y actualiza el grid.
+        /// </summary>
         private void actualizarGrid(object sender, EventArgs e)
         {
             List<Grupo> gruposFiltrados = FiltrarGrupos();

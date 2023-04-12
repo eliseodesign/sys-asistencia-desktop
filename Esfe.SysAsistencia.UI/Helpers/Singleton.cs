@@ -15,6 +15,10 @@ using Esfe.SysAsistencia.UI.Components;
 
 namespace Esfe.SysAsistencia.UI
 {
+    /**
+     * Clase que implementa el patrón de diseño Singleton para asegurar que solo exista una instancia de la clase en toda la aplicación y proporcionar un punto de acceso global a dicha instancia.
+     */
+
     public class MySingleton
     {
         private static MySingleton _instance = null;

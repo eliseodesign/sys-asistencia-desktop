@@ -11,10 +11,20 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Esfe.SysAsistencia.UI
+{/// <summary>
+/// Clase que representa el formulario de inicio de sesión de la interfaz de usuario de Esfe.SysAsistencia.
+/// </summary>
+public partial class LoginWF : Form
 {
-    public partial class LoginWF : Form
-    {
-        public Panel _panelGeneral;
+    /// <summary>
+    /// Panel general utilizado para la gestión de los paneles en la interfaz de usuario.
+    /// </summary>
+    public Panel _panelGeneral;
+
+    /// <summary>
+    /// Constructor de la clase LoginWF que recibe un panel como parámetro.
+    /// </summary>
+    /// <param name="panelGeneral">Panel general utilizado para la gestión de los paneles en la interfaz de usuario.</param>
         public LoginWF(Panel panelGeneral)
         {
             _panelGeneral = panelGeneral;

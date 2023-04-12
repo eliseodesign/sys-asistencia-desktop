@@ -17,6 +17,13 @@ using Esfe.SysAsistencia.DAL;
 
 namespace Esfe.SysAsistencia.UI.Components
 {
+    /// <summary>
+    /// Clase que representa el formulario de registro de docentes en una aplicación de asistencia
+    /// de una institución educativa. Contiene la lógica para interactuar con la interfaz de usuario,
+    /// guardar los datos del docente en la base de datos, y manejar eventos y acciones del formulario.
+    /// Además, incluye la integración con un lector de huellas dactilares para la verificación de
+    /// identidad del docente.
+    /// </summary>
     public partial class DocentesWF : Form
     {
         public DocenteBL docenteBL = new DocenteBL();

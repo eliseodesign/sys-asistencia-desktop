@@ -11,6 +11,9 @@ using Esfe.SysAsistencia.UI.Helpers;
 
 namespace Esfe.SysAsistencia.UI.Components
 {
+    /// <summary>
+    /// Componente que contiene el nombre de usuario, hora, y btnGuardarJson
+    /// </summary>
     public partial class BarWF : Form
     {
         public BarWF()
