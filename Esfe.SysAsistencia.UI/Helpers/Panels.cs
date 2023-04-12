@@ -3,14 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using System.Windows.Forms;
+
 namespace Esfe.SysAsistencia.UI.Helpers
 {
-    /// <summary>
-    /// Clase de utilidad que proporciona métodos estáticos para la manipulación de paneles en una interfaz de usuario Windows Forms.
-    /// Estos métodos permiten sustituir o agregar un formulario hijo en un panel, limpiando o reemplazando los formularios hijos existentes en el panel.
-    /// </summary>
     public static class Panels
     {
         public static void SustituirPanel(Panel panel,Object formHijo)

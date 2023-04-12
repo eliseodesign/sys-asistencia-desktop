@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DataEdit;
 using Esfe.SysAsistencia.UI.Helpers;
 
 namespace Esfe.SysAsistencia.UI.Components
@@ -39,18 +40,16 @@ namespace Esfe.SysAsistencia.UI.Components
                     _ListGruposSelect.Add(g.ToString());
                 }
 
-                MessageBox.Show("Los Grupos se seleccionaron correctamente",
-                    "Éxito",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
+                MsgBox msg = new MsgBox("filled", "Los Grupos se seleccionaron correctamente");
+                msg.ShowDialog();
+              
                 this.Close();
             }
             else
             {
-                MessageBox.Show("Debe seleccionar los grupos en donde estará el docente",
-                    "Adventencia",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
+                MsgBox msg = new MsgBox("onlyerror", "Debe seleccionar los grupos en donde estará el docente");
+                msg.ShowDialog();
+ 
             }
 
         }

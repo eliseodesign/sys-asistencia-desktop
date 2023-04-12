@@ -12,6 +12,7 @@ using DPFP;
 using DPFP.Capture;
 using DPFP.Verification;
 using Esfe.SysAsistencia.BL;
+using Esfe.SysAsistencia.DAL;
 using System.Drawing;
 using Esfe.SysAsistencia.EN;
 using Esfe.SysAsistencia.UI.Helpers;
