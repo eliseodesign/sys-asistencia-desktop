@@ -19,11 +19,26 @@ using Esfe.SysAsistencia.EN;
 namespace Esfe.SysAsistencia.UI
 {
 
+    /*
+    Clase CapturarHuella
+
+    Propósito:
+    Esta clase proporciona una interfaz heredada de CaptureForm. Esta clase se utiliza para capturar y registrar la huella
+
+    Funcionalidades:
+    - Tomar 4 muestras de huellas del lector
+    - Convertir muestras en un Template
+    - Guardar la muestra en el objeto correspondiente
+
+    Componentes:
+    - Los heredados de CaptureForm
+    */
+
     public partial class CapturarHuella : CaptureForm
     {
         public CapturarHuella()
         {
-            cbxPersons.Hide(); //Borrar para final
+            cbxPersons.Hide(); //TODO: REMOVER Y BORRAR EL COMPONENTE cbxPersons
 
         }
         public delegate void OnTemplateEventHandler(DPFP.Template template);
@@ -31,46 +46,42 @@ namespace Esfe.SysAsistencia.UI
         private DPFP.Template Template;
         public event OnTemplateEventHandler OnTemplate;
         public event OnTemplateEventHandler OnComplete;
-        private DPFP.Verification.Verification Verificator;
-        private DocentesWF _padreDocentes;
 
-
+        //Constructor deñ padre
         protected override void Init()
         {
             base.Init();
             base.Text = "Registrar una nueva Huella";
-            Enroller = new DPFP.Processing.Enrollment();// Create an enrollment.
+            Enroller = new DPFP.Processing.Enrollment();// Crea un objeto Enroller (donde se almacena la huella)
             UpdateStatus();
             UpdateTitleAndDescription(0);
         }
 
-        public void Verify(DPFP.Template template)
-        {
-            Template = template;
-            ShowDialog();
-        }
-
+        //Metodo del padre que sobre escribe pero a la vez se llama en la base
+        //Funcionamiento: Procesar cada que el lector detecta una huella
+        //
+        //Paramteros:
+        //  Sample -> la muestra que es tomada directamente del lector
+        // Este metodo es especifico para el funcionamiento del lector, No remover!
+        //
         protected override void Process(DPFP.Sample Sample)
         {
             base.Process(Sample);
 
-            // Process the sample and create a feature set for the enrollment purpose.
+            // Procesa la muestra
             DPFP.FeatureSet features = ExtractFeatures(Sample, DPFP.Processing.DataPurpose.Enrollment);
 
-            // Check quality of the sample and add to enroller if it's good
+            // Verifica la calidad de la muestra y continua si está correcta
             if (features != null) try
                 {
                     try
                     {
-
                         MakeReport("Muestra completada: " + Convert.ToString(5 - Enroller.FeaturesNeeded) + "/4");
                         UpdateMuestras(Convert.ToInt32(5 - Enroller.FeaturesNeeded));
                         Enroller.AddFeatures(features);     // Add feature set to template
                     }
                     catch (Exception e)
                     {
-
-
                         MySingleton.Instance.TemplateIsNull = true;
                         MessageBox.Show("Algo salió mal con el registro de la huella, por favor repita el proceso", "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         UpdateMuestras(99);
@@ -86,7 +97,6 @@ namespace Esfe.SysAsistencia.UI
                 finally
                 {
                     UpdateStatus();
-
                     // Check if template has been created
                     switch (Enroller.TemplateStatus)
                     {
@@ -107,6 +117,9 @@ namespace Esfe.SysAsistencia.UI
                 }
         }
 
+        /// <summary>
+        /// Actualiza el status del CaptureForm
+        /// </summary>
         private void UpdateStatus()
         {
             // Show number of samples needed.

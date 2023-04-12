@@ -32,7 +32,17 @@ namespace Esfe.SysAsistencia.UI
 
         private void btnCerrarSesion_Click(object sender, EventArgs e)
         {
+            if (!MySingleton.Instance.IsAsistenciaFinished)
+            {
+                MessageBox.Show("La asistencia aún está activa", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            
             State.TotalAccess = false;
+            if (MySingleton.Instance.AsistenciasVerifyOBJ != null)
+            {
+                MySingleton.Instance.AsistenciasVerifyOBJ.StopLector();
+            }
             Panels.SustituirPanel(_panelGeneral, new LoginWF(_panelGeneral));
         }
 
@@ -100,7 +110,7 @@ namespace Esfe.SysAsistencia.UI
                 return;
             }
 
-            Panels.AgregarPanel(PanelApp, new AsistenciaWF(PanelApp));
+            Panels.AgregarPanel(PanelApp, new AsistenciaWF());
             SetButtonsColors(btnAsistencia);
         }
 

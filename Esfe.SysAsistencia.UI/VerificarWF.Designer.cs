@@ -44,7 +44,6 @@
             Name = "VerificarWF";
             Text = "Verificar Huella";
             FormClosing += VerificarWF_FormClosing;
-            Click += VerificarWF_Click;
             ResumeLayout(false);
             PerformLayout();
         }

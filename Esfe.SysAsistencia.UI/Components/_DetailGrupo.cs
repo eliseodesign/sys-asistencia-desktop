@@ -12,6 +12,8 @@ using System.Windows.Forms;
 
 namespace Esfe.SysAsistencia.UI.Components
 {
+
+
     public partial class _DetailGrupo : Form
     {
         Grupo oGrupo = new Grupo();

@@ -11,9 +11,26 @@ using System.Windows.Forms;
 
 namespace Esfe.SysAsistencia.UI
 {
-    /* NOTE: This form is a base for the EnrollmentForm and the VerificationForm,
-		All changes in the CaptureForm will be reflected in all its derived forms.
-	*/
+    /*
+    Clase CaptureForm
+
+    Propósito:
+    Esta clase proporciona una interfaz para la captura y verificacion de la huella con el lector
+    Todas las clases hijas de este formulario heredan las propiedades y metodos de este formulario y el SDK del lector
+
+    Funcionalidades:
+    - Procesa las muestras de las huellas y el Template
+    - Activa y Desactiva el Lector
+    - Maneja todos los eventos dele lector, cuando detecta huella, cuando termina el proceso, etc.
+    - Cambiar las propiedades de los metodos de forma remota con Invoke
+
+    Componentes:
+    - PictureBox -> Picture: Donde se muestra la imagen de la huella
+    - Label -> LabelMuestra1 - LabelMuestra4: para cambiar el icono de la huella si ya detecto la muestra
+    - Button -> CloseButton: para cerrar el formulario desactivar e lector
+    - TextBox -> StatusText: Para añadir texto en donde se de el informe actual de la toma de las huellas
+
+    */
     delegate void Function();
 
     public partial class CaptureForm : Form, DPFP.Capture.EventHandler
@@ -25,6 +42,9 @@ namespace Esfe.SysAsistencia.UI
 
         }
 
+        /// <summary>
+        /// Inicia el Constructor de esta clase para crear la captura
+        /// </summary>
         protected virtual void Init()
         {
             try
@@ -42,12 +62,19 @@ namespace Esfe.SysAsistencia.UI
             }
         }
 
+        /// <summary>
+        /// Dibuja la huella en una imagen con los Bytes
+        /// </summary>
+        /// <param name="Sample">La muestra de la huella</param>
         protected virtual void Process(DPFP.Sample Sample)
         {
             // Draw fingerprint sample image.
             DrawPicture(ConvertSampleToBitmap(Sample));
         }
 
+        /// <summary>
+        /// Activa el Lector
+        /// </summary>
         protected void Start()
         {
             if (null != Capturer)
@@ -64,6 +91,9 @@ namespace Esfe.SysAsistencia.UI
             }
         }
 
+        /// <summary>
+        /// Desactiva el lector
+        /// </summary>
         protected void Stop()
         {
             if (null != Capturer)
@@ -79,6 +109,9 @@ namespace Esfe.SysAsistencia.UI
             }
         }
 
+        //A lo demás si le se pero me dio hueva documentar ajshajsasajshjasjasad
+        //de todos modos nadie leera esto y no servira para nada ¿o si?
+
         #region Form Event Handlers:
 
         private void CaptureForm_Load(object sender, EventArgs e)
@@ -92,6 +125,7 @@ namespace Esfe.SysAsistencia.UI
             Stop();
         }
         #endregion
+
 
         #region EventHandler Members:
 

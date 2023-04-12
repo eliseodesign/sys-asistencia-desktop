@@ -14,6 +14,21 @@ using Esfe.SysAsistencia.DAL;
 
 namespace Esfe.SysAsistencia.UI
 {
+
+    /*
+    Clase VerificarWF
+
+    Propósito:
+    Esta clase proporciona una interfaz heredada de CaptureForm
+    Su proposito es verificar si la huella obtenida ya existe en algun registro
+
+    Funcionalidades:
+    - Toma de la muestra de la huella
+    - Verificacion de la huella
+
+    Componentes:
+    - Los heredados por CaptureForm
+    */
     public partial class VerificarWF : CaptureForm
     {
 
@@ -23,12 +38,14 @@ namespace Esfe.SysAsistencia.UI
         private DPFP.Template Template;
         private DPFP.Verification.Verification Verificator;
 
+        //Evento necesario para la verificacion
         public void Verify(DPFP.Template template)
         {
             Template = template;
             ShowDialog();
         }
 
+        //Constructor del padre
         protected override void Init()
         {
             base.Init();
@@ -38,6 +55,10 @@ namespace Esfe.SysAsistencia.UI
             UpdateTitleAndDescription(1);
         }
 
+        /// <summary>
+        /// Actualiza el Status en el Padre. Mire: CaptureForm
+        /// </summary>
+        /// <param name="FAR">Ni idea :(</param>
         private void UpdateStatus(int FAR)
         {
             // Show "False accept rate" value
@@ -45,21 +66,29 @@ namespace Esfe.SysAsistencia.UI
 
         }
 
+        /// <summary>
+        /// Verificacion de la Huella sin el lector (ONLY TESTING)
+        /// </summary>
+        /// TODO: REMOVER
         private void verifyWhitout(object sender, EventArgs e)
         {
-
             this.CancelButton.PerformClick();
             foreach (var doc in State.docenteBL.ObtenerDocentes())
             {
                 if (doc.Nombres == cbxPersons.Text)
                 {
                     State.DocenteLoged = doc;
+                    _padre.LoginDocente(true);
+                }
+                else
+                {
+                    _padre.LoginDocente(false);
                 }
             }
-
-            _padre.LoginDocente(true);
+            
         }
 
+        //Ya explique esto, ya me aburri. chequen CaptureForm y CapturarHuella
         protected override void Process(DPFP.Sample Sample)
         {
             base.Process(Sample);
@@ -112,23 +141,15 @@ namespace Esfe.SysAsistencia.UI
 
         public VerificarWF(LoginWF padre, bool initWhitoutScanner = false)
         {
-            //InitializeComponent();
             _padre = padre;
-            cbxPersons.Hide();
-
             base.FormClosing += new FormClosingEventHandler(VerificarWF_FormClosing);
 
-            //foreach (var doc in State.docenteBL.ObtenerDocentes())
-            //{
-            //    cbxPersons.Items.Add(doc.Nombres);
-            //}
-            //cbxPersons.SelectedIndexChanged += new EventHandler(verifyWhitout);
-
-        }
-
-        public VerificarWF(AplicationWF app)
-        {
-
+            //TODO: ELIMINAR
+            foreach (var doc in State.docenteBL.ObtenerDocentes())
+            {
+                cbxPersons.Items.Add(doc.Nombres);
+            }
+            cbxPersons.SelectedIndexChanged += new EventHandler(verifyWhitout);
 
         }
 
@@ -136,11 +157,6 @@ namespace Esfe.SysAsistencia.UI
         {
 
             _padre.LoginDocente(respuestaVerifiation);
-        }
-
-        private void VerificarWF_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

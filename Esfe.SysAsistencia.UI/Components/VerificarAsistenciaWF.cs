@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DPFP;
 using DPFP.Capture;
+using DPFP.Verification;
 using Esfe.SysAsistencia.BL;
 using System.Drawing;
 using Esfe.SysAsistencia.EN;
@@ -18,21 +19,32 @@ using Esfe.SysAsistencia.UI.Helpers;
 
 namespace Esfe.SysAsistencia.UI.Components
 {
+
+    /*
+    Clase VerificarAsistenciaWF
+
+    Propósito:
+    Esta clase proporciona la funcionalidad para poder tomar la asistencia por medio de el Lector de Huellas
+
+    Funcionalidades:
+    - Toma la muestra de la huella del alumno y marca la asistencia
+    - Habilitar o deshabilitar la toma de la asistencia
+
+    Componentes:
+    - Botone para guardar y cancelar la asistencia.
+    */
+
     public partial class VerificarAsistenciaWF : CaptureForm
     {
         //variables
-        private DPFP.Template Template;
-        private DPFP.Verification.Verification Verificator;
-        private DPFP.Capture.Capture Capture;
-        bool respuestaVerificacion = false;
-        bool asistenciaEnable = false;
+        private DPFP.Template Template; // Es la plantilla para la huella
+        private DPFP.Verification.Verification Verificator; //Herramienta que ayuda a verificar la huella
+        bool respuestaVerificacion = false; //El resultado de la verificacion de la huella
+        bool asistenciaEnable = false; //Si la asistencia esta habilitada
         AsistenciaWF _padre_asistencia;
-        Panel _panel_asistencia;
-        string GrupoCarreraSelected = "";
-        private Control _control;
-
-
-        enum ASISTENCIA_STATE
+        string GrupoCarreraSelected = ""; //El grupo de la carrera
+        private Control _control;//Controlador para el Hilo de subprocesos que usa el lector
+        enum ASISTENCIA_STATE //Un simple enum para los estados de la asitencia
         {
             VERIFIED = 0,
             UNVERIFIED = 1,
@@ -43,11 +55,11 @@ namespace Esfe.SysAsistencia.UI.Components
         }
         //variables
 
+        //TODO: Remover el cbxPersons de CaptureForm
         public VerificarAsistenciaWF(AsistenciaWF padre, string carrera)
         {
-            //base.Controls.Remove(cbxPersons);
             InitializeComponent();
-            CloseButton.BringToFront();
+            base.Hide();
             _padre_asistencia = padre;
             GrupoCarreraSelected = carrera;
             _control = this;
@@ -56,74 +68,47 @@ namespace Esfe.SysAsistencia.UI.Components
             lblHuella.Text = "Deshabilitado";
             lblHuella.Image = Properties.Resources.huella_verificar;
             lblName.Text = "";
+            MySingleton.Instance.AsistenciasVerifyOBJ = this;//Esto se ocupa para poder desactivar el lector de forma remota en esa clase
             
         }
 
         //Funcion del SDK
+        //
+        // Este metodo es especifico para el funcionamiento del lector, No remover!
         public void Verify(DPFP.Template template)
         {
             Template = template;
             ShowDialog();
         }
 
+        // Constructor del Padre CaptureForm
         protected override void Init()
         {
             base.Init();
-            Stop();
-            Verificator = new DPFP.Verification.Verification();     // Create a fingerprint template verificator
+            Verificator = new DPFP.Verification.Verification();//Crea un objeto verificador de huellas
+            
         }
 
-
-        //Verificar sin el lector ¡TESTING!
-        private void verifyWhitout()
-        {
-            List<Estudiante> estudianteVar = State.estudianteBL.ObtenerEstudiante().Where(g => g.CodigoGrupo == GrupoCarreraSelected).ToList();
-            //var estudianteVar = State.estudianteBL.ObtenerEstudiante().Where(g => g.CodigoGrupo == GrupoCarreraSelected && g.Huella == State.estudianteBL.ObtenerEstudiante().First().Huella).ToList();
-            //var nombreEstudiante = estudianteVar.Nombres + " " + estudianteVar.Apellidos;
-
-
-
-            foreach (var xd in estudianteVar)
-            {
-                if (xd.Huella == State.estudianteBL.ObtenerEstudiante().First().Huella)
-                {
-                    UpdateInfo(ASISTENCIA_STATE.VERIFIED, xd.Nombres);
-                    var AsistenciaOBJ = new Asistencia()
-                    {
-                        AlumnoId = xd.Id,
-                        Fecha = DateTime.Now
-                    };
-                    State.asistenciaBL.AgregarAsistencia(AsistenciaOBJ);
-                    var asis = State.asistenciaBL.ObtenerAsistencias();
-                    foreach (var a in asis)
-                    {
-                        MessageBox.Show("Asistencias: \nID: " + a.Id.ToString() + " \nFecha: " + Convert.ToString(a.Fecha));
-                    }
-
-                    return;
-                }
-                else
-                {
-                    UpdateInfo(ASISTENCIA_STATE.UNVERIFIED, xd.Nombres);
-                    return;
-                }
-            }
-
-
-
-        }
-
-        //Verificar la huella
+        //Metodo del padre que sobre escribe pero a la vez se llama en la base
+        //Funcionamiento: Procesar cada que el lector detecta una huella
+        //
+        //Paramteros:
+        //  Sample -> la muestra que es tomada directamente del lector
+        // Este metodo es especifico para el funcionamiento del lector, No remover!
+        //
         protected override void Process(DPFP.Sample Sample)
         {
-            if (!asistenciaEnable) return;
-
+            if (asistenciaEnable == false)
+            {
+                Stop(); //Este metodo es heredado, detiene la lectura del lector
+                return;
+            }
             base.Process(Sample);
-            // Process the sample and create a feature set for the enrollment purpose.
+            // Procesa la muestra
             DPFP.FeatureSet features = ExtractFeatures(Sample, DPFP.Processing.DataPurpose.Verification);
 
-            // Check quality of the sample and start verification if it's good
-            // TODO: move to a separate task
+            // Verifica la calidad de la muestra y continua si está correcta
+            
             if (features != null)
             {
                 Estudiante estudiante = new Estudiante();
@@ -131,9 +116,13 @@ namespace Esfe.SysAsistencia.UI.Components
                 DPFP.Verification.Verification.Result result = new DPFP.Verification.Verification.Result();
                 DPFP.Template template = new DPFP.Template();
                 Stream stream;
-                var estudiantes = State.estudianteBL.ObtenerEstudiante().Where(x => x.CodigoGrupo == GrupoCarreraSelected).ToList();
+
+                //Descongelar si algo sale mal xD -->
+                //var alumnos = State.estudianteBL.ObtenerEstudiante().Where(x => x.CodigoGrupo == GrupoCarreraSelected).ToList();
+
+                var alumnos = State.estudianteBL.ObtenenerEstudiantesByGroup(GrupoCarreraSelected);
                 var NombreAlumno = "";
-                foreach (var alu in estudiantes)
+                foreach (var alu in alumnos)
                 {
                     estudiante = alu;
                     stream = new MemoryStream(alu.Huella);
@@ -164,6 +153,12 @@ namespace Esfe.SysAsistencia.UI.Components
             }
         }
 
+        /// <summary>
+        /// Crea la asistencia en la grid del Alumno.(Cuando se marca en verde)
+        /// </summary>
+        /// <param name="ID">El ID del alumno que se pasará la asistencia.</param>
+        /// 
+        //TODO: Cambiar Nombre al Metodo
         void AsistirAlumno(int ID)
         {
             _control.Invoke((MethodInvoker)delegate {
@@ -177,6 +172,26 @@ namespace Esfe.SysAsistencia.UI.Components
             });
         }
 
+        /// <summary>
+        /// Detiene el Lector y Termina las asistencias. (En prueba pero funcional)
+        /// </summary>
+        /// TODO: Mejorar el metodo
+        public void StopLector()
+        {
+            base.Stop();
+            Stop();
+            asistenciaEnable = false;
+            btnEnableAsis.Enabled = false; btnEnableAsis.BackColor = Color.Gray;
+            btnEnableAsis.Text = "Asistencias Terminadas";
+            _padre_asistencia.cbxGrupo.Enabled = true;
+            MySingleton.Instance.IsAsistenciaFinished = true;
+
+        }
+
+        /// <summary>
+        /// Crea la asistencia final, marcando las inasistencias y asistencias
+        /// </summary>
+        /// 
         void CreateAsistencia()
         {
 
@@ -207,7 +222,12 @@ namespace Esfe.SysAsistencia.UI.Components
 
         }
 
-        //Esto actualiza la informacion en el panel
+        /// <summary>
+        /// Actualiza la informacion UI del Panel.
+        /// </summary>
+        /// <param name="ID">Estado de la asistencia</param>
+        /// <param name="AlumnoName">El nombre del alumno(Opcional)</param>
+        /// 
         private void UpdateInfo(ASISTENCIA_STATE ID, string AlumnoName = "")
         {
             _control.Invoke((MethodInvoker)delegate
@@ -258,14 +278,13 @@ namespace Esfe.SysAsistencia.UI.Components
 
         }
 
-        //--------- ATENCION: Esto es para habilitar o deshabilitar la asistencia
-        //--------- pero fue pospuesta por falta de tiempo
-        //--------- Y ahora se dejo solo pa cancelarla :C
+        //Este evento es el que se encarga de activar o desactivar la asistencia del dia
         //
-        //
+        //TODO: Meterlo a un meotodo tal vez?
         private void btnEnableAsis_Click(object sender, EventArgs e)
         {
             //Funcion para cancelar la asitencia
+            
             if (!asistenciaEnable)
             {
                 UpdateInfo(ASISTENCIA_STATE.DEFAULT);
@@ -281,23 +300,31 @@ namespace Esfe.SysAsistencia.UI.Components
             {
                 UpdateInfo(ASISTENCIA_STATE.FINISHED);
                 asistenciaEnable = false;
-                btnEnableAsis.BackColor = Color.FromArgb(90, 200, 90);
-                btnEnableAsis.Text = "Asistencias Terminadas";
                 _padre_asistencia.cbxGrupo.Enabled = true;
                 MySingleton.Instance.IsAsistenciaFinished = true;
-                CreateAsistencia(); ;
                 Stop();
+                CreateAsistencia();
+                StopLector();
                 MessageBox.Show("La asistencia del Día se ha guardado de forma exitosa. ", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                
             }
 
         }
 
+        //Evento que se ejecuta cuando el combo box grupo de AsistenciasWF se cambia
+        //Crea un Combobox y lo convierte en el Sender cbxGrupo
+        //Cambia la variable GrupoCarreraSelected para saber la carrera de los alumnos a tomarle la asistencia
         private void On_cbx_grupo_changed(object sender, EventArgs e)
         {
             ComboBox comboBox = (ComboBox)sender;
             GrupoCarreraSelected = comboBox.Text;
         }
 
+        /// <summary>
+        /// Crea un temporizador especifico para restablecer el estado del panel, Solo funciona si se encuentra en el bucle de Process
+        /// </summary>
+        /// <param name="time">El tiempo que tendrá el temporizador.</param>
+        /// 
         void CreateTimer(int time = 1)
         {
             _control.Invoke((MethodInvoker)delegate

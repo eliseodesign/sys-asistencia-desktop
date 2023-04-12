@@ -7,48 +7,65 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Esfe.SysAsistencia.BL;
 using Esfe.SysAsistencia.EN;
 using Esfe.SysAsistencia.UI.Helpers;
 
 namespace Esfe.SysAsistencia.UI.Components
 {
+
+    /*
+    Clase AsistenciaWF
+
+    Propósito:
+    Esta clase proporciona una interfaz para que el docente pueda registrar la asistencia de los alumnos en una sesión de clase. 
+
+    Funcionalidades:
+    - Muestra una lista de estudiantes en un grupo seleccionado por el docente.
+    - Permite al docente marcar la asistencia de cada alumno en la lista.
+    - Guarda los registros en su respectivas capas BL -> DAl
+
+    Componentes:
+    - ComboBox para seleccionar el grupo.
+    - DataGridView para mostrar la lista de estudiantes.
+    - Botones para guardar y cancelar la asistencia.
+    */
+
     public partial class AsistenciaWF : Form
     {
-        public Panel _panel_app;
 
-        public AsistenciaWF(Panel panel)
+        public AsistenciaWF()
         {
-            _panel_app = panel;
             InitializeComponent();
-            SetGridFormatStyle(gridAsistencia);
-            var codigos = State.DocenteLoged.GrupoCodigos;
-            cbxGrupo.DataSource = null;
-            cbxGrupo.DataSource = codigos;
-            Panels.AgregarPanel(panelVerificar, new VerificarAsistenciaWF(this, cbxGrupo.SelectedValue.ToString()));
+            //Inicializacion de variables para los Componentes ->
+            SetGridFormatStyle(gridAsistencia, 3); // Se le da formato a la Grid
+            Panels.AgregarPanel(panelVerificar, new VerificarAsistenciaWF(this, cbxGrupo.SelectedValue.ToString()));// Se añade el FormVerificar
         }
 
+        // Este evento se dispara cuando se cambia la selección del ComboBox de grupos.
+        // Su propósito es mostrar en el grid los alumnos que pertenecen al grupo seleccionado.
+        // Se obtienen los alumnos del grupo seleccionado a través del servicio de alumnos y se añaden al grid.
+        // Si no hay alumnos en el grupo seleccionado, se muestra un mensaje en el grid indicando que no hay resultados.
         private void cbxGrupo_SelectedIndexChanged(object sender, EventArgs e)
         {
             string grupo = cbxGrupo.SelectedValue.ToString();
-            List<Estudiante> lista = new List<Estudiante>();
-            foreach (var ee in State.estudianteBL.ObtenerEstudiante())
-            {
-                if (ee.CodigoGrupo == grupo)
-                {
-                    lista.Add(ee);
-                }
-            }
-
+            var lista = State.estudianteBL.ObtenenerEstudiantesByGroup(grupo);
             gridAsistencia.DataSource = null;
             gridAsistencia.DataSource = lista;
 
         }
 
-        public void SetGridFormatStyle(DataGridView dataGridView)
-        {
+        /// <summary>
+        /// Da formato y estilo al DataGridView especificado.
+        /// </summary>
+        /// <param name="dataGridView">El DataGridView al que se le dará formato.</param>
 
+        public void SetGridFormatStyle(DataGridView dataGridView, int ColumnCount)
+        {
+            var codigos = State.DocenteLoged.GrupoCodigos;
+            cbxGrupo.DataSource = null;
             dataGridView.AutoGenerateColumns = false;
-            dataGridView.ColumnCount = 3;
+            dataGridView.ColumnCount = ColumnCount;
 
             dataGridView.Columns[0].Name = "ID";
             dataGridView.Columns[0].DataPropertyName = "Id";
@@ -101,7 +118,17 @@ namespace Esfe.SysAsistencia.UI.Components
             dataGridView.Columns[1].DefaultCellStyle.SelectionBackColor = ColorTranslator.FromHtml("#0401ad");
             dataGridView.Columns[1].DefaultCellStyle.SelectionForeColor = Color.White;
 
+            cbxGrupo.DataSource = codigos;
+
         }
+
+
+
+        //Este evento es cuando el Boton de Asistencias del Día se presiona
+        //
+        //Funcion: Lo que hace es obtener una lista de asistencias de tipo Asistencia
+        //
+        // TODO: REMOVER o REEMPLAZAR
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -110,9 +137,9 @@ namespace Esfe.SysAsistencia.UI.Components
             foreach (var a in asis)
             {
 
-                Str += "\n ================= " + 
+                Str += "\n ================= " +
                     "\n Alumno ID: " + a.AlumnoId.ToString() +
-                    "\n Nombre: " + State.estudianteBL.ObtenerEstudiante().FirstOrDefault(e=>e.Id == a.AlumnoId).Nombres +
+                    "\n Nombre: " + State.estudianteBL.ObtenerEstudiante().FirstOrDefault(e => e.Id == a.AlumnoId).Nombres +
                     "\n Fecha: " + a.Fecha.ToString() +
                     "\n Criterio: " + a.Criterio.ToString();
             }
