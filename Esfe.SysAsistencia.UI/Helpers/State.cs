@@ -25,10 +25,6 @@ namespace Esfe.SysAsistencia.UI.Helpers
         public static List<Grupo> GruposDocente { get; set; } = new List<Grupo>();
 
 
-        //----------------- utilidades ---------------------------------------
-        public static int CountDocentes = docenteBL.ObtenerDocentes().Count();
-        public static int CountEstudiantes = estudianteBL.ObtenerEstudiante().Count();
-
 
         public static class InfoCarrera{
             public static string[] carreras = new string[4] { "Téc. ing Electrica", "Téc. en ing de Desarrollo De Software", "Téc en Mercadeo", "Téc. en Gestión y Desarrollo Turístico" };
