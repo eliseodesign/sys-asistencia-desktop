@@ -32,16 +32,13 @@ namespace Esfe.SysAsistencia.UI.Components
     */
 
     public partial class AsistenciaWF : Form
-{
+    {
 
         public AsistenciaWF()
         {
             InitializeComponent();
             //Inicializacion de variables para los Componentes ->
-            var codigos = State.DocenteLoged.GrupoCodigos;
-            cbxGrupo.DataSource = null;
-            cbxGrupo.DataSource = codigos;
-            SetGridFormatStyle(gridAsistencia); // Se le da formato a la Grid
+            SetGridFormatStyle(gridAsistencia, 3); // Se le da formato a la Grid
             Panels.AgregarPanel(panelVerificar, new VerificarAsistenciaWF(this, cbxGrupo.SelectedValue.ToString()));// Se añade el FormVerificar
         }
 
@@ -63,11 +60,12 @@ namespace Esfe.SysAsistencia.UI.Components
         /// </summary>
         /// <param name="dataGridView">El DataGridView al que se le dará formato.</param>
 
-        public void SetGridFormatStyle(DataGridView dataGridView)
+        public void SetGridFormatStyle(DataGridView dataGridView, int ColumnCount)
         {
-
+            var codigos = State.DocenteLoged.GrupoCodigos;
+            cbxGrupo.DataSource = null;
             dataGridView.AutoGenerateColumns = false;
-            dataGridView.ColumnCount = 3;
+            dataGridView.ColumnCount = ColumnCount;
 
             dataGridView.Columns[0].Name = "ID";
             dataGridView.Columns[0].DataPropertyName = "Id";
@@ -120,6 +118,8 @@ namespace Esfe.SysAsistencia.UI.Components
             dataGridView.Columns[1].DefaultCellStyle.SelectionBackColor = ColorTranslator.FromHtml("#0401ad");
             dataGridView.Columns[1].DefaultCellStyle.SelectionForeColor = Color.White;
 
+            cbxGrupo.DataSource = codigos;
+
         }
 
 
@@ -129,7 +129,7 @@ namespace Esfe.SysAsistencia.UI.Components
         //Funcion: Lo que hace es obtener una lista de asistencias de tipo Asistencia
         //
         // TODO: REMOVER o REEMPLAZAR
-        
+
         private void button1_Click(object sender, EventArgs e)
         {
             var asis = State.asistenciaBL.ObtenerAsistencias();

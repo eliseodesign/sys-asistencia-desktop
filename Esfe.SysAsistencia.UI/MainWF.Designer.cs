@@ -37,17 +37,18 @@
             panelGeneral.Location = new Point(0, 0);
             panelGeneral.Margin = new Padding(0);
             panelGeneral.Name = "panelGeneral";
-            panelGeneral.Size = new Size(934, 561);
+            panelGeneral.Size = new Size(1172, 748);
             panelGeneral.TabIndex = 1;
             // 
             // MainWF
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
-            ClientSize = new Size(934, 561);
+            ClientSize = new Size(1172, 748);
             Controls.Add(panelGeneral);
             ForeColor = Color.White;
+            Margin = new Padding(3, 4, 3, 4);
             Name = "MainWF";
             Opacity = 0.97D;
             StartPosition = FormStartPosition.CenterScreen;
