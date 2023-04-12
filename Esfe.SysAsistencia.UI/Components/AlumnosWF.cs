@@ -14,6 +14,7 @@ using Esfe.SysAsistencia.DAL;
 using static DPFP.Verification.Verification;
 using Microsoft.Win32;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using TextBox = System.Windows.Forms.TextBox;
 
 namespace Esfe.SysAsistencia.UI.Components
 {
