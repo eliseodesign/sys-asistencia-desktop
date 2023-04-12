@@ -227,6 +227,7 @@
             cbxCarrera.Name = "cbxCarrera";
             cbxCarrera.Size = new Size(186, 26);
             cbxCarrera.TabIndex = 16;
+            cbxCarrera.SelectedValueChanged += cbxCarrera_SelectedValueChanged;
             // 
             // label6
             // 

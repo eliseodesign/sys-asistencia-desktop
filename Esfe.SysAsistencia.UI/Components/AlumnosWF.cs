@@ -35,10 +35,10 @@ namespace Esfe.SysAsistencia.UI.Components
             InitializeComponent();
             SetGridFormat();
             RefreshGrid();
-            string[] carreras = new string[4] { "Téc. ing Electica", "Téc. ing de Desarrollo De Software", "Téc en Mercadeo", "Téc. en Gestión y Desarrollo Turístico" };
-            cbxCarrera.DataSource = carreras;
 
-            cbxGrupo.DataSource = State.grupoBL.ObtenerGrupos().Select(g => g.Codigo).ToList();
+            cbxCarrera.DataSource = State.InfoCarrera.carreras;
+
+            
         }
 
         //Signals
@@ -69,9 +69,9 @@ namespace Esfe.SysAsistencia.UI.Components
                 CodigoGrupo = cbxGrupo.SelectedValue.ToString(),
 
             };
-            if(ID == 0)
+            if (ID == 0)
             {
-              
+
                 //Agregar alumno al BL
                 var result = State.estudianteBL.AgregarEstudiante(estudiante);
                 if (!result)
@@ -303,7 +303,7 @@ namespace Esfe.SysAsistencia.UI.Components
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (ID <= 0 )
+            if (ID <= 0)
             {
                 result = MessageBox.Show("Primero Seleccione un alumno", "ERROR");
                 return;
@@ -344,14 +344,14 @@ namespace Esfe.SysAsistencia.UI.Components
                 {
 
                     int id = Convert.ToInt32(row.Cells[0].Value);
-                    
+
                     //if (row.Cells[0].Value != null) ID = Convert.ToInt32(row.Cells[0].Value);
                     //if (row.Cells[1].Value != null) txtNombres.Text = row.Cells[1].Value.ToString();
                     //if (row.Cells[2].Value != null) txtApellidos.Text = row.Cells[2].Value.ToString();
                     //if (row.Cells[3].Value != null) txtTelefono.Text = row.Cells[3].Value.ToString();
 
                     var estudiante = State.estudianteBL.ObtenerEstudiante().FirstOrDefault(x => x.Id == id);
-                    if(estudiante!= null)
+                    if (estudiante != null)
                     {
                         ID = id;
                         txtNombres.Text = estudiante.Nombres;
@@ -361,9 +361,9 @@ namespace Esfe.SysAsistencia.UI.Components
                         txtNit.Text = estudiante.Nit;
                         cbxCarrera.Text = estudiante.IdCarrera;
                         cbxGrupo.Text = estudiante.CodigoGrupo;
-                        
 
-                        
+
+
                     }
                 }
             }
@@ -372,5 +372,26 @@ namespace Esfe.SysAsistencia.UI.Components
         {
             DgvDesing.Formato(gridEstudiantes, 1, false);
         }
+
+        private void cbxCarrera_SelectedValueChanged(object sender, EventArgs e)
+        {
+
+            int indice = cbxCarrera.SelectedIndex;
+            //if (indice != -1)
+            //{
+            var codigo = State.InfoCarrera.idCarrera[indice];
+
+
+            var grupos = (from g in State.grupoBL.ObtenerGrupos()
+                          where g.Carrera == codigo
+                          select g.Codigo).ToList();
+
+            cbxGrupo.DataSource = grupos;
+        }
+
+
+
     }
+
+    
 }
