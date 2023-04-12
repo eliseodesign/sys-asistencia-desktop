@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace Esfe.SysAsistencia.DAL
 {
+    /// <summary>
+    /// Clase que se encarga de almacenar Estudianes y contiene los metodo para menjar su información
+    /// </summary>
     public class EstudianteDAL
     {
         private static List<Estudiante> Estudiantes;
@@ -16,6 +19,7 @@ namespace Esfe.SysAsistencia.DAL
 
         public Estudiante Existente { get; set; }
 
+        // al ejecutarse el constructor busca si existe el archivo y extrae sus datos
         public EstudianteDAL()
         {
             if (File.Exists(Path))

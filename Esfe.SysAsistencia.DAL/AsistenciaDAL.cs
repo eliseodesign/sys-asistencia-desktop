@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace Esfe.SysAsistencia.DAL
 {
+    /// <summary>
+    /// Contiene las asitencia y el manejo de estas
+    /// </summary>
     public class AsistenciaDAL
     {
         private List<Asistencia> Asistencias = new List<Asistencia>();

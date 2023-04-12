@@ -8,6 +8,15 @@ using Esfe.SysAsistencia.DAL;
 
 namespace Esfe.SysAsistencia.BL
 {
+    /// <summary>
+    /// Clase DocenteBL
+    //Esta clase representa la capa de lógica de negocios(BL) para la entidad Grupo en
+    //el sistema SysAsistencia.Proporciona métodos para interactuar con la capa de acceso a datos
+    //(DAL) representada por la clase DocenteDAL para realizar operaciones CRUD
+    //
+    //Uso:
+    //- Instanciar la clase DocenteBL para acceder a los métodos de la capa de lógica de negocios para la entidad Docente.
+    /// </summary>
     public class DocenteBL
     {
         private DocenteDAL oDocenteDAL = new DocenteDAL();

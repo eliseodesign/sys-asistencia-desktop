@@ -9,11 +9,15 @@ using System.Threading.Tasks;
 
 namespace Esfe.SysAsistencia.DAL
 {
+    /// <summary>
+    /// Clase encarga de almacenar los Grupos y los metodos de los mismos
+    /// </summary>
     public class GrupoDAL
     {
         private List<Grupo> Grupos = new List<Grupo>();
         private string Path { get; } = "grupos.json";
 
+        // constructor de se ejectuta al instanciar la clase y busca el archivo
         public GrupoDAL()
         {
             if (File.Exists(Path))
@@ -48,10 +52,6 @@ namespace Esfe.SysAsistencia.DAL
 
             if (grupo != null)
             {
-                // comentado porque es lo que le da identidad a cada grupo
-                //grupo.Codigo = update.Codigo;
-                //grupo.Carrera = update.Carrera;
-                //grupo.Año = update.Año;
                 grupo.Turno = update.Turno;
                 grupo.EstudiantesMax = update.EstudiantesMax;
 

@@ -8,12 +8,17 @@ using Esfe.SysAsistencia.EN;
 
 namespace Esfe.SysAsistencia.DAL
 {
+    /// <summary>
+    /// Guarda Docentes y metodos para manejar su información
+    /// </summary>
     public class DocenteDAL
     {
         private static List<Docente> ListaDocentes;
         private string Path { get; } = "docentes.json";
 
         public Docente Existente { get; set; }
+
+        // al ejecutarse el constructor busca si existe el archivo y extrae sus datos
         public bool AgregarDocente(Docente docente)
         {
             Docente exist = ListaDocentes.FirstOrDefault(d => d.Id == docente.Id);
