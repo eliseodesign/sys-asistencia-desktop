@@ -13,10 +13,6 @@ using Esfe.SysAsistencia.UI.Helpers;
 
 namespace Esfe.SysAsistencia.UI
 {
-    /// <summary>
-    /// Proposito:
-    /// Clase principal del formulario de la interfaz de usuario de Esfe.SysAsistencia.
-    /// </summary>
     public partial class MainWF : Form
     {
         public MainWF()
@@ -26,5 +22,4 @@ namespace Esfe.SysAsistencia.UI
             Panels.AgregarPanel(this.panelGeneral, new LoginWF(this.panelGeneral));
         }
     }
-
 }

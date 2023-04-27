@@ -1,4 +1,5 @@
-﻿using Esfe.SysAsistencia.EN;
+﻿using DataEdit;
+using Esfe.SysAsistencia.EN;
 using Esfe.SysAsistencia.UI.Helpers;
 using System;
 using System.Collections.Generic;
@@ -82,14 +83,14 @@ namespace Esfe.SysAsistencia.UI.Components
                     };
 
                     string codigo = State.grupoBL.AgregarGrupo(grupo);
-
-                    MessageBox.Show($"Se creó el gurpo {codigo} de forma exitosa", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MsgBox msg = new MsgBox("filled", $"Se creó el grupo {codigo} de forma exitosa");
+                    msg.ShowDialog();
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Deben haber 3 días marcados como Presenciales!", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
+                    MsgBox msg = new MsgBox("onlywarning", "¡Deben haber 3 días marcados como Presenciales!");
+                    msg.ShowDialog();
                 }
             }
             else if (imgEdit.Visible == true)
@@ -103,14 +104,16 @@ namespace Esfe.SysAsistencia.UI.Components
                     var si = State.grupoBL.ActualizarGrupo(oGrupo);
                     if (si == false)
                     {
-                        MessageBox.Show("Ocurrio un error!!!");
+                        MsgBox msg = new MsgBox("onlyerror", "¡Ocurrio un error en el proceso!");
+                        msg.ShowDialog();
                     }
 
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Deben haber 3 días marcados como Presenciales!", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MsgBox msg = new MsgBox("onlywarning", "¡Deben haber 3 días marcados como Presenciales!");
+                    msg.ShowDialog();
 
                 }
             }

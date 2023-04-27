@@ -12,19 +12,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Esfe.SysAsistencia.DAL;
 using static DPFP.Verification.Verification;
-using Microsoft.Win32;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using TextBox = System.Windows.Forms.TextBox;
+using DataEdit;
 
 namespace Esfe.SysAsistencia.UI.Components
 {
-    /// <summary>
-    //  La clase "AlumnosWF" es un formulario de Windows Forms que permite registrar 
-    // y gestionar estudiantes en un sistema de asistencia.El formulario contiene
-    // una serie de controles como cuadros de texto(txtNombres, txtApellidos, txtDui,
-    // txtNit, txtTelefono), cuadros combinados(cbxCarrera, cbxGrupo), un botón de 
-    // guardar(btnGuardar) 
-    /// </summary>
     public partial class AlumnosWF : Form
     {
         //  -------------------------- Variables para el lector --------------------------
@@ -45,10 +36,10 @@ namespace Esfe.SysAsistencia.UI.Components
             InitializeComponent();
             SetGridFormat();
             RefreshGrid();
+            string[] carreras = new string[4] { "Téc. ing Electica", "Téc. ing de Desarrollo De Software", "Téc en Mercadeo", "Téc. en Gestión y Desarrollo Turístico" };
+            cbxCarrera.DataSource = carreras;
 
-            cbxCarrera.DataSource = State.InfoCarrera.carreras;
-
-            
+            cbxGrupo.DataSource = State.grupoBL.ObtenerGrupos().Select(g => g.Codigo).ToList();
         }
 
         //Signals
@@ -57,12 +48,16 @@ namespace Esfe.SysAsistencia.UI.Components
             // Validacion de campos
             if (string.IsNullOrEmpty(txtNombres.Text) || string.IsNullOrEmpty(txtApellidos.Text) || string.IsNullOrEmpty(txtDui.Text))
             {
-                MessageBox.Show("Los datos son obligatorios", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MsgBox msg = new MsgBox("onlywarning", "Todos los datos son obligatorios");
+                msg.ShowDialog();
+                //MessageBox.Show("Los datos son obligatorios", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             else if (Template == null)
             {
-                MessageBox.Show("Aún no se ha registrado una huella", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MsgBox msg = new MsgBox("onlywarning", "Aún no se ha registrado una huella");
+                msg.ShowDialog();
+                //MessageBox.Show("Aún no se ha registrado una huella", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             //Creacion del Alumno
@@ -86,12 +81,16 @@ namespace Esfe.SysAsistencia.UI.Components
                 var result = State.estudianteBL.AgregarEstudiante(estudiante);
                 if (!result)
                 {
-                    MessageBox.Show("No se puede registrar con la misma huella!", "ERROR GRAVE!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MsgBox msg = new MsgBox("onlyerror", "¡No se puede registrar con la misma huella!\nDebe de registrar otra huella.");
+                    msg.ShowDialog();
+                    //MessageBox.Show("No se puede registrar con la misma huella!", "ERROR GRAVE!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
                     RefreshGrid();
-                    MessageBox.Show("Se regitró al estudiante de forma exitosa", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MsgBox msg = new MsgBox("filled", "Se regitró al estudiante de forma exitosa");
+                    msg.ShowDialog();
+                    //MessageBox.Show("Se regitró al estudiante de forma exitosa", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
             }
@@ -100,12 +99,16 @@ namespace Esfe.SysAsistencia.UI.Components
                 var result = State.estudianteBL.AgregarEstudiante(estudiante);
                 if (!result)
                 {
-                    MessageBox.Show("No se puede registrar con la misma huella!", "ERROR GRAVE!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MsgBox msg = new MsgBox("onlyerror", "¡No se puede registrar con la misma huella!\nDebe de registrar otra huella.");
+                    msg.ShowDialog();
+                    //MessageBox.Show("No se puede registrar con la misma huella!", "ERROR GRAVE!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
                     RefreshGrid();
-                    MessageBox.Show("Se edito el estudiante de forma exitosa", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MsgBox msg = new MsgBox("filled", "Se edito el estudiante de forma exitosa");
+                    msg.ShowDialog();
+                    //MessageBox.Show("Se edito el estudiante de forma exitosa", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             ID = 0;
@@ -165,13 +168,17 @@ namespace Esfe.SysAsistencia.UI.Components
                     //Comprobar si la huella existe->
                     if (!MySingleton.Instance.TemplateIsNull)
                     {
-                        MessageBox.Show("La huella está lista.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MsgBox msg = new MsgBox("info", "¡Excelente!\nLa huella está lista.");
+                        msg.ShowDialog();
+                        //MessageBox.Show("La huella está lista.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
                 else
                 {
                     MySingleton.Instance.TemplateIsNull = false;
-                    MessageBox.Show("La huella no es valida.", "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MsgBox msg = new MsgBox("onlyerror", "Lo sentimos\nLa huella no es valida.");
+                    msg.ShowDialog();
+                    //MessageBox.Show("La huella no es valida.", "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 }
             }));
@@ -315,11 +322,13 @@ namespace Esfe.SysAsistencia.UI.Components
         {
             if (ID <= 0)
             {
-                result = MessageBox.Show("Primero Seleccione un alumno", "ERROR");
+                MsgBox messages = new MsgBox("onlywarning", "Es necesario selecciona un alumno de la tabla");
+                messages.ShowDialog();
                 return;
             }
-            result = MessageBox.Show("¿Desea Eliminar este resgistro?", "ELIMINAR", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
-            if (result == DialogResult.Yes)
+            MsgBox msg = new MsgBox("question", "¿Desea Eliminar este resgistro?\nSe eliminara permanentemente.");
+            msg.ShowDialog();
+            if (msg.DialogResult == DialogResult.OK)
             {
                 try
                 {
@@ -328,12 +337,14 @@ namespace Esfe.SysAsistencia.UI.Components
                     bool eliminado = State.estudianteBL.EliminarEstudiante(ID);
                     if (eliminado == true)
                     {
-                        MessageBox.Show("El estudiante a sido eliminado");
+                        MsgBox messages = new MsgBox("filled", "Los datos del estudiante han sido eliminados exitosamnte");
+                        messages.ShowDialog();
                         RefreshGrid();
                     }
                     else
                     {
-                        MessageBox.Show("Error al eliminar estudiante");
+                        MsgBox messages = new MsgBox("onlyerror", "Ha ocurrido un error al intentar eliminar un estudiante");
+                        messages.ShowDialog();
                     }
                 }
                 catch (Exception ex)
@@ -382,26 +393,5 @@ namespace Esfe.SysAsistencia.UI.Components
         {
             DgvDesing.Formato(gridEstudiantes, 1, false);
         }
-
-        private void cbxCarrera_SelectedValueChanged(object sender, EventArgs e)
-        {
-
-            int indice = cbxCarrera.SelectedIndex;
-            //if (indice != -1)
-            //{
-            var codigo = State.InfoCarrera.idCarrera[indice];
-
-
-            var grupos = (from g in State.grupoBL.ObtenerGrupos()
-                          where g.Carrera == codigo
-                          select g.Codigo).ToList();
-
-            cbxGrupo.DataSource = grupos;
-        }
-
-
-
     }
-
-    
 }

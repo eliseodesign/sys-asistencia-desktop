@@ -13,17 +13,10 @@ using System.Windows.Forms;
 using DPFP.Verification;
 using DPFP;
 using Esfe.SysAsistencia.DAL;
-
+using DataEdit;
 
 namespace Esfe.SysAsistencia.UI.Components
 {
-    /// <summary>
-    /// Clase que representa el formulario de registro de docentes en una aplicación de asistencia
-    /// de una institución educativa. Contiene la lógica para interactuar con la interfaz de usuario,
-    /// guardar los datos del docente en la base de datos, y manejar eventos y acciones del formulario.
-    /// Además, incluye la integración con un lector de huellas dactilares para la verificación de
-    /// identidad del docente.
-    /// </summary>
     public partial class DocentesWF : Form
     {
         public DocenteBL docenteBL = new DocenteBL();
@@ -65,12 +58,16 @@ namespace Esfe.SysAsistencia.UI.Components
             // Validar si los campos obligatorios están llenos
             if (string.IsNullOrEmpty(txtNombres.Text) || string.IsNullOrEmpty(txtApellidos.Text) || string.IsNullOrEmpty(txtDui.Text))
             {
-                MessageBox.Show("Los datos son obligatorios", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MsgBox msg = new MsgBox("onlywarning", "Los datos son obligatorios");
+                msg.ShowDialog();
+                //MessageBox.Show("Los datos son obligatorios", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             else if (Template == null)
             {
-                MessageBox.Show("Aún no se ha registrado una huella", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MsgBox msg = new MsgBox("onlywarning", "Aún no se ha registrado una huella");
+                msg.ShowDialog();
+                //MessageBox.Show("Aún no se ha registrado una huella", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             var docente = new Docente()
@@ -92,9 +89,19 @@ namespace Esfe.SysAsistencia.UI.Components
             {
                 RefreshGrid();
                 if (ID != 0)
-                    MessageBox.Show("Se editaron los datos del docente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                {
+                    MsgBox msg = new MsgBox("filled", "Se editaron los datos del docente");
+                    msg.ShowDialog();
+                    //MessageBox.Show("Se editaron los datos del docente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
                 else
-                    MessageBox.Show("Se regitró al docente de forma exitosa", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                {
+                    MsgBox msg = new MsgBox("filled", "Se registro al docente de forma exitosa");
+                    msg.ShowDialog();
+                    //MessageBox.Show("Se regitró al docente de forma exitosa", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
                 //MessageBox.Show("No se puede registrar con la misma huella!", "ERROR GRAVE!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             ID = 0;
@@ -171,13 +178,17 @@ namespace Esfe.SysAsistencia.UI.Components
 
                         if (huellaExist) return;
                         //Exito->
-                        MessageBox.Show("La huella está lista.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MsgBox msg = new MsgBox("info", "¡Excelente!\nLa huella está lista.");
+                        msg.ShowDialog();
+                        //MessageBox.Show("La huella está lista.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
                 else
                 {
                     MySingleton.Instance.TemplateIsNull = false;
-                    MessageBox.Show("La huella no es valida.", "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MsgBox msg = new MsgBox("onlyerror", "Lo sentimos\nLa huella no es valida.");
+                    msg.ShowDialog();
+                    //MessageBox.Show("La huella no es valida.", "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }));
         }
@@ -213,8 +224,10 @@ namespace Esfe.SysAsistencia.UI.Components
         // eliminar este metodo 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            result = MessageBox.Show("¿Desea modificar este registro?", "MODIFICAR", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
-            if (result == DialogResult.Yes)
+            MsgBox msg = new MsgBox("question", "¿Desea modificar este registro?");
+            msg.ShowDialog();
+            //result = MessageBox.Show("¿Desea modificar este registro?", "MODIFICAR", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+            if (msg.DialogResult == DialogResult.OK)
             {
                 try
                 {
@@ -237,7 +250,9 @@ namespace Esfe.SysAsistencia.UI.Components
 
                         gridDocentes.DataSource = null;
                         gridDocentes.DataSource = updateList;
-                        MessageBox.Show("¡Se actualizaron los datos!", "Exitosamente", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MsgBox mssg = new MsgBox("filled", "Se edito el docente de forma exitosa");
+                        mssg.ShowDialog();
+                        //MessageBox.Show("¡Se actualizaron los datos!", "Exitosamente", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         LimpiarDatos();
                     }
                 }
@@ -256,11 +271,13 @@ namespace Esfe.SysAsistencia.UI.Components
         {
             if (ID == 0)
             {
-                result = MessageBox.Show("Primero Seleccione un docente", "ELIMINAR", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                MsgBox messages = new MsgBox("onlywarning", "Es necesario selecciona un docente de la tabla");
+                messages.ShowDialog();
                 return;
             }
-            result = MessageBox.Show("¿Desea Eliminar este resgistro?", "ELIMINAR", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
-            if (result == DialogResult.Yes)
+            MsgBox msg = new MsgBox("question", "¿Desea Eliminar este resgistro?\nSe eliminara permanentemente.");
+            msg.ShowDialog();
+            if (msg.DialogResult == DialogResult.OK)
             {
                 try
                 {
@@ -277,7 +294,8 @@ namespace Esfe.SysAsistencia.UI.Components
 
                         gridDocentes.DataSource = null;
                         gridDocentes.DataSource = updateList;
-                        MessageBox.Show("Se elimaron los datos!", "Exitosamente", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MsgBox messages = new MsgBox("filled", "Los datos del docente han sido eliminados exitosamnte");
+                        messages.ShowDialog();
                         LimpiarDatos();
                     }
                 }

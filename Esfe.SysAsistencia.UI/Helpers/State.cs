@@ -9,9 +9,6 @@ using System.Threading.Tasks;
 
 namespace Esfe.SysAsistencia.UI.Helpers
 {
-    /// <summary>
-    /// Clase que proporciona un estado global para la aplicación de asistencia en la interfaz de usuario.
-    /// </summary>
     public class State
     {
         // --------------- instancias de las capas --------------------------
@@ -27,10 +24,6 @@ namespace Esfe.SysAsistencia.UI.Helpers
 
         public static List<Grupo> GruposDocente { get; set; } = new List<Grupo>();
 
-
-        //----------------- utilidades ---------------------------------------
-        public static int CountDocentes = docenteBL.ObtenerDocentes().Count();
-        public static int CountEstudiantes = estudianteBL.ObtenerEstudiante().Count();
 
 
         public static class InfoCarrera{

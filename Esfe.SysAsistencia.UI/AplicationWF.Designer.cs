@@ -31,6 +31,7 @@
             PanelAplication = new Panel();
             PanelApp = new Panel();
             mainLateral = new Panel();
+            pictureBox1 = new PictureBox();
             btnCerrarSesion = new Button();
             panel5 = new Panel();
             btnGrupos = new Button();
@@ -47,6 +48,7 @@
             panelBar = new Panel();
             PanelAplication.SuspendLayout();
             mainLateral.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // PanelAplication
@@ -72,6 +74,7 @@
             // mainLateral
             // 
             mainLateral.BackColor = Color.FromArgb(0, 40, 100);
+            mainLateral.Controls.Add(pictureBox1);
             mainLateral.Controls.Add(btnCerrarSesion);
             mainLateral.Controls.Add(panel5);
             mainLateral.Controls.Add(btnGrupos);
@@ -91,6 +94,17 @@
             mainLateral.Size = new Size(203, 376);
             mainLateral.TabIndex = 6;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            pictureBox1.Image = Properties.Resources.sign_out_alt1;
+            pictureBox1.Location = new Point(0, 334);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(65, 30);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 0;
+            pictureBox1.TabStop = false;
+            // 
             // btnCerrarSesion
             // 
             btnCerrarSesion.Cursor = Cursors.Hand;
@@ -105,7 +119,7 @@
             btnCerrarSesion.Size = new Size(203, 55);
             btnCerrarSesion.TabIndex = 34;
             btnCerrarSesion.Text = "Cerrar Sesión";
-            btnCerrarSesion.TextAlign = ContentAlignment.MiddleLeft;
+            btnCerrarSesion.TextAlign = ContentAlignment.MiddleRight;
             btnCerrarSesion.UseVisualStyleBackColor = true;
             btnCerrarSesion.Click += btnCerrarSesion_Click;
             // 
@@ -273,6 +287,7 @@
             PanelAplication.ResumeLayout(false);
             mainLateral.ResumeLayout(false);
             mainLateral.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -295,5 +310,6 @@
         private Label label5;
         private Panel panelBar;
         public Button btnGrupos;
+        private PictureBox pictureBox1;
     }
 }
