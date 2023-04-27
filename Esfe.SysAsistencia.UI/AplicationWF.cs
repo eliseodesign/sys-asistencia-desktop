@@ -33,10 +33,10 @@ namespace Esfe.SysAsistencia.UI
 
         private void btnCerrarSesion_Click(object sender, EventArgs e)
         {
-            MsgBox msg = new MsgBox("question","¿Quieres salir del sistema?\nSe debera registrar nuevamente en el login.");
+            MsgBox msg = new MsgBox("question", "¿Quieres salir del sistema?\nSe debera registrar nuevamente en el login.");
             msg.ShowDialog();
 
-            if(msg.DialogResult == DialogResult.OK)
+            if (msg.DialogResult == DialogResult.OK)
             {
                 if (!MySingleton.Instance.IsAsistenciaFinished)
                 {
@@ -52,7 +52,7 @@ namespace Esfe.SysAsistencia.UI
                 }
                 Panels.SustituirPanel(_panelGeneral, new LoginWF(_panelGeneral));
             }
-            
+
         }
 
 

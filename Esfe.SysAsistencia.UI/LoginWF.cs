@@ -1,4 +1,5 @@
-﻿using Esfe.SysAsistencia.EN.Static;
+﻿using DataEdit;
+using Esfe.SysAsistencia.EN.Static;
 using Esfe.SysAsistencia.UI.Helpers;
 using System;
 using System.Collections.Generic;
@@ -36,8 +37,12 @@ namespace Esfe.SysAsistencia.UI
                 Panels.SustituirPanel(_panelGeneral, new AplicationWF(_panelGeneral));
             }
             else
-                MessageBox.Show("Usuario y/o contraseña incorrectos", "Error de autenticación", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            txtUseKey.Clear(); txtUserName.Clear();
+            {
+                MsgBox msg = new MsgBox("onlyerror", "Usuario y/o contraseña incorrectos");
+                msg.ShowDialog();
+                txtUseKey.Clear(); txtUserName.Clear();
+            }
+               
         }
 
         private void lblLoginDocente_Click(object sender, EventArgs e)
@@ -52,12 +57,15 @@ namespace Esfe.SysAsistencia.UI
             
             if (res)
             {
-                MessageBox.Show("Se ha iniciado sesión como Docente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MsgBox msg = new MsgBox("filled", "Se ha iniciado sesión como Docente");
+                msg.ShowDialog();
                 Panels.SustituirPanel(_panelGeneral, new AplicationWF(_panelGeneral)); 
             }
             else
             {
-                MessageBox.Show("No se pudo iniciar como Docente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MsgBox msg = new MsgBox("onlyerror", "No se pudo iniciar como Docente");
+                msg.ShowDialog();
+
 
             }
         }
