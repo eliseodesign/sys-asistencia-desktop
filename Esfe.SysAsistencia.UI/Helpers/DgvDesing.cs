@@ -8,17 +8,8 @@ using System.Windows.Forms;
 
 namespace Esfe.SysAsistencia.UI.Helpers
 {
-    /// <summary>
-    /// Clase estática que proporciona métodos para dar formato a un DataGridView en una aplicación de Windows Forms.
-    /// </summary>
     public static class DgvDesing
     {
-        /// <summary>
-        /// Método para dar formato al DataGridView con opciones de diseño personalizado.
-        /// </summary>
-        /// <param name="pData">DataGridView al que se aplicará el formato.</param>
-        /// <param name="color">Entero que indica el color de diseño deseado.</param>
-        /// <param name="border">Valor booleano que indica si se mostrará o no el borde del DataGridView.</param>
         //Método para dar formato al DataGridView, recibimos dos paramateros uno tipo DataGrid y otro int para la selección del color.
         public static void Formato(DataGridView pData, int color,bool border = true)
         {

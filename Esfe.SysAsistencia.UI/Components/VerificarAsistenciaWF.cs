@@ -12,10 +12,11 @@ using DPFP;
 using DPFP.Capture;
 using DPFP.Verification;
 using Esfe.SysAsistencia.BL;
+using Esfe.SysAsistencia.DAL;
 using System.Drawing;
 using Esfe.SysAsistencia.EN;
 using Esfe.SysAsistencia.UI.Helpers;
-
+using DataEdit;
 
 namespace Esfe.SysAsistencia.UI.Components
 {
@@ -305,7 +306,8 @@ namespace Esfe.SysAsistencia.UI.Components
                 Stop();
                 CreateAsistencia();
                 StopLector();
-                MessageBox.Show("La asistencia del Día se ha guardado de forma exitosa. ", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MsgBox msg = new MsgBox("filled", "La asistencia del Día se ha guardado de forma exitosa.");
+                msg.ShowDialog();
                 
             }
 

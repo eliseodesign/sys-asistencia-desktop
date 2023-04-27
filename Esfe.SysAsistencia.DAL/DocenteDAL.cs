@@ -16,7 +16,6 @@ namespace Esfe.SysAsistencia.DAL
         private static List<Docente> ListaDocentes;
         private string Path { get; } = "docentes.json";
 
-        public Docente Existente { get; set; }
 
         // al ejecutarse el constructor busca si existe el archivo y extrae sus datos
         public bool AgregarDocente(Docente docente)

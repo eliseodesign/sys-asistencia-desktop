@@ -154,7 +154,7 @@
             groupBox1.Controls.Add(btnEliminar);
             groupBox1.Font = new Font("Lucida Sans Unicode", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             groupBox1.ForeColor = SystemColors.AppWorkspace;
-            groupBox1.Location = new Point(12, 67);
+            groupBox1.Location = new Point(12, 51);
             groupBox1.Margin = new Padding(3, 2, 3, 2);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(3, 2, 3, 2);
@@ -227,7 +227,6 @@
             cbxCarrera.Name = "cbxCarrera";
             cbxCarrera.Size = new Size(186, 26);
             cbxCarrera.TabIndex = 16;
-            cbxCarrera.SelectedValueChanged += cbxCarrera_SelectedValueChanged;
             // 
             // label6
             // 
