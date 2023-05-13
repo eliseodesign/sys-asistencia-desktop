@@ -18,7 +18,6 @@ namespace Esfe.SysAsistencia.UI
         public MainWF()
         {
             InitializeComponent();
-            //txtUseKey.PasswordChar = '*'; // definir * para ocultar caracteres
             Panels.AgregarPanel(this.panelGeneral, new LoginWF(this.panelGeneral));
         }
     }
