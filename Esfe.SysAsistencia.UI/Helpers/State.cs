@@ -15,6 +15,10 @@ namespace Esfe.SysAsistencia.UI.Helpers
         public static DocenteBL docenteBL { get; set; } = new DocenteBL();
         public static EstudianteBL estudianteBL { get; set; } = new EstudianteBL();
         public static GrupoBL grupoBL { get; set; } = new GrupoBL();
+        public static AnioBL anioBL { get; set; } = new AnioBL();
+        public static CarreraBL carreraBL { get; set; } = new CarreraBL();
+        public static TurnoBL turnoBL { get; set; } = new TurnoBL();
+        public static NumGrupoBL numGrupoBL { get; set; } = new NumGrupoBL();
         public static AsistenciaBL asistenciaBL { get; set; } = new AsistenciaBL();
 
 
@@ -38,24 +42,24 @@ namespace Esfe.SysAsistencia.UI.Helpers
         }
 
          //-------------- Constructucor ----------------
-        public static List<Grupo> obtenerGruposDocente()
-        {
-            List<Grupo> Grupos = grupoBL.ObtenerGrupos();
-            List<string> Codigos = DocenteLoged.GrupoCodigos;
+        //public static List<Grupo> obtenerGruposDocente()
+        //{
+        //    List<Grupo> Grupos = grupoBL.ObtenerGrupos();
+        //    List<string> Codigos = DocenteLoged.GrupoCodigos;
 
 
 
-            foreach (String codigo in Codigos)
-            {
+        //    foreach (String codigo in Codigos)
+        //    {
                 
 
-                Grupo busca = Grupos.FirstOrDefault(g => g.Codigo == codigo);
-                if (busca != null)
-                {
-                    GruposDocente.Add(busca);
-                }
-            }
-            return GruposDocente;
-        }
+        //        Grupo busca = Grupos.FirstOrDefault(g => g.Codigo == codigo);
+        //        if (busca != null)
+        //        {
+        //            GruposDocente.Add(busca);
+        //        }
+        //    }
+        //    return GruposDocente;
+        //}
     }
 }

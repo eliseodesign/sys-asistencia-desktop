@@ -9,6 +9,6 @@ namespace Esfe.SysAsistencia.EN
     public class NumGrupo
     {
         public byte Id { get; set; }
-        public string Nombe { get; set; }
+        public string Nombre { get; set; }
     }
 }

@@ -9,6 +9,6 @@ namespace Esfe.SysAsistencia.EN
     public class Anio
     {
         public byte Id { get; set; }
-        public string Nombe { get; set; }
+        public string Nombre { get; set; }
     }
 }

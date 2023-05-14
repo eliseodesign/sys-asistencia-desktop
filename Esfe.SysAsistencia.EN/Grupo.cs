@@ -14,8 +14,9 @@ namespace Esfe.SysAsistencia.EN
         public int Id { get; set; }
         public byte EstudiantesMax { get; set; }
         public string DiasPresencial { get; set; } 
-        //public int DocenteId { get; set; } = 0;
+        //public int DocenteId { get; set;  } = 0;
         public byte IdNumGrupo { get; set; }
+        public byte IdAnio { get; set; }
         public byte IdCarrera { get; set; }
         public byte IdTurno { get; set; }
     }

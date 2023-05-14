@@ -17,7 +17,7 @@ namespace Esfe.SysAsistencia.UI.Helpers
         {
             State.docenteBL.GuadarJson();// Obtener la lista de docentes desde tu instancia de DocenteBL
             State.estudianteBL.GuadarJson();// Obtener la lista de docentes desde tu instancia de DocenteBL
-            State.grupoBL.GuardarJson();// Obtener la lista de docentes desde tu instancia de DocenteBL
+            
 
             MsgBox msg = new MsgBox("filled","Los datos se guardaron correctamente");
             msg.ShowDialog();

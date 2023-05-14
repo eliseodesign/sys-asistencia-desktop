@@ -1,4 +1,5 @@
-﻿using Esfe.SysAsistencia.EN;
+﻿using Esfe.SysAsistencia.DAL;
+using Esfe.SysAsistencia.EN;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ namespace Esfe.SysAsistencia.BL
 {
     public class CarreraBL
     {
-        CarreraBL oCarreraBL = new CarreraBL();
+        CarreraDAL oCarreraDAL = new CarreraDAL();
         public List<Carrera> ObtenerCarrera()
         {
-            return oCarreraBL.ObtenerCarrera();
+            return oCarreraDAL.ObtenerCarrera();
         }
     }
 }

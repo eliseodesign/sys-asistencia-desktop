@@ -1,4 +1,5 @@
 ﻿using Esfe.SysAsistencia.EN;
+using Esfe.SysAsistencia.DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ namespace Esfe.SysAsistencia.BL
 {
     public class AnioBL
     {
-        AnioBL oAnioBL = new AnioBL();
+        AnioDAL oAnioDAL = new AnioDAL();
         public List<Anio> ObtenerAnio()
         {
-            return oAnioBL.ObtenerAnio();
+            return oAnioDAL.ObtenerAnio();
         }
     }
 }

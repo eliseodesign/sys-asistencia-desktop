@@ -19,17 +19,17 @@ namespace Esfe.SysAsistencia.UI.Components
         {
             _ListGruposSelect = ListGruposSelect;
             InitializeComponent();
-            UpdateGrupos(carrera);
+            //UpdateGrupos(carrera);
         }
 
-        private void UpdateGrupos(string _carrera)
-        {
-            //Verificar primero si el grupo ya tiene un docente?????
-            foreach (var gg in State.grupoBL.ObtenerGrupos().Where(g => g.Carrera == _carrera && g.DocenteId == 0).Select(g => g.Codigo))
-            {
-                clbGruposCarrera.Items.Add(gg);
-            }
-        }
+        //private void UpdateGrupos(string _carrera)
+        //{
+        //    //Verificar primero si el grupo ya tiene un docente?????
+        //    foreach (var gg in State.grupoBL.ObtenerGrupos().Where(g => g.Carrera == _carrera && g.DocenteId == 0).Select(g => g.Codigo))
+        //    {
+        //        clbGruposCarrera.Items.Add(gg);
+        //    }
+        //}
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             if (clbGruposCarrera.CheckedItems.Count > 0)

@@ -39,7 +39,7 @@ namespace Esfe.SysAsistencia.UI.Components
             string[] carreras = new string[4] { "Téc. ing Electica", "Téc. ing de Desarrollo De Software", "Téc en Mercadeo", "Téc. en Gestión y Desarrollo Turístico" };
             cbxCarrera.DataSource = carreras;
 
-            cbxGrupo.DataSource = State.grupoBL.ObtenerGrupos().Select(g => g.Codigo).ToList();
+            //cbxGrupo.DataSource = State.grupoBL.ObtenerGrupos().Select(g => g.Codigo).ToList();
         }
 
         //Signals

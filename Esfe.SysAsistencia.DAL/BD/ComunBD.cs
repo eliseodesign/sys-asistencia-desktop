@@ -12,7 +12,7 @@ namespace Esfe.SysAsistencia.DAL.BD
     public class ComunBD
     {
         //---Se coloca el link de conexion en una constante
-        const string StrConexion = @"Data Source=localhost;Initial Catalog=BDTienda;Integrated Security=True";
+        const string StrConexion = @"Data Source=localhost;Initial Catalog=BDSysAsistencia;Integrated Security=True";
         //----Establecemos la conexion con SQL
         private static SqlConnection ObtenerConexion()
         {
@@ -73,7 +73,7 @@ namespace Esfe.SysAsistencia.DAL.BD
                 {
                     if (reader[propiedad.Name] != DBNull.Value)
                     {
-                        propiedad.SetValue(item, reader[propiedad.Name], null);
+                        propiedad.SetValue(item, reader[propiedad.Name]);
                     }
                 }
                 lista.Add(item);

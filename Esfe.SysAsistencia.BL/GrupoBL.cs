@@ -34,9 +34,9 @@ namespace Esfe.SysGrupo.BL
             return oGrupoDAL.ActualizarGrupo(grupo); 
         }
 
-        public bool EliminarGrupo(int id) 
+        public bool EliminarGrupo(Grupo grupo) 
         {
-            return oGrupoDAL.EliminarGrupo(id); 
+            return oGrupoDAL.EliminarGrupo(grupo); 
         }
 
     }

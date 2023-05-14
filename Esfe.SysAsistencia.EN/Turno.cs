@@ -9,6 +9,6 @@ namespace Esfe.SysAsistencia.EN
     public class Turno
     {
         public byte Id { get; set; }
-        public string Nombe { get; set; }
+        public string Nombre { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Esfe.SysAsistencia.EN;
+using Esfe.SysAsistencia.DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ namespace Esfe.SysAsistencia.BL
 {
     public class TurnoBL
     {
-        TurnoBL oTurnoBL = new TurnoBL();
+        TurnoDAL oTurnoDAL = new TurnoDAL();
         public List<Turno> ObtenerTurno()
         {
-            return oTurnoBL.ObtenerTurno();
+            return oTurnoDAL.ObtenerTurno();
         }
     }
 }

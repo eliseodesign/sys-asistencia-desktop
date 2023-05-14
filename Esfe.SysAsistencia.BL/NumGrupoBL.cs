@@ -1,4 +1,5 @@
 ﻿using Esfe.SysAsistencia.EN;
+using Esfe.SysAsistencia.DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ namespace Esfe.SysAsistencia.BL
 {
     public class NumGrupoBL
     {
-        NumGrupoBL oNumGrupoBL = new NumGrupoBL();
+        NumGrupoDAL oNumGrupoDAL = new NumGrupoDAL();
         public List<NumGrupo> ObtenerNumGrupo()
         {
-            return oNumGrupoBL.ObtenerNumGrupo();
+            return oNumGrupoDAL.ObtenerNumGrupo();
         }
     }
 }
