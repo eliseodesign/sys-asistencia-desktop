@@ -71,10 +71,10 @@ namespace Esfe.SysAsistencia.DAL.BD
                 T item = new T();
                 foreach (var propiedad in item.GetType().GetProperties())
                 {
-                    if (reader[propiedad.Name] != DBNull.Value)
-                    {
+                    //if (reader[propiedad.Name] != DBNull.Value)
+                    //{
                         propiedad.SetValue(item, reader[propiedad.Name]);
-                    }
+                    //}
                 }
                 lista.Add(item);
             }

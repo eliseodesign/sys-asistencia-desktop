@@ -20,23 +20,30 @@ namespace Esfe.SysAsistencia.UI.Components
         public AplicationWF padre;
         //variable global para editar y eliminar en el DataGriedView
         int Id;
-        
+        List<Carrera> carreras = State.carreraBL.ObtenerCarrera();
+        List<Anio> anios = State.anioBL.ObtenerAnio();
+        List<NumGrupo> numGrupos = State.numGrupoBL.ObtenerNumGrupo();
+
+       
         public GruposWF(AplicationWF form)
         {
             padre = form;
             InitializeComponent();
             List<Carrera> carreras = State.carreraBL.ObtenerCarrera();
+            carreras.Insert(0, new Carrera() { Id = 0, Nombre = "Todas",Siglas="N/A" });
             List<Anio> anios = State.anioBL.ObtenerAnio();
+            anios.Insert(0, new Anio() { Id = 0, Nombre = "Todos"});
 
-            //carreras.Insert(0, "Todas");
+
+
             cbxCarrera.DisplayMember = "Nombre"; 
             cbxCarrera.ValueMember = "Id";
             cbxCarrera.DataSource = carreras;
 
             //carreras.Insert(0, "Todas");
-            cbxCarrera.DisplayMember = "Nombre"; 
-            cbxCarrera.ValueMember = "Id";
-            cbxCarrera.DataSource = anios;
+            cbxAño.DisplayMember = "Nombre";
+            cbxAño.ValueMember = "Id";
+            cbxAño.DataSource = anios;
 
             configGrid();
             refreshGrid();
@@ -56,41 +63,7 @@ namespace Esfe.SysAsistencia.UI.Components
 
         private void actualizarGrid(object sender, EventArgs e)
         {
-            List<Carrera> carreras = State.carreraBL.ObtenerCarrera();
-            List<Anio> anios = State.anioBL.ObtenerAnio();
-            List<NumGrupo> numGrupos = State.numGrupoBL.ObtenerNumGrupo();
-
-            List<Grupo> grupos = State.grupoBL.ObtenerGrupos();
-            var resultado = from grupo in grupos
-                            join carrera in carreras on grupo.IdCarrera equals carrera.Id
-                            join anio in anios on grupo.IdAnio equals anio.Id
-                            join num in numGrupos on grupo.IdNumGrupo equals num.Id
-                            select new
-                            {
-                                Id = grupo.Id,
-                                Codigo = "G" + num.Nombre[num.Nombre.Length - 1] + "-" + anio.Nombre.Substring(0, 1) + carrera.Siglas,
-                                EstudiantesMax = grupo.EstudiantesMax,
-                                IdCarrera = carrera.Id,
-                                Carrera = carrera.Nombre,
-                                IdAnio = anio.Id,
-                                Año = anio.Nombre
-                            };
-
-            byte carreraSelect = 0;
-            byte anioSelect = 0;
-
-            if (cbxCarrera.SelectedIndex > 0)
-                carreraSelect = Convert.ToByte(cbxCarrera.SelectedValue);
-
-            if (cbxAño.SelectedIndex > 0)
-                anioSelect = Convert.ToByte(cbxAño.SelectedValue);
-
-            var gruposFiltrados = resultado
-                .Where(x => x.IdAnio == anioSelect && x.IdCarrera == carreraSelect)
-                .ToList();
-
-            gridGrupos.DataSource = null;
-            gridGrupos.DataSource = gruposFiltrados;
+            refreshGrid();
         }
 
 
@@ -98,7 +71,7 @@ namespace Esfe.SysAsistencia.UI.Components
         private void panel2_Paint(object sender, PaintEventArgs e)
         {
             //// cuando carge
-            //DgvDesing.Formato(gridGrupos, 1);
+            DgvDesing.Formato(gridGrupos, 1);
             //gridGrupos.Columns["Id"].Width = 50;
             //gridGrupos.Columns["Presencial"].Width = 200;
             //gridGrupos.Columns["Editar"].Width = 90;
@@ -129,17 +102,39 @@ namespace Esfe.SysAsistencia.UI.Components
 
         private void refreshGrid()
         {
-            gridGrupos.DataSource = null;
-            List<Grupo> listaGrupos = State.grupoBL.ObtenerGrupos();
+            List<Grupo> grupos = State.grupoBL.ObtenerGrupos();
 
-            gridGrupos.DataSource = listaGrupos;
+            var resultado = from g in grupos
+                            join c in carreras on g.IdCarrera equals c.Id
+                            join a in anios on g.IdAnio equals a.Id
+                            join n in numGrupos on g.IdNumGrupo equals n.Id
+
+                            select new
+                            {
+                                Id = g.Id,
+                                Codigo = "G" + n.Nombre[n.Nombre.Length - 1] + "-" + a.Nombre.Substring(0, 1) + c.Siglas,
+                                EstudiantesMax = g.EstudiantesMax,
+                                IdCarrera = c.Id,
+                                Carrera = c.Siglas,
+                                IdAnio = a.Id,
+                                Año = a.Nombre
+                            };
+
+            byte carreraSelect = Convert.ToByte(cbxCarrera.SelectedValue);
+            byte anioSelect = Convert.ToByte(cbxAño.SelectedValue);
+
+            var gruposFiltrados = resultado
+                .Where(x => (x.IdAnio == anioSelect || anioSelect == 0) && (x.IdCarrera == carreraSelect || carreraSelect == 0));
+                
+
+            gridGrupos.DataSource = null;
+            gridGrupos.DataSource = gruposFiltrados.ToList();
         }
         private void configGrid()
         {
             gridGrupos.AutoGenerateColumns = false;
             gridGrupos.ReadOnly = true;
 
-            int i = 0;
             gridGrupos.Columns["Id"].DisplayIndex = 0;
             gridGrupos.Columns["Codigo"].DisplayIndex = 1;
             gridGrupos.Columns["EstudiantesMax"].DisplayIndex = 2;
@@ -150,8 +145,8 @@ namespace Esfe.SysAsistencia.UI.Components
             gridGrupos.Columns["Editar"].DisplayIndex = 5;
             gridGrupos.Columns["Eliminar"].DisplayIndex = 6;
 
-            //gridGrupos.Columns["DocenteId"].Visible = false;
-            //gridGrupos.Columns["Carrera"].Visible = false;
+            gridGrupos.Columns["IdAnio"].Visible = false;
+            gridGrupos.Columns["IdCarrera"].Visible = false;
             //gridGrupos.Columns["Año"].Visible = false;
         }
 

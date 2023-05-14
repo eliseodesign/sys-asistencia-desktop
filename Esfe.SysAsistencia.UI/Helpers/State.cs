@@ -41,25 +41,6 @@ namespace Esfe.SysAsistencia.UI.Helpers
             public static string[] turnos = new string[3] { "mañana", "tarde", "noche" };
         }
 
-         //-------------- Constructucor ----------------
-        //public static List<Grupo> obtenerGruposDocente()
-        //{
-        //    List<Grupo> Grupos = grupoBL.ObtenerGrupos();
-        //    List<string> Codigos = DocenteLoged.GrupoCodigos;
-
-
-
-        //    foreach (String codigo in Codigos)
-        //    {
-                
-
-        //        Grupo busca = Grupos.FirstOrDefault(g => g.Codigo == codigo);
-        //        if (busca != null)
-        //        {
-        //            GruposDocente.Add(busca);
-        //        }
-        //    }
-        //    return GruposDocente;
-        //}
+        
     }
 }
