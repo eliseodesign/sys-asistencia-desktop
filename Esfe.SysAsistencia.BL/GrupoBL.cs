@@ -19,34 +19,24 @@ namespace Esfe.SysGrupo.BL
     {
         private GrupoDAL oGrupoDAL = new GrupoDAL(); // Instancia de la clase GrupoDAL para interactuar con la capa de acceso a datos (DAL)
 
-        public string AgregarGrupo(Grupo Grupo) // Método para agregar un nuevo grupo
+        public bool AgregarGrupo(Grupo Grupo) 
         {
-            return oGrupoDAL.AgregarGrupo(Grupo); // Llama al método correspondiente en la capa de acceso a datos (DAL)
+            return oGrupoDAL.AgregarGrupo(Grupo);
         }
 
-        public List<Grupo> ObtenerGrupos() // Método para obtener la lista de grupos
+        public List<Grupo> ObtenerGrupos()
         {
-            return oGrupoDAL.ObtenerGrupos(); // Llama al método correspondiente en la capa de acceso a datos (DAL)
+            return oGrupoDAL.ObtenerGrupos(); 
         }
 
-        public Grupo ObtenerGrupoPorId(int id) // Método para obtener un grupo por su ID
+        public bool ActualizarGrupo(Grupo grupo) 
         {
-            return oGrupoDAL.ObtenerGrupoPorId(id); // Llama al método correspondiente en la capa de acceso a datos (DAL)
+            return oGrupoDAL.ActualizarGrupo(grupo); 
         }
 
-        public bool ActualizarGrupo(Grupo grupo) // Método para actualizar información de un grupo
+        public bool EliminarGrupo(int id) 
         {
-            return oGrupoDAL.ActualizarGrupo(grupo); // Llama al método correspondiente en la capa de acceso a datos (DAL)
-        }
-
-        public void EliminarGrupo(int id) // Método para eliminar un grupo por su ID
-        {
-            oGrupoDAL.EliminarGrupo(id); // Llama al método correspondiente en la capa de acceso a datos (DAL)
-        }
-
-        public void GuardarJson() // Método para guardar los datos de los grupos en formato JSON
-        {
-            oGrupoDAL.GuardarJson(); // Llama al método correspondiente en la capa de acceso a datos (DAL)
+            return oGrupoDAL.EliminarGrupo(id); 
         }
 
     }
