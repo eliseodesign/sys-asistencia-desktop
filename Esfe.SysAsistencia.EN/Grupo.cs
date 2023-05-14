@@ -12,12 +12,14 @@ namespace Esfe.SysAsistencia.EN
     public class Grupo
     {
         public int Id { get; set; }
-        public int DocenteId { get; set; } = 0;
+        public byte EstudiantesMax { get; set; }
+        public bool[] DiasPresencial { get; set; } = new bool[5];
+        //public int DocenteId { get; set; } = 0;
         public string Codigo { get; set; }
         public string Carrera { get; set; }
         public string Turno { get; set; }
-        public int EstudiantesMax { get; set; }
-        public bool[] Horario { get; set; } = new bool[5];
+        public string Docente { get; set; }
+        
         public string Presencial
         {
             get
@@ -25,9 +27,9 @@ namespace Esfe.SysAsistencia.EN
                 string[] diasSemana = new string[] { "Lun", "Mar", "Mie", "Jue", "Vie" };
                 string diasPresenciales = "";
 
-                for (int i = 0; i < Horario.Length; i++)
+                for (int i = 0; i < DiasPresencial.Length; i++)
                 {
-                    if (Horario[i])
+                    if (DiasPresencial[i])
                     {
                         diasPresenciales += ", " + diasSemana[i];
                     }
