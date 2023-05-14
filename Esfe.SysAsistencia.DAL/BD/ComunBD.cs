@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace ESFE.BDConn.DAL
+namespace Esfe.SysAsistencia.DAL.BD
 {
     public class ComunBD
     {
@@ -44,8 +44,8 @@ namespace ESFE.BDConn.DAL
         //Ejecutar Comando
         public static int EjecutarSP(string nombreSP, object objeto, List<string> parametros)
         {
-            SqlCommand comando = ComunBD.ObtenerComando();
-            comando.CommandType = System.Data.CommandType.StoredProcedure;
+            SqlCommand comando = ObtenerComando();
+            comando.CommandType = CommandType.StoredProcedure;
             comando.CommandText = nombreSP;
             foreach (var propiedad in objeto.GetType().GetProperties())
             {
@@ -59,11 +59,11 @@ namespace ESFE.BDConn.DAL
         }
         public static List<T> EjecutarSPSelect<T>(string nombreSP) where T : new()
         {
-            SqlCommand comando = ComunBD.ObtenerComando();
-            comando.CommandType = System.Data.CommandType.StoredProcedure;
+            SqlCommand comando = ObtenerComando();
+            comando.CommandType = CommandType.StoredProcedure;
             comando.CommandText = nombreSP;
 
-            SqlDataReader reader = ComunBD.EjecutarReader(comando);
+            SqlDataReader reader = EjecutarReader(comando);
 
             List<T> lista = new List<T>();
             while (reader.Read())

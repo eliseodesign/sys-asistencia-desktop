@@ -1,5 +1,5 @@
-﻿using Esfe.SysAsistencia.EN;
-using ESFE.BDConn.DAL;
+﻿using Esfe.SysAsistencia.DAL.BD;
+using Esfe.SysAsistencia.EN;
 using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
