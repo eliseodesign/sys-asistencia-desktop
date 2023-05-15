@@ -35,7 +35,6 @@ namespace Esfe.SysAsistencia.UI.Components
             anios.Insert(0, new Anio() { Id = 0, Nombre = "Todos"});
 
 
-
             cbxCarrera.DisplayMember = "Nombre"; 
             cbxCarrera.ValueMember = "Id";
             cbxCarrera.DataSource = carreras;
@@ -51,9 +50,9 @@ namespace Esfe.SysAsistencia.UI.Components
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            //_DetailGrupo detailGrupo = new _DetailGrupo("Nuevo Grupo");
-            //detailGrupo.ShowDialog();
-            //refreshGrid();
+            _DetailGrupo detailGrupo = new _DetailGrupo("Nuevo Grupo");
+            detailGrupo.ShowDialog();
+            refreshGrid();
             //List<Grupo> listaGrupos = State.grupoBL.ObtenerGrupos();
             //if (listaGrupos.Count == 1)
             //{
@@ -80,24 +79,31 @@ namespace Esfe.SysAsistencia.UI.Components
 
         private void gridGrupos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            //if (gridGrupos.Columns[e.ColumnIndex].Name == "Editar")
-            //{
-            //    Id = Convert.ToInt32(gridGrupos.CurrentRow.Cells["Id"].Value);
-            //    _DetailGrupo detailGrupo = new _DetailGrupo(Id);
-            //    detailGrupo.ShowDialog();
-            //    refreshGrid();
-            //}
-            //if (gridGrupos.Columns[e.ColumnIndex].Name == "Eliminar")
-            //{
-            //    Id = Convert.ToInt32(gridGrupos.CurrentRow.Cells["Id"].Value.ToString());
-            //    MsgBox msg = new MsgBox("question", "¿Está seguro que desea eliminar este grupo?\nSe eliminará de forma permanente.");
-            //    msg.ShowDialog();
-            //    if(msg.DialogResult == DialogResult.OK)
-            //    {
-            //        State.grupoBL.EliminarGrupo(Id);
-            //        refreshGrid();
-            //    }
-            //}
+            if (gridGrupos.Columns[e.ColumnIndex].Name == "Editar")
+            {
+                Id = Convert.ToInt32(gridGrupos.CurrentRow.Cells["Id"].Value);
+                _DetailGrupo detailGrupo = new _DetailGrupo(Id);
+                detailGrupo.ShowDialog();
+                refreshGrid();
+            }
+            if (gridGrupos.Columns[e.ColumnIndex].Name == "Eliminar")
+            {
+                Id = Convert.ToByte(gridGrupos.CurrentRow.Cells["Id"].Value);
+                MsgBox msg = new MsgBox("question", "¿Está seguro que desea eliminar este grupo?\nSe eliminará de forma permanente.");
+                msg.ShowDialog();
+                if (msg.DialogResult == DialogResult.OK)
+                {
+                    var grupo = new Grupo() { Id = Id};
+                    bool resul = State.grupoBL.EliminarGrupo(grupo);
+                    if (resul)
+                    {
+                        refreshGrid();
+                        return;
+                    }
+                    MsgBox err = new MsgBox("onlyerror", "No se pudo eliminar");
+                    err.ShowDialog();
+                }
+            }
         }
 
         private void refreshGrid()

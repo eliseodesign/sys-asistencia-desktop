@@ -23,32 +23,32 @@ namespace Esfe.SysAsistencia.DAL
 
         public bool ActualizarGrupo(Grupo update)
         {
-            List<string> parametros = new() { "Id","EstudiantesMax","DiasPresencial", "@IdAnio","IdCarrera","IdTurno" };
-            try
-            {
+            List<string> parametros = new() { "Id","EstudiantesMax","DiasPresencial", "IdAnio","IdCarrera","IdTurno" };
+            //try
+            //{
                 int valor = ComunBD.EjecutarSP("SPUpdateGrupo", update, parametros);
                 if (valor > 0) return true;
                 else return false;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    return false;
+            //}
         }
 
         public bool AgregarGrupo(Grupo grupo)
         {
-            List<string> parametros = new() {"EstudiantesMax", "DiasPresencial", "@IdAnio", "IdCarrera", "IdTurno" };
-            try
-            {
-                int valor = ComunBD.EjecutarSP("SPUpdateGrupo", grupo, parametros);
+            List<string> parametros = new() {"EstudiantesMax", "DiasPresencial", "IdAnio", "IdCarrera", "IdTurno" };
+            //try
+            //{
+                int valor = ComunBD.EjecutarSP("SPCreateGrupo", grupo, parametros);
                 if (valor > 0) return true;
                 else return false;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
+            
+            //catch (Exception ex)
+            //{
+            //    return false;
+            //}
 
         }
 
