@@ -18,38 +18,44 @@ namespace Esfe.SysAsistencia.DAL
     {
         public List<Grupo> ObtenerGrupos()
         {
-            return ComunBD.EjecutarSPSelect<Grupo>("SPReadGrupo");
+            try
+            {
+                return ComunBD.EjecutarSPSelect<Grupo>("SPReadGrupo");
+            }
+            catch (Exception)
+            {
+                return new List<Grupo>();
+            }
         }
 
         public bool ActualizarGrupo(Grupo update)
         {
             List<string> parametros = new() { "Id","EstudiantesMax","DiasPresencial", "IdAnio","IdCarrera","IdTurno" };
-            //try
-            //{
+            try
+            {
                 int valor = ComunBD.EjecutarSP("SPUpdateGrupo", update, parametros);
                 if (valor > 0) return true;
                 else return false;
-            //}
-            //catch (Exception ex)
-            //{
-            //    return false;
-            //}
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public bool AgregarGrupo(Grupo grupo)
         {
             List<string> parametros = new() {"EstudiantesMax", "DiasPresencial", "IdAnio", "IdCarrera", "IdTurno" };
-            //try
-            //{
+            try
+            {
                 int valor = ComunBD.EjecutarSP("SPCreateGrupo", grupo, parametros);
                 if (valor > 0) return true;
                 else return false;
-            
-            //catch (Exception ex)
-            //{
-            //    return false;
-            //}
-
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public bool EliminarGrupo(Grupo grupo)
@@ -61,7 +67,7 @@ namespace Esfe.SysAsistencia.DAL
                 if (valor > 0) return true;
                 else return false;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
