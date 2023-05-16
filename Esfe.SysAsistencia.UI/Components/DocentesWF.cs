@@ -22,10 +22,9 @@ namespace Esfe.SysAsistencia.UI.Components
         public DocenteBL docenteBL = new DocenteBL();
 
         public Panel _panel_app;
-
-        int ID = 0;
-
-        public List<string> ListGruposSelect = new List<string>(); // nos servira para almacenar los grupos elegidos
+        private int GloabalID;
+        List<Carrera> carreras = State.carreraBL.ObtenerCarrera();
+        List<NumGrupo> numGrupos = State.numGrupoBL.ObtenerNumGrupo();
 
         //  -------------------------- Variables para el lector --------------------------
         private DPFP.Template Template;
@@ -38,21 +37,32 @@ namespace Esfe.SysAsistencia.UI.Components
         DialogResult result = new DialogResult();
 
 
-
-
-
-
         //public string[] carreras = State.InfoCarrera.carreras;
         public DocentesWF(Panel PanelApp)
         {
             _panel_app = PanelApp;
             InitializeComponent();
             SetGridFormat();
+            cargarCBX();
+        }
 
-            string[] carreras = new string[5] { "", "Téc. ing Electica", "Téc. ing de Desarrollo De Software", "Téc en Mercadeo", "Téc. en Gestión y Desarrollo Turístico" };
+        private void cargarCBX()
+        {
+            ComboBox[] cbxs = new ComboBox[1] { txtCarrera };
+
+            foreach (ComboBox combo in cbxs)
+            {
+                combo.DisplayMember = "Nombre";
+                combo.ValueMember = "Id";
+            }
+
             txtCarrera.DataSource = carreras;
         }
 
+
+        //------------------------------------------------------------------------
+        //                                  EVENTOS
+        //------------------------------------------------------------------------
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             // Validar si los campos obligatorios están llenos
@@ -72,39 +82,27 @@ namespace Esfe.SysAsistencia.UI.Components
             }
             var docente = new Docente()
             {
-                Id = ID,
                 Nombres = txtNombres.Text,
                 Apellidos = txtApellidos.Text,
                 Cel = txtTelefono.Text,
                 Dui = txtDui.Text,
-                Nit = txtNit.Text,
                 Huella = Template.Bytes,
-                Carrera = txtCarrera.Text,
-                GrupoCodigos = ListGruposSelect
+                IdCarrera = Convert.ToByte(txtCarrera.SelectedValue)
+                //TODO: AÑADIR LA FK DE GRUPO XD
 
             };
 
-            var result = State.docenteBL.AgregarDocente(docente);
-            if (result)
+            var si = State.docenteBL.AgregarDocente(docente);
+            if (si)
             {
-                RefreshGrid();
-                if (ID != 0)
-                {
-                    MsgBox msg = new MsgBox("filled", "Se editaron los datos del docente");
-                    msg.ShowDialog();
-                    //MessageBox.Show("Se editaron los datos del docente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-
-                else
-                {
-                    MsgBox msg = new MsgBox("filled", "Se registro al docente de forma exitosa");
-                    msg.ShowDialog();
-                    //MessageBox.Show("Se regitró al docente de forma exitosa", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-
-                //MessageBox.Show("No se puede registrar con la misma huella!", "ERROR GRAVE!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MsgBox msg = new MsgBox("filled", $"Se creó el grupo de forma exitosa");
+                msg.ShowDialog();
             }
-            ID = 0;
+            else
+            {
+                MsgBox msg = new MsgBox("onlywarning", "¡Error en el proceso!");
+                msg.ShowDialog();
+            }
         }
 
 
@@ -112,13 +110,11 @@ namespace Esfe.SysAsistencia.UI.Components
 
         public void RefreshGrid()
         {
-
             var docentes = State.docenteBL.ObtenerDocentes();
             if (docentes.Count == 0) return;
             gridDocentes.DataSource = null;
             gridDocentes.DataSource = docentes;
         }
-
         private void SetGridFormat()
         {
             gridDocentes.AutoGenerateColumns = false;
@@ -209,13 +205,12 @@ namespace Esfe.SysAsistencia.UI.Components
                 if (row != null)
                 {
 
-                    if (row.Cells[0].Value != null) ID = Convert.ToInt32(row.Cells[0].Value);
+                    if (row.Cells[0].Value != null) GloabalID = Convert.ToInt32(row.Cells[0].Value);
                     if (row.Cells[1].Value != null) txtNombres.Text = row.Cells[1].Value.ToString();
                     if (row.Cells[2].Value != null) txtApellidos.Text = row.Cells[2].Value.ToString();
                     if (row.Cells[3].Value != null) txtTelefono.Text = row.Cells[3].Value.ToString();
                     if (row.Cells[4].Value != null) txtDui.Text = row.Cells[4].Value.ToString();
-                    if (row.Cells[5].Value != null) txtNit.Text = row.Cells[5].Value.ToString();
-                    if (row.Cells[6].Value != null) txtCarrera.Text = row.Cells[6].Value.ToString();
+                    if (row.Cells[5].Value != null) txtCarrera.Text = row.Cells[6].Value.ToString();
                 }
             }
         }
@@ -238,14 +233,13 @@ namespace Esfe.SysAsistencia.UI.Components
                         Apellidos = txtApellidos.Text,
                         Cel = Convert.ToString(txtTelefono.Text),
                         Dui = Convert.ToString(txtDui.Text),
-                        Nit = Convert.ToString(txtNit.Text),
-                        Carrera = txtCarrera.Text
-
+                        IdCarrera = Convert.ToByte(txtCarrera.SelectedValue)
+                        //TODO: AGREGAR FK DE GRUPO XD
                     };
 
                     if (teacherUpdate != null)
                     {
-                        docenteBL.ModificarDocente(teacherUpdate);
+                        docenteBL.ActualizarDocente(teacherUpdate);
                         var updateList = docenteBL.ObtenerDocentes();
 
                         gridDocentes.DataSource = null;
@@ -269,7 +263,7 @@ namespace Esfe.SysAsistencia.UI.Components
         //ELIMINAR REGISTRO
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (ID == 0)
+            if (GloabalID == 0)
             {
                 MsgBox messages = new MsgBox("onlywarning", "Es necesario selecciona un docente de la tabla");
                 messages.ShowDialog();
@@ -313,7 +307,6 @@ namespace Esfe.SysAsistencia.UI.Components
             txtApellidos.Text = "";
             txtTelefono.Text = "";
             txtDui.Text = "";
-            txtNit.Text = "";
             txtCarrera.SelectedIndex = 0;
             Template = null;
         }
@@ -353,7 +346,7 @@ namespace Esfe.SysAsistencia.UI.Components
                     error.Clear();
                 }
             }
-            else if (txtBox == txtDui || txtBox == txtNit)
+            else if (txtBox == txtDui)
             {
                 bool num = Verificar.validarNumeros(e);
                 if (!num)
@@ -372,7 +365,7 @@ namespace Esfe.SysAsistencia.UI.Components
         {
             if (txtCarrera.SelectedIndex != 0)
             {
-                new _SelectGrupo(State.InfoCarrera.idCarrera[txtCarrera.SelectedIndex - 1], ListGruposSelect).ShowDialog();
+                //new _SelectGrupo(State.InfoCarrera.idCarrera[txtCarrera.SelectedIndex - 1], ListGruposSelect).ShowDialog();
 
             };
         }
@@ -411,50 +404,6 @@ namespace Esfe.SysAsistencia.UI.Components
                     txtDui.Text = dui;
                     txtDui.SelectionStart = txtDui.Text.Length;
                 }
-            }
-        }
-
-        private void txtNit_TextChanged(object sender, EventArgs e)
-        {
-
-            string text = txtNit.Text.Replace("-", "");
-
-            // Verificamos que el texto solo contenga números y no exceda los 9 dígitos
-            if (System.Text.RegularExpressions.Regex.IsMatch(text, @"^\d{0,14}"))
-            {
-                if (text.Length > 3 && text.Length <= 9)
-                {
-                    txtNit.Text = text.Substring(0, 4) + "-" + text.Substring(4);
-                    txtNit.SelectionStart = txtNit.Text.Length;
-
-                }
-
-                else if (text.Length > 9 && text.Length <= 12)
-                {
-                    txtNit.Text = text.Substring(0, 4) + "-" + text.Substring(4, 6) + "-" + text.Substring(10);
-                    txtNit.SelectionStart = txtNit.Text.Length;
-
-                }
-
-
-                else if (text.Length > 12)
-                {
-                    txtNit.Text = text.Substring(0, 4) + "-" + text.Substring(4, 6) + "-" + text.Substring(10, 3) + "-" + text.Substring(13);
-                    txtNit.SelectionStart = txtNit.Text.Length;
-
-                }
-
-
-                else
-                {
-                    txtNit.Text = text; txtNit.SelectionStart = txtNit.Text.Length;
-
-                }
-
-            }
-            else
-            {
-                txtNit.SelectionStart = txtNit.Text.Length;
             }
         }
     }

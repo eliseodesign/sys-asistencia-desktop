@@ -62,7 +62,7 @@ namespace Esfe.SysAsistencia.UI.Components
 
         public void SetGridFormatStyle(DataGridView dataGridView, int ColumnCount)
         {
-            var codigos = State.DocenteLoged.GrupoCodigos;
+            /*ar codigos = State.DocenteLoged.GrupoCodigos;*/
             cbxGrupo.DataSource = null;
             dataGridView.AutoGenerateColumns = false;
             dataGridView.ColumnCount = ColumnCount;
@@ -118,7 +118,8 @@ namespace Esfe.SysAsistencia.UI.Components
             dataGridView.Columns[1].DefaultCellStyle.SelectionBackColor = ColorTranslator.FromHtml("#0401ad");
             dataGridView.Columns[1].DefaultCellStyle.SelectionForeColor = Color.White;
 
-            cbxGrupo.DataSource = codigos;
+
+            //cbxGrupo.DataSource = codigos;
 
         }
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Esfe.SysAsistencia.DAL.BD;
 using Esfe.SysAsistencia.EN;
 
 namespace Esfe.SysAsistencia.DAL
@@ -11,107 +12,79 @@ namespace Esfe.SysAsistencia.DAL
     /// <summary>
     /// Guarda Docentes y metodos para manejar su información
     /// </summary>
-    public class DocenteDAL
-    {
-        private static List<Docente> ListaDocentes;
-        private string Path { get; } = "docentes.json";
-
-
-        // al ejecutarse el constructor busca si existe el archivo y extrae sus datos
-        public bool AgregarDocente(Docente docente)
+    public class DocenteDAL 
+    { 
+ 
+        public List<Docente> ObtenerDocentes()
         {
-            Docente exist = ListaDocentes.FirstOrDefault(d => d.Id == docente.Id);
-            if (exist!= null)
+            try
             {
-                ActualizarDocente(exist, docente); return true;
+                return ComunBD.EjecutarSPSelect<Docente>("SPReadDocentes");
             }
-            if (VerificarHuella(docente) != null)
+            catch (Exception)
+            {
+                return new List<Docente>();
+            }
+        }
+
+        public bool ActualizarDocente(Docente update)
+        {
+            List<string> parametros = new() { "Id", "Nombre", "Apellidos", "Dui", "Cel", "Huella", "IdGrupo", "IdCarrera"};
+            try
+            {
+                int valor = ComunBD.EjecutarSP("SPUpdateDocente", update, parametros);
+                return valor > 0;
+            }
+            catch (Exception)
             {
                 return false;
             }
-                docente.Id = ListaDocentes.Select(d => d.Id).DefaultIfEmpty(0).Max() + 1;
-                ListaDocentes.Add(docente);
-            
-                return true;
         }
 
-        public Docente VerificarHuella(Docente docente)
+        public bool AgregarDocente(Docente docente)
         {
-           return ListaDocentes.FirstOrDefault(h => h.Huella == docente.Huella);
-
-        }
-
-        public DocenteDAL()
-        {
-
-            if (File.Exists(Path))
+            List<string> parametros = new() { "Id", "Nombre", "Apellidos", "Dui", "Cel", "Huella", "IdGrupo", "IdCarrera"};
+            try
             {
-                string json = File.ReadAllText("docentes.json");
-                ListaDocentes = JsonSerializer.Deserialize<List<Docente>>(json);
+                int valor = ComunBD.EjecutarSP("SPCreateDocente", docente, parametros);
+                return valor > 0;
             }
-            else
+            catch (Exception e)
             {
-                ListaDocentes = new List<Docente>();
+                Console.Write(Convert.ToString(e));
+                return false;
             }
         }
 
-        public List<Docente> ObtenerDocentes()
+        public bool EliminarDocente(Docente docente)
         {
-            return ListaDocentes;
+            List<string> parametros = new() { "Id" };
+            try
+            {
+                int valor = ComunBD.EjecutarSP("SPDeleteDocente", docente, parametros);
+                return valor > 0;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
-        public bool ExisteDocente(Docente buscar)
-        {
-            return ListaDocentes.Exists(docente => (docente.Nombres == buscar.Nombres || docente.Apellidos == buscar.Apellidos));
-        }
 
-        public void ActualizarDocente(Docente docente, Docente docenteActualizado)
-        {
-            docente.Nombres = docenteActualizado.Nombres;
-            docente.Apellidos = docenteActualizado.Apellidos;
-            docente.Direccion = docenteActualizado.Direccion;
-            docente.Cel = docenteActualizado.Cel;
-            docente.Dui = docenteActualizado.Dui;
-            docente.Carrera = docenteActualizado.Carrera;
-            docente.Nit = docenteActualizado.Nit;
-            docente.Huella = docenteActualizado.Huella;
-
-            // Actualizamos los códigos de grupo del docente
-            docente.GrupoCodigos.Clear();
-            docente.GrupoCodigos.AddRange(docenteActualizado.GrupoCodigos);
-        }
-
-        public void EliminarDocente(Docente docente)
-        {
-            var eliminar = ListaDocentes.FirstOrDefault(i => i.Id == docente.Id);
-            ListaDocentes.Remove(eliminar);
-        }
-
-        public void ModificarDocente(Docente docente)
-        {
-            var update = ListaDocentes.FirstOrDefault(i => i.Id == docente.Id);
-            ListaDocentes.Remove(update);
-            ListaDocentes.Add(docente);
-        }
-
-        public Docente ObtenerDocentePorId(int id)
-        {
-            return ListaDocentes.FirstOrDefault(d => d.Id == id);
-        }
         //// -------------------- json methos -----------------------------------
-        public void GuardarJson()
-        {
+        //public void GuardarJson()
+        //{
 
-            var options = new JsonSerializerOptions // Opciones para la serialización JSON
-            {
-                WriteIndented = true // Indentación para que el archivo sea más legible
-            };
+        //    var options = new JsonSerializerOptions // Opciones para la serialización JSON
+        //    {
+        //        WriteIndented = true // Indentación para que el archivo sea más legible
+        //    };
 
-            var jsonDocentes = JsonSerializer.Serialize(ListaDocentes, options); // Convertir la lista a JSON
+        //    var jsonDocentes = JsonSerializer.Serialize(ListaDocentes, options); // Convertir la lista a JSON
 
-            File.WriteAllText(Path, jsonDocentes); // Guardar el JSON en un archivo
+        //    File.WriteAllText(Path, jsonDocentes); // Guardar el JSON en un archivo
 
-        }
+        //}
 
     }
 }

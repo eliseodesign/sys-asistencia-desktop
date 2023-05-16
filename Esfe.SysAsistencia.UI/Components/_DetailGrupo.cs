@@ -23,8 +23,8 @@ namespace Esfe.SysAsistencia.UI.Components
         CheckBox[] CheckBoxDays = new CheckBox[5];
 
         List<Carrera> carreras = State.carreraBL.ObtenerCarrera();
-        List<Anio> anios = State.anioBL.ObtenerAnio();
         List<NumGrupo> numGrupos = State.numGrupoBL.ObtenerNumGrupo();
+        List<Anio> anios = State.anioBL.ObtenerAnio();
         List<Turno> turnos = State.turnoBL.ObtenerTurno();
 
         public _DetailGrupo()
@@ -86,9 +86,9 @@ namespace Esfe.SysAsistencia.UI.Components
                         IdCarrera = Convert.ToByte(cbxCarrera.SelectedValue),
                         IdTurno = Convert.ToByte(cbxTurno.SelectedValue),
                         EstudiantesMax = Convert.ToByte(numEstudiantes.Value),
-                        DiasPresencial = obtenerPresencial()
+                        DiasPresencial = obtenerPresencial()  
                     };
-
+                    
                     var si = State.grupoBL.AgregarGrupo(grupo);
                     if (si)
                     {
@@ -135,6 +135,7 @@ namespace Esfe.SysAsistencia.UI.Components
 
                 }
             }
+            
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)

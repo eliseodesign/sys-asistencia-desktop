@@ -34,8 +34,7 @@ namespace Esfe.SysAsistencia.DAL
             try
             {
                 int valor = ComunBD.EjecutarSP("SPUpdateGrupo", update, parametros);
-                if (valor > 0) return true;
-                else return false;
+                return valor > 0;
             }
             catch (Exception)
             {
@@ -49,11 +48,11 @@ namespace Esfe.SysAsistencia.DAL
             try
             {
                 int valor = ComunBD.EjecutarSP("SPCreateGrupo", grupo, parametros);
-                if (valor > 0) return true;
-                else return false;
+                return valor > 0;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Console.Write(Convert.ToString(e));
                 return false;
             }
         }
@@ -64,8 +63,7 @@ namespace Esfe.SysAsistencia.DAL
             try
             {
                 int valor = ComunBD.EjecutarSP("SPDeleteGrupo", grupo, parametros);
-                if (valor > 0) return true;
-                else return false;
+                return valor > 0;
             }
             catch (Exception)
             {
