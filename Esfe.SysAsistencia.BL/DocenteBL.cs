@@ -31,24 +31,19 @@ namespace Esfe.SysAsistencia.BL
             return oDocenteDAL.ObtenerDocentes();
         }
 
-        public bool ExisteDocente(Docente buscar)
-        {
-            return oDocenteDAL.ExisteDocente(buscar);
-        }
-
         public void EliminarDocente(Docente docente)
         {
             oDocenteDAL.EliminarDocente(docente);
         }
 
-        public void ModificarDocente(Docente docente)
+        public void ActualizarDocente(Docente docente)
         {
-            oDocenteDAL.ModificarDocente(docente);
+            oDocenteDAL.ActualizarDocente(docente);
         }
 
-        public void GuadarJson()
-        {
-            oDocenteDAL.GuardarJson();
-        }
+        //public void GuadarJson()
+        //{
+        //    oDocenteDAL.GuardarJson();
+        //}
     }
 }
