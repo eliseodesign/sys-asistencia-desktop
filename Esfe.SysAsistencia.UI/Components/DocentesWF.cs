@@ -82,8 +82,8 @@ namespace Esfe.SysAsistencia.UI.Components
             }
             var docente = new Docente()
             {
-                Nombres = txtNombres.Text,
-                Apellidos = txtApellidos.Text,
+                Nombre = txtNombres.Text,
+                Apellido = txtApellidos.Text,
                 Cel = txtTelefono.Text,
                 Dui = txtDui.Text,
                 Huella = Template.Bytes,
@@ -111,7 +111,10 @@ namespace Esfe.SysAsistencia.UI.Components
         public void RefreshGrid()
         {
             var docentes = State.docenteBL.ObtenerDocentes();
-            if (docentes.Count == 0) return;
+            if (docentes.Count == 0)
+            {
+                MessageBox.Show("Nada bro " + docentes[0].Nombre);
+            }
             gridDocentes.DataSource = null;
             gridDocentes.DataSource = docentes;
         }
@@ -229,8 +232,8 @@ namespace Esfe.SysAsistencia.UI.Components
                     var teacherUpdate = new Docente
                     {
                         Id = Convert.ToInt32(gridDocentes.CurrentRow.Cells[0].Value),
-                        Nombres = txtNombres.Text,
-                        Apellidos = txtApellidos.Text,
+                        Nombre = txtNombres.Text,
+                        Apellido = txtApellidos.Text,
                         Cel = Convert.ToString(txtTelefono.Text),
                         Dui = Convert.ToString(txtDui.Text),
                         IdCarrera = Convert.ToByte(txtCarrera.SelectedValue)

@@ -17,7 +17,7 @@ namespace Esfe.SysAsistencia.UI.Components
         {
             InitializeComponent();
             if (State.DocenteLoged != null)
-                txtLoginNombre.Text = State.DocenteLoged.Nombres.ToString() + "     ";
+                txtLoginNombre.Text = State.DocenteLoged.Nombre.ToString() + "     ";
             else
                 txtLoginNombre.Text = "Admin     ";
 

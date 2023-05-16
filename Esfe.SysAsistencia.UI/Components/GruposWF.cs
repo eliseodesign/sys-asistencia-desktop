@@ -30,7 +30,7 @@ namespace Esfe.SysAsistencia.UI.Components
             padre = form;
             InitializeComponent();
             List<Carrera> carreras = State.carreraBL.ObtenerCarrera();
-            carreras.Insert(0, new Carrera() { Id = 0, Nombre = "Todas",Siglas="N/A" });
+            carreras.Insert(0, new Carrera() { Id = 0, Nombre = "Todas",Sigla="N/A" });
             List<Anio> anios = State.anioBL.ObtenerAnio();
             anios.Insert(0, new Anio() { Id = 0, Nombre = "Todos"});
 
@@ -118,10 +118,10 @@ namespace Esfe.SysAsistencia.UI.Components
                             select new
                             {
                                 Id = g.Id,
-                                Codigo = "G" + n.Nombre[n.Nombre.Length - 1] + "-" + a.Nombre.Substring(0, 1) + c.Siglas,
+                                Codigo = "G" + n.Nombre[n.Nombre.Length - 1] + "-" + a.Nombre.Substring(0, 1) + c.Sigla,
                                 EstudiantesMax = g.EstudiantesMax,
                                 IdCarrera = c.Id,
-                                Carrera = c.Siglas,
+                                Carrera = c.Sigla,
                                 IdAnio = a.Id,
                                 Año = a.Nombre
                             };

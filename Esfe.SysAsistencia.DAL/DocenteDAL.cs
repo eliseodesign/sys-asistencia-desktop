@@ -17,57 +17,57 @@ namespace Esfe.SysAsistencia.DAL
  
         public List<Docente> ObtenerDocentes()
         {
-            try
-            {
-                return ComunBD.EjecutarSPSelect<Docente>("SPReadDocentes");
-            }
-            catch (Exception)
-            {
-                return new List<Docente>();
-            }
+            //try
+            //{
+                return ComunBD.EjecutarSPSelect<Docente>("SPReadDocente");
+            //}
+            //catch (Exception)
+            //{
+            //    return new List<Docente>();
+            //}
         }
 
         public bool ActualizarDocente(Docente update)
         {
-            List<string> parametros = new() { "Id", "Nombre", "Apellidos", "Dui", "Cel", "Huella", "IdGrupo", "IdCarrera"};
-            try
-            {
+            List<string> parametros = new() { "Id", "Nombre", "Apellido", "Dui", "Cel", "Huella", "IdGrupo", "IdCarrera"};
+            //try
+            //{
                 int valor = ComunBD.EjecutarSP("SPUpdateDocente", update, parametros);
                 return valor > 0;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            //}
+            //catch (Exception)
+            //{
+            //    return false;
+            //}
         }
 
         public bool AgregarDocente(Docente docente)
         {
-            List<string> parametros = new() { "Id", "Nombre", "Apellidos", "Dui", "Cel", "Huella", "IdGrupo", "IdCarrera"};
-            try
-            {
+            List<string> parametros = new() { "Nombre", "Apellido", "Dui", "Cel", "Huella", "IdGrupo", "IdCarrera"};
+            //try
+            //{
                 int valor = ComunBD.EjecutarSP("SPCreateDocente", docente, parametros);
                 return valor > 0;
-            }
-            catch (Exception e)
-            {
-                Console.Write(Convert.ToString(e));
-                return false;
-            }
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.Write(Convert.ToString(e));
+            //    return false;
+            //}
         }
 
         public bool EliminarDocente(Docente docente)
         {
             List<string> parametros = new() { "Id" };
-            try
-            {
+            //try
+            //{
                 int valor = ComunBD.EjecutarSP("SPDeleteDocente", docente, parametros);
                 return valor > 0;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            //}
+            //catch (Exception)
+            //{
+            //    return false;
+            //}
         }
 
 
