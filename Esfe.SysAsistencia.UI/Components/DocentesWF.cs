@@ -88,8 +88,6 @@ namespace Esfe.SysAsistencia.UI.Components
                 Dui = txtDui.Text,
                 Huella = Template.Bytes,
                 IdCarrera = Convert.ToByte(txtCarrera.SelectedValue)
-                //TODO: AÑADIR LA FK DE GRUPO XD
-
             };
 
             var si = State.docenteBL.AgregarDocente(docente);

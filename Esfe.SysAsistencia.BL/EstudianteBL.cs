@@ -21,41 +21,24 @@ namespace Esfe.SysAsistencia.BL
     {
         private EstudianteDAL oEstudianteDAL = new EstudianteDAL();
 
-        public bool AgregarEstudiante(Estudiante Estudiante)
+        public bool AgregarEstudiante(Estudiante estudiante)
         {
-            return oEstudianteDAL.AgregarEstudiante(Estudiante);
+            return oEstudianteDAL.AgregarEstudiante(estudiante);
         }
 
-        public List<Estudiante> ObtenerEstudiante()
+        public List<Estudiante> ObtenerEstudiantes()
         {
             return oEstudianteDAL.ObtenerEstudiantes();
         }
 
-        public List<Estudiante> ObtenenerEstudiantesByGroup(string grupo)
+        public void EliminarEstudiante(Estudiante estudiante)
         {
-            List<Estudiante> lista = new List<Estudiante>();
-            foreach (var ee in oEstudianteDAL.ObtenerEstudiantes())
-            {
-                if (ee.CodigoGrupo == grupo)
-                {
-                    lista.Add(ee);
-                }
-            }
-
-            return lista;
+            oEstudianteDAL.EliminarEstudiante(estudiante);
         }
 
-        public bool EliminarEstudiante(int id)
+        public void ActualizarEstudiante(Estudiante estudiante)
         {
-            return oEstudianteDAL.EliminarEstudiante(id);
-        }
-        public bool ExisteEstudiatne(Estudiante Estudiante)
-        {
-            return oEstudianteDAL.ExisteEstudiante(Estudiante);
-        }
-        public void GuadarJson()
-        {
-            oEstudianteDAL.GuardarJson();
+            oEstudianteDAL.ActualizarEstudiante(estudiante);
         }
 
     }

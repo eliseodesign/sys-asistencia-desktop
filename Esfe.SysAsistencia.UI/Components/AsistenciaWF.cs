@@ -48,10 +48,10 @@ namespace Esfe.SysAsistencia.UI.Components
         // Si no hay alumnos en el grupo seleccionado, se muestra un mensaje en el grid indicando que no hay resultados.
         private void cbxGrupo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string grupo = cbxGrupo.SelectedValue.ToString();
-            var lista = State.estudianteBL.ObtenenerEstudiantesByGroup(grupo);
-            gridAsistencia.DataSource = null;
-            gridAsistencia.DataSource = lista;
+            //string grupo = cbxGrupo.SelectedValue.ToString();
+            //var lista = State.estudianteBL.ObtenenerEstudiantesByGroup(grupo);
+            //gridAsistencia.DataSource = null;
+            //gridAsistencia.DataSource = lista;
 
         }
 
@@ -133,19 +133,19 @@ namespace Esfe.SysAsistencia.UI.Components
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var asis = State.asistenciaBL.ObtenerAsistencias();
-            var Str = "";
-            foreach (var a in asis)
-            {
+            //var asis = State.asistenciaBL.ObtenerAsistencias();
+            //var Str = "";
+            //foreach (var a in asis)
+            //{
 
-                Str += "\n ================= " +
-                    "\n Alumno ID: " + a.AlumnoId.ToString() +
-                    "\n Nombre: " + State.estudianteBL.ObtenerEstudiante().FirstOrDefault(e => e.Id == a.AlumnoId).Nombres +
-                    "\n Fecha: " + a.Fecha.ToString() +
-                    "\n Criterio: " + a.Criterio.ToString();
-            }
+            //    Str += "\n ================= " +
+            //        "\n Alumno ID: " + a.AlumnoId.ToString() +
+            //        "\n Nombre: " + State.estudianteBL.ObtenerEstudiante().FirstOrDefault(e => e.Id == a.AlumnoId).Nombres +
+            //        "\n Fecha: " + a.Fecha.ToString() +
+            //        "\n Criterio: " + a.Criterio.ToString();
+            //}
 
-            MessageBox.Show("La lista de asistencia de hoy es: \n" + Str, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //MessageBox.Show("La lista de asistencia de hoy es: \n" + Str, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
