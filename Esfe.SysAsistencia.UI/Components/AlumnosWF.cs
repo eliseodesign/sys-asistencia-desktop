@@ -84,7 +84,7 @@ namespace Esfe.SysAsistencia.UI.Components
                 Cel = txtTelefono.Text,
                 Dui = txtDui.Text,
                 Huella = Template.Bytes,
-                IdGrupo = Convert.ToByte(cbxCarrera.SelectedValue)
+                IdGrupo = Convert.ToByte(cbxGrupo.SelectedValue)
 
             };
             if (ID == 0)
