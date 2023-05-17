@@ -25,10 +25,10 @@ namespace Esfe.SysAsistencia.UI.Components
         //Clase para las validaciones de campos
         ErrorProvider error = new ErrorProvider();
         DialogResult result = new DialogResult();
-
-
+        List<Carrera> carreras = State.carreraBL.ObtenerCarrera();
+        List<NumGrupo> numGrupos = State.numGrupoBL.ObtenerNumGrupo();
+        public EstudianteBL estudianteBL = new EstudianteBL();
         int ID;
-
         public Panel _panel_app;
         public AlumnosWF(Panel panel)
         {
@@ -36,10 +36,29 @@ namespace Esfe.SysAsistencia.UI.Components
             InitializeComponent();
             SetGridFormat();
             RefreshGrid();
-            string[] carreras = new string[4] { "Téc. ing Electica", "Téc. ing de Desarrollo De Software", "Téc en Mercadeo", "Téc. en Gestión y Desarrollo Turístico" };
-            cbxCarrera.DataSource = carreras;
+            cargarCBX();
+        }
+        private void cargarCBX()
+        {
+            ComboBox[] cbxs = new ComboBox[1] { cbxCarrera };
 
-            //cbxGrupo.DataSource = State.grupoBL.ObtenerGrupos().Select(g => g.Codigo).ToList();
+            foreach (ComboBox combo in cbxs)
+            {
+                combo.DisplayMember = "Nombre";
+                combo.ValueMember = "Id";
+            }
+
+            cbxCarrera.DataSource = carreras;
+        }
+
+        public void LimpiarDatos()
+        {
+            txtNombres.Text = "";
+            txtApellidos.Text = "";
+            txtTelefono.Text = "";
+            txtDui.Text = "";
+            cbxCarrera.SelectedIndex = 0;
+            Template = null;
         }
 
         //Signals
@@ -63,15 +82,12 @@ namespace Esfe.SysAsistencia.UI.Components
             //Creacion del Alumno
             var estudiante = new Estudiante()
             {
-                Id = ID,
-                Nombres = txtNombres.Text,
-                Apellidos = txtApellidos.Text,
+                Nombre = txtNombres.Text,
+                Apellido = txtApellidos.Text,
                 Cel = txtTelefono.Text,
                 Dui = txtDui.Text,
-                Nit = txtNit.Text,
-                IdCarrera = cbxCarrera.SelectedValue.ToString(),
                 Huella = Template.Bytes,
-                CodigoGrupo = cbxGrupo.SelectedValue.ToString(),
+                IdGrupo = Convert.ToString(cbxCarrera.SelectedValue)
 
             };
             if (ID == 0)
@@ -117,7 +133,7 @@ namespace Esfe.SysAsistencia.UI.Components
         //Refrescar Tabla
         void RefreshGrid()
         {
-            var estudiantes = State.estudianteBL.ObtenerEstudiante();
+            var estudiantes = State.estudianteBL.ObtenerEstudiantes();
             if (estudiantes.Count == 0) return; // si es cero, se retorna
             gridEstudiantes.DataSource = null;
             gridEstudiantes.DataSource = estudiantes;
@@ -226,50 +242,6 @@ namespace Esfe.SysAsistencia.UI.Components
             }
         }
 
-        private void txtNit_TextChanged(object sender, EventArgs e)
-        {
-
-            string text = txtNit.Text.Replace("-", "");
-
-            // Verificamos que el texto solo contenga números y no exceda los 9 dígitos
-            if (System.Text.RegularExpressions.Regex.IsMatch(text, @"^\d{0,14}"))
-            {
-                if (text.Length > 3 && text.Length <= 9)
-                {
-                    txtNit.Text = text.Substring(0, 4) + "-" + text.Substring(4);
-                    txtNit.SelectionStart = txtNit.Text.Length;
-
-                }
-
-                else if (text.Length > 9 && text.Length <= 12)
-                {
-                    txtNit.Text = text.Substring(0, 4) + "-" + text.Substring(4, 6) + "-" + text.Substring(10);
-                    txtNit.SelectionStart = txtNit.Text.Length;
-
-                }
-
-
-                else if (text.Length > 12)
-                {
-                    txtNit.Text = text.Substring(0, 4) + "-" + text.Substring(4, 6) + "-" + text.Substring(10, 3) + "-" + text.Substring(13);
-                    txtNit.SelectionStart = txtNit.Text.Length;
-
-                }
-
-
-                else
-                {
-                    txtNit.Text = text; txtNit.SelectionStart = txtNit.Text.Length;
-
-                }
-
-            }
-            else
-            {
-                txtNit.SelectionStart = txtNit.Text.Length;
-            }
-        }
-
         private void textBox_Press(object sender, KeyPressEventArgs e)
         {
             TextBox txtBox = (TextBox)sender;
@@ -303,7 +275,7 @@ namespace Esfe.SysAsistencia.UI.Components
                     error.Clear();
                 }
             }
-            else if (txtBox == txtDui || txtBox == txtNit)
+            else if (txtBox == txtDui)
             {
                 bool num = Verificar.validarNumeros(e);
                 if (!num)
@@ -320,31 +292,38 @@ namespace Esfe.SysAsistencia.UI.Components
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (ID <= 0)
+
+            if (ID == 0)
             {
-                MsgBox messages = new MsgBox("onlywarning", "Es necesario selecciona un alumno de la tabla");
+                MsgBox messages = new MsgBox("onlywarning", "Es necesario selecciona un estudiante de la tabla");
                 messages.ShowDialog();
                 return;
             }
-            MsgBox msg = new MsgBox("question", "¿Desea Eliminar este resgistro?\nSe eliminara permanentemente.");
+            MsgBox msg = new MsgBox("question", "¿Desea Eliminar este resgistro?\nSe eliminará permanentemente.");
             msg.ShowDialog();
+            
             if (msg.DialogResult == DialogResult.OK)
             {
                 try
                 {
                     //Eliminar registros del datagriedview
 
-                    bool eliminado = State.estudianteBL.EliminarEstudiante(ID);
-                    if (eliminado == true)
+                    var delete = new Estudiante() 
                     {
-                        MsgBox messages = new MsgBox("filled", "Los datos del estudiante han sido eliminados exitosamnte");
-                        messages.ShowDialog();
-                        RefreshGrid();
-                    }
-                    else
+                        //Captura el Id de la linea seleccionada
+                        Id = Convert.ToInt32(gridEstudiantes.CurrentRow.Cells[0].Value)
+                    };
+
+                    if (delete != null)
                     {
-                        MsgBox messages = new MsgBox("onlyerror", "Ha ocurrido un error al intentar eliminar un estudiante");
+                        estudianteBL.EliminarEstudiante(delete);
+                        var updateList = estudianteBL.ObtenerEstudiantes();
+
+                        gridEstudiantes.DataSource = null;
+                        gridEstudiantes.DataSource = updateList;
+                        MsgBox messages = new MsgBox("filled", "Los datos del estudiante han sido eliminados exitosamente");
                         messages.ShowDialog();
+                        LimpiarDatos();
                     }
                 }
                 catch (Exception ex)
@@ -358,34 +337,17 @@ namespace Esfe.SysAsistencia.UI.Components
         {
             if (gridEstudiantes != null && gridEstudiantes.SelectedRows.Count > 0)
             {
-
                 DataGridViewRow row = gridEstudiantes.SelectedRows[0];
 
                 if (row != null)
                 {
 
-                    int id = Convert.ToInt32(row.Cells[0].Value);
-
-                    //if (row.Cells[0].Value != null) ID = Convert.ToInt32(row.Cells[0].Value);
-                    //if (row.Cells[1].Value != null) txtNombres.Text = row.Cells[1].Value.ToString();
-                    //if (row.Cells[2].Value != null) txtApellidos.Text = row.Cells[2].Value.ToString();
-                    //if (row.Cells[3].Value != null) txtTelefono.Text = row.Cells[3].Value.ToString();
-
-                    var estudiante = State.estudianteBL.ObtenerEstudiante().FirstOrDefault(x => x.Id == id);
-                    if (estudiante != null)
-                    {
-                        ID = id;
-                        txtNombres.Text = estudiante.Nombres;
-                        txtApellidos.Text = estudiante.Apellidos;
-                        txtTelefono.Text = estudiante.Cel;
-                        txtDui.Text = estudiante.Dui;
-                        txtNit.Text = estudiante.Nit;
-                        cbxCarrera.Text = estudiante.IdCarrera;
-                        cbxGrupo.Text = estudiante.CodigoGrupo;
-
-
-
-                    }
+                    if (row.Cells[0].Value != null) ID = Convert.ToInt32(row.Cells[0].Value);
+                    if (row.Cells[1].Value != null) txtNombres.Text = row.Cells[1].Value.ToString();
+                    if (row.Cells[2].Value != null) txtApellidos.Text = row.Cells[2].Value.ToString();
+                    if (row.Cells[3].Value != null) txtTelefono.Text = row.Cells[3].Value.ToString();
+                    if (row.Cells[4].Value != null) txtDui.Text = row.Cells[4].Value.ToString();
+                    if (row.Cells[5].Value != null) cbxCarrera.Text = row.Cells[6].Value.ToString();
                 }
             }
         }

@@ -75,7 +75,7 @@ namespace Esfe.SysAsistencia.UI
             this.CancelButton.PerformClick();
             foreach (var doc in State.docenteBL.ObtenerDocentes())
             {
-                if (doc.Nombres == cbxPersons.Text)
+                if (doc.Nombre == cbxPersons.Text)
                 {
                     State.DocenteLoged = doc;
                     _padre.LoginDocente(true);
@@ -117,7 +117,7 @@ namespace Esfe.SysAsistencia.UI
                     UpdateStatus(result.FARAchieved);
                     if (result.Verified)
                     {
-                        MakeReport("Huella verificada " + emp.Nombres);
+                        MakeReport("Huella verificada " + emp.Nombre);
                         MakeReport("Por favor cierre el formulario.");
                         UpdateMuestras(1);
                         respuestaVerifiation = true;
@@ -147,7 +147,7 @@ namespace Esfe.SysAsistencia.UI
             //TODO: ELIMINAR
             foreach (var doc in State.docenteBL.ObtenerDocentes())
             {
-                cbxPersons.Items.Add(doc.Nombres);
+                cbxPersons.Items.Add(doc.Nombre);
             }
             cbxPersons.SelectedIndexChanged += new EventHandler(verifyWhitout);
 

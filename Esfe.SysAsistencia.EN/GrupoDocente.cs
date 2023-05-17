@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Esfe.SysAsistencia.EN
 {
-    public class Carrera
+    public class GrupoDocente
     {
-        public byte Id { get; set; }
-        public string Nombre { get; set; }
-        public string Sigla { get; set; }
+        public int Id { get; set; }
+        public byte IdGrupo {get;set;}
+        public int IdDocente {get;set; }
     }
 }

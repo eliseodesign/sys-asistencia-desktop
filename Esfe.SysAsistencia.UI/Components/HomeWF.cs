@@ -20,7 +20,7 @@ namespace Esfe.SysAsistencia.UI.Components
             lblFecha.Text = DateTime.Now.ToLongDateString();
 
             lblDocentes.Text = State.docenteBL.ObtenerDocentes().Count().ToString();
-            lblEstudiantes.Text = State.estudianteBL.ObtenerEstudiante().Count().ToString();
+            lblEstudiantes.Text = State.estudianteBL.ObtenerEstudiantes().Count().ToString();
             lblGrupos.Text = State.grupoBL.ObtenerGrupos().Count().ToString();
 
         }

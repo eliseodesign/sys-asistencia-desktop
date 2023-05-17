@@ -99,59 +99,59 @@ namespace Esfe.SysAsistencia.UI.Components
         //
         protected override void Process(DPFP.Sample Sample)
         {
-            if (asistenciaEnable == false)
-            {
-                Stop(); //Este metodo es heredado, detiene la lectura del lector
-                return;
-            }
-            base.Process(Sample);
-            // Procesa la muestra
-            DPFP.FeatureSet features = ExtractFeatures(Sample, DPFP.Processing.DataPurpose.Verification);
+            //if (asistenciaEnable == false)
+            //{
+            //    Stop(); //Este metodo es heredado, detiene la lectura del lector
+            //    return;
+            //}
+            //base.Process(Sample);
+            //// Procesa la muestra
+            //DPFP.FeatureSet features = ExtractFeatures(Sample, DPFP.Processing.DataPurpose.Verification);
 
-            // Verifica la calidad de la muestra y continua si está correcta
+            //// Verifica la calidad de la muestra y continua si está correcta
             
-            if (features != null)
-            {
-                Estudiante estudiante = new Estudiante();
-                // Compare the feature set with our template
-                DPFP.Verification.Verification.Result result = new DPFP.Verification.Verification.Result();
-                DPFP.Template template = new DPFP.Template();
-                Stream stream;
+            //if (features != null)
+            //{
+            //    Estudiante estudiante = new Estudiante();
+            //    // Compare the feature set with our template
+            //    DPFP.Verification.Verification.Result result = new DPFP.Verification.Verification.Result();
+            //    DPFP.Template template = new DPFP.Template();
+            //    Stream stream;
 
-                //Descongelar si algo sale mal xD -->
-                //var alumnos = State.estudianteBL.ObtenerEstudiante().Where(x => x.CodigoGrupo == GrupoCarreraSelected).ToList();
+            //    //Descongelar si algo sale mal xD -->
+            //    //var alumnos = State.estudianteBL.ObtenerEstudiante().Where(x => x.CodigoGrupo == GrupoCarreraSelected).ToList();
 
-                var alumnos = State.estudianteBL.ObtenenerEstudiantesByGroup(GrupoCarreraSelected);
-                var NombreAlumno = "";
-                foreach (var alu in alumnos)
-                {
-                    estudiante = alu;
-                    stream = new MemoryStream(alu.Huella);
-                    template = new DPFP.Template(stream);
-                    Verificator.Verify(features, template, ref result);
-                    if (result.Verified)
-                    {
+            //    //var alumnos = State.estudianteBL.ObtenenerEstudiantesByGroup(GrupoCarreraSelected);
+            //    var NombreAlumno = "";
+            //    foreach (var alu in alumnos)
+            //    {
+            //        estudiante = alu;
+            //        stream = new MemoryStream(alu.Huella);
+            //        template = new DPFP.Template(stream);
+            //        Verificator.Verify(features, template, ref result);
+            //        if (result.Verified)
+            //        {
 
-                        respuestaVerificacion = true;
-                        NombreAlumno = estudiante.Nombres + " " + estudiante.Apellidos;
-                        Stop();
-                        break;
-                    }
-                }
+            //            respuestaVerificacion = true;
+            //            NombreAlumno = estudiante.Nombres + " " + estudiante.Apellidos;
+            //            Stop();
+            //            break;
+            //        }
+            //    }
 
-                if (respuestaVerificacion)
-                {
-                    Stop();
-                    UpdateInfo(ASISTENCIA_STATE.VERIFIED, NombreAlumno);
-                    CreateTimer(2);
-                    AsistirAlumno(estudiante.Id);
-                }
-                else
-                {
-                    UpdateInfo(ASISTENCIA_STATE.UNVERIFIED);
-                    CreateTimer(10);
-                }
-            }
+            //    if (respuestaVerificacion)
+            //    {
+            //        Stop();
+            //        UpdateInfo(ASISTENCIA_STATE.VERIFIED, NombreAlumno);
+            //        CreateTimer(2);
+            //        AsistirAlumno(estudiante.Id);
+            //    }
+            //    else
+            //    {
+            //        UpdateInfo(ASISTENCIA_STATE.UNVERIFIED);
+            //        CreateTimer(10);
+            //    }
+            //}
         }
 
         /// <summary>
