@@ -40,16 +40,11 @@ namespace Esfe.SysAsistencia.UI.Components
             RefreshGrid();
             cargarCBX();
         }
-        private void cargarCBX()
-        {
-            ComboBox[] cbxs = new ComboBox[1] { cbxCarrera };
-
-            foreach (ComboBox combo in cbxs)
-            {
-                combo.DisplayMember = "Nombre";
-                combo.ValueMember = "Id";
-            }
-
+        private void cargarCBX() 
+        { 
+           cbxCarrera.DisplayMember = "Nombre";
+           cbxCarrera.ValueMember = "Id";
+ 
             cbxCarrera.DataSource = carreras;
         }
 
@@ -159,7 +154,7 @@ namespace Esfe.SysAsistencia.UI.Components
         //Darle formato a la tabla
         public void SetGridFormat()
         {
-            
+
         }
 
         //Abrir form para la huella
@@ -300,14 +295,14 @@ namespace Esfe.SysAsistencia.UI.Components
             }
             MsgBox msg = new MsgBox("question", "¿Desea Eliminar este resgistro?\nSe eliminará permanentemente.");
             msg.ShowDialog();
-            
+
             if (msg.DialogResult == DialogResult.OK)
             {
                 try
                 {
                     //Eliminar registros del datagriedview
 
-                    var delete = new Estudiante() 
+                    var delete = new Estudiante()
                     {
                         //Captura el Id de la linea seleccionada
                         Id = Convert.ToInt32(gridEstudiantes.CurrentRow.Cells[0].Value)
@@ -346,13 +341,41 @@ namespace Esfe.SysAsistencia.UI.Components
                     if (row.Cells[2].Value != null) txtApellidos.Text = row.Cells[2].Value.ToString();
                     if (row.Cells[3].Value != null) txtTelefono.Text = row.Cells[3].Value.ToString();
                     if (row.Cells[4].Value != null) txtDui.Text = row.Cells[4].Value.ToString();
-                    if (row.Cells[5].Value != null) cbxCarrera.Text = row.Cells[6].Value.ToString();
+                    var idGruop = estudianteBL.ObtenerEstudiantes().FirstOrDefault(x => x.Id == Convert.ToInt32(row.Cells[0].Value)).IdGrupo;
+                    if (row.Cells[5].Value != null) cbxCarrera.SelectedValue = grupos.FirstOrDefault(x => x.Id == idGruop).IdCarrera;//TODO reparar 
+                    cbxCarrera_SelectedValueChanged(null, new EventArgs());
                 }
             }
         }
         private void panel3_Paint(object sender, PaintEventArgs e)
         {
             DgvDesing.Formato(gridEstudiantes, 1, false);
+        }
+
+        private void cbxCarrera_SelectedValueChanged(object sender, EventArgs e)
+        {
+
+           
+
+            cbxGrupo.DisplayMember = "Codigo";
+            cbxGrupo.ValueMember = "Id";
+            if (cbxCarrera.SelectedIndex > -1)
+            {
+                var join = from g in grupos
+                           join n in numGrupos on g.IdNumGrupo equals n.Id
+                           join c in carreras on g.IdCarrera equals c.Id
+                           join a in anios on g.IdAnio equals a.Id
+                           select new
+                           {
+                               Id = g.Id,
+                               Codigo = "G" + n.Nombre[n.Nombre.Length - 1] + "-" + a.Nombre.Substring(0, 1) + c.Sigla,
+                               IdCarrera = c.Id
+                           };
+                cbxGrupo.DataSource = join.Where(x=> x.IdCarrera == Convert.ToByte(cbxCarrera.SelectedValue)).ToList();
+
+            }
+
+            
         }
     }
 }
