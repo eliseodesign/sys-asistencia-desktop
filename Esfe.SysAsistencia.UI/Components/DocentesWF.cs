@@ -19,6 +19,7 @@ namespace Esfe.SysAsistencia.UI.Components
 {
     public partial class DocentesWF : Form
     {
+
         public DocenteBL docenteBL = new DocenteBL();
 
         public Panel _panel_app;
@@ -42,7 +43,6 @@ namespace Esfe.SysAsistencia.UI.Components
         {
             _panel_app = PanelApp;
             InitializeComponent();
-            SetGridFormat();
             cargarCBX();
         }
 
@@ -111,46 +111,21 @@ namespace Esfe.SysAsistencia.UI.Components
         public void RefreshGrid()
         {
             var docentes = State.docenteBL.ObtenerDocentes();
-            if (docentes.Count == 0)
-            {
-                MessageBox.Show("Nada bro " + docentes[0].Nombre);
-            }
+
+            var joinDocente = from d in docentes
+                            join c in carreras on d.IdCarrera equals c.Id
+                            select new
+                            {
+                                Id = d.Id,
+                                Nombre = d.Nombre,
+                                Apellido = d.Apellido,
+                                Celular = d.Cel,
+                                Dui = d.Dui,
+                                Carrera = c.Sigla
+                            };
+
             gridDocentes.DataSource = null;
-            gridDocentes.DataSource = docentes;
-        }
-        private void SetGridFormat()
-        {
-            gridDocentes.AutoGenerateColumns = false;
-            gridDocentes.ColumnCount = 7;
-
-
-            gridDocentes.Columns[0].Name = "ID";
-            gridDocentes.Columns[0].DataPropertyName = "Id";
-            gridDocentes.Columns[0].Width = 200;
-
-            gridDocentes.Columns[1].Name = "Nombre";
-            gridDocentes.Columns[1].DataPropertyName = "Nombres";
-            gridDocentes.Columns[1].Width = 200;
-
-            gridDocentes.Columns[2].Name = "Apellidos";
-            gridDocentes.Columns[2].DataPropertyName = "Apellidos";
-            gridDocentes.Columns[2].Width = 200;
-
-            gridDocentes.Columns[3].Name = "Telefono";
-            gridDocentes.Columns[3].DataPropertyName = "Cel";
-            gridDocentes.Columns[3].Width = 200;
-
-            gridDocentes.Columns[4].Name = "DUI";
-            gridDocentes.Columns[4].DataPropertyName = "Dui";
-            gridDocentes.Columns[4].Width = 200;
-
-            gridDocentes.Columns[5].Name = "NIT";
-            gridDocentes.Columns[5].DataPropertyName = "Nit";
-            gridDocentes.Columns[5].Width = 200;
-
-            gridDocentes.Columns[6].Name = "Carrera";
-            gridDocentes.Columns[6].DataPropertyName = "carrera";
-            gridDocentes.Columns[6].Width = 200;
+            gridDocentes.DataSource = joinDocente.ToList();
         }
 
         private void btnChangeHuella_Click(object sender, EventArgs e)
