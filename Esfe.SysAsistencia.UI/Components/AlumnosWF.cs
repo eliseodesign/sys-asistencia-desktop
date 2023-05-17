@@ -26,7 +26,9 @@ namespace Esfe.SysAsistencia.UI.Components
         ErrorProvider error = new ErrorProvider();
         DialogResult result = new DialogResult();
         List<Carrera> carreras = State.carreraBL.ObtenerCarrera();
+        List<Anio> anios = State.anioBL.ObtenerAnio();
         List<NumGrupo> numGrupos = State.numGrupoBL.ObtenerNumGrupo();
+        List<Grupo> grupos = State.grupoBL.ObtenerGrupos();
         public EstudianteBL estudianteBL = new EstudianteBL();
         int ID;
         public Panel _panel_app;
@@ -87,7 +89,7 @@ namespace Esfe.SysAsistencia.UI.Components
                 Cel = txtTelefono.Text,
                 Dui = txtDui.Text,
                 Huella = Template.Bytes,
-                IdGrupo = Convert.ToString(cbxCarrera.SelectedValue)
+                IdGrupo = Convert.ToByte(cbxCarrera.SelectedValue)
 
             };
             if (ID == 0)
@@ -135,32 +137,29 @@ namespace Esfe.SysAsistencia.UI.Components
         {
             var estudiantes = State.estudianteBL.ObtenerEstudiantes();
             if (estudiantes.Count == 0) return; // si es cero, se retorna
+
+            var join = from e in estudiantes
+                       join g in grupos on e.IdGrupo equals g.Id
+                       join n in numGrupos on g.IdNumGrupo equals n.Id
+                       join c in carreras on g.IdCarrera equals c.Id
+                       join a in anios on g.IdAnio equals a.Id
+                       select new
+                       {
+                           Id = e.Id,
+                           Nombre = e.Nombre,
+                           Apellido = e.Apellido,
+                           Celular = e.Cel,
+                           Dui = e.Dui,
+                           Grupo = "G" + n.Nombre[n.Nombre.Length - 1] + "-" + a.Nombre.Substring(0, 1) + c.Sigla
+                       };
             gridEstudiantes.DataSource = null;
-            gridEstudiantes.DataSource = estudiantes;
+            gridEstudiantes.DataSource = join.ToList();
         }
 
         //Darle formato a la tabla
         public void SetGridFormat()
         {
-            gridEstudiantes.AutoGenerateColumns = false;
-
-            gridEstudiantes.ColumnCount = 4;
-
-            gridEstudiantes.Columns[0].Name = "ID";
-            gridEstudiantes.Columns[0].DataPropertyName = "Id";
-            gridEstudiantes.Columns[0].Width = 50;
-
-            gridEstudiantes.Columns[1].Name = "Nombre";
-            gridEstudiantes.Columns[1].DataPropertyName = "Nombres";
-            gridEstudiantes.Columns[1].Width = 200;
-
-            gridEstudiantes.Columns[2].Name = "Carrera";
-            gridEstudiantes.Columns[2].DataPropertyName = "IdCarrera";
-            gridEstudiantes.Columns[2].Width = 200;
-
-            gridEstudiantes.Columns[3].Name = "Grupo";
-            gridEstudiantes.Columns[3].DataPropertyName = "CodigoGrupo";
-            gridEstudiantes.Columns[3].Width = 200;
+            
         }
 
         //Abrir form para la huella

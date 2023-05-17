@@ -19,7 +19,5 @@ namespace Esfe.SysAsistencia.EN
         public byte[] Huella { get; set; }
         public byte IdCarrera { get; set; }
 
-
     }
-
 }

@@ -17,6 +17,7 @@ namespace Esfe.SysAsistencia.DAL
     {
         public List<Estudiante> ObtenerEstudiantes()
         {
+            //return new List<Estudiante>();
             return ComunBD.EjecutarSPSelect<Estudiante>("SPReadEstudiante");
         }
 
