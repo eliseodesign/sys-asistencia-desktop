@@ -14,6 +14,7 @@ using DPFP.Verification;
 using DPFP;
 using Esfe.SysAsistencia.DAL;
 using DataEdit;
+using Esfe.SysGrupo.BL;
 
 namespace Esfe.SysAsistencia.UI.Components
 {
@@ -186,7 +187,9 @@ namespace Esfe.SysAsistencia.UI.Components
                     if (row.Cells[2].Value != null) txtApellidos.Text = row.Cells[2].Value.ToString();
                     if (row.Cells[3].Value != null) txtTelefono.Text = row.Cells[3].Value.ToString();
                     if (row.Cells[4].Value != null) txtDui.Text = row.Cells[4].Value.ToString();
-                    if (row.Cells[5].Value != null) txtCarrera.Text = row.Cells[6].Value.ToString();
+                    var idCarrera = docenteBL.ObtenerDocentes().FirstOrDefault(x => x.Id == Convert.ToInt32(row.Cells[0].Value)).IdCarrera;
+                    if (row.Cells[5].Value != null) txtCarrera.SelectedValue = carreras.FirstOrDefault(x => x.Id == idCarrera).Id;
+                    
                 }
             }
         }
