@@ -79,6 +79,15 @@ namespace Esfe.SysAsistencia.UI.Components
 
         private void gridGrupos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (gridGrupos.Columns[e.ColumnIndex].Name == "Docente")
+            {
+                DataGridViewRow row = gridGrupos.Rows[e.RowIndex];
+                DataGridViewCell idCell = row.Cells["Id"];
+
+                int idGrupo = Convert.ToByte(idCell.Value);
+                _DetailGrupoDocente detail  = new _DetailGrupoDocente(idGrupo);
+                detail.ShowDialog();
+            }
             if (gridGrupos.Columns[e.ColumnIndex].Name == "Editar")
             {
                 Id = Convert.ToInt32(gridGrupos.CurrentRow.Cells["Id"].Value);
