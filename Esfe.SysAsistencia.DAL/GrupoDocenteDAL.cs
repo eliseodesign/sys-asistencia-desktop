@@ -12,59 +12,59 @@ namespace Esfe.SysAsistencia.DAL
     {
         public List<GrupoDocente> ObtenerGrupoDocentes()
         {
-            try
-            {
+            //try
+            //{
                 return ComunBD.EjecutarSPSelect<GrupoDocente>("SPReadGrupoDocente");
-            }
-            catch (Exception)
-            {
-                return new List<GrupoDocente>();
-            }
+            //}
+            //catch (Exception)
+            //{
+                //return new List<GrupoDocente>();
+            //}
         }
 
         public bool ActualizarGrupoDocente(GrupoDocente update)
         {
             List<string> parametros = new() { "Id", "IdGrupo", "IdDocente"};
-            try
-            {
+            //try
+            //{
                 int valor = ComunBD.EjecutarSP("SPUpdateGrupoDocente", update, parametros);
                 if (valor > 0) return true;
                 else return false;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            //}
+            //catch (Exception)
+            //{
+            //    return false;
+            //}
         }
 
         public bool AgregarGrupoDocente(GrupoDocente pGrupoDocente)
         {
             List<string> parametros = new() { "IdGrupo", "IdDocente" };
-            try
-            {
+            //try
+            //{
                 int valor = ComunBD.EjecutarSP("SPCreateGrupoDocente", pGrupoDocente, parametros);
                 if (valor > 0) return true;
                 else return false;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            //}
+            //catch (Exception)
+            //{
+            //    return false;
+            //}
         }
 
         public bool EliminarGrupoDocente(GrupoDocente GrupoDocente)
         {
             List<string> parametros = new() { "Id" };
-            try
-            {
+            //try
+            //{
                 int valor = ComunBD.EjecutarSP("SPDeleteGrupoDocente", GrupoDocente, parametros);
                 if (valor > 0) return true;
                 else return false;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            //}
+            //catch (Exception)
+            //{
+            //    return false;
+            //}
         }
     }
 }

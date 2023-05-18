@@ -29,17 +29,17 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            pictureBox1 = new PictureBox();
+            label2 = new Label();
             gridGrupoDocentes = new DataGridView();
             Delete = new DataGridViewImageColumn();
             labelCarrera = new Label();
             label1 = new Label();
             listBox = new ListBox();
             lblTitulo = new Label();
-            label2 = new Label();
-            pictureBox1 = new PictureBox();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)gridGrupoDocentes).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridGrupoDocentes).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -58,6 +58,27 @@
             panel1.Size = new Size(776, 426);
             panel1.TabIndex = 0;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.agregar_usuario__1_;
+            pictureBox1.Location = new Point(442, 9);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(46, 29);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 9;
+            pictureBox1.TabStop = false;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.ForeColor = SystemColors.ButtonShadow;
+            label2.Location = new Point(27, 97);
+            label2.Name = "label2";
+            label2.Size = new Size(242, 21);
+            label2.TabIndex = 8;
+            label2.Text = "Has click para agregar docentes";
+            // 
             // gridGrupoDocentes
             // 
             gridGrupoDocentes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -67,6 +88,7 @@
             gridGrupoDocentes.RowTemplate.Height = 25;
             gridGrupoDocentes.Size = new Size(303, 256);
             gridGrupoDocentes.TabIndex = 7;
+            gridGrupoDocentes.CellClick += gridGrupoDocentes_CellClick;
             // 
             // Delete
             // 
@@ -105,6 +127,7 @@
             listBox.Name = "listBox";
             listBox.Size = new Size(332, 256);
             listBox.TabIndex = 4;
+            listBox.SelectedIndexChanged += listBox_SelectedIndexChanged;
             // 
             // lblTitulo
             // 
@@ -118,27 +141,6 @@
             lblTitulo.TabIndex = 2;
             lblTitulo.Text = "Asignar Docente";
             // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.ForeColor = SystemColors.ButtonShadow;
-            label2.Location = new Point(27, 97);
-            label2.Name = "label2";
-            label2.Size = new Size(242, 21);
-            label2.TabIndex = 8;
-            label2.Text = "Has click para agregar docentes";
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.Image = Properties.Resources.agregar_usuario__1_;
-            pictureBox1.Location = new Point(442, 9);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(46, 29);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 9;
-            pictureBox1.TabStop = false;
-            // 
             // _DetailGrupoDocente
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -150,10 +152,11 @@
             Name = "_DetailGrupoDocente";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "_DetailGrupoDocente";
+            Load += _DetailGrupoDocente_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)gridGrupoDocentes).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridGrupoDocentes).EndInit();
             ResumeLayout(false);
         }
 
