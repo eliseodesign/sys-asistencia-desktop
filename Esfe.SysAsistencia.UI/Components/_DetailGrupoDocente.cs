@@ -1,4 +1,5 @@
-﻿using Esfe.SysAsistencia.BL;
+﻿using DataEdit;
+using Esfe.SysAsistencia.BL;
 using Esfe.SysAsistencia.EN;
 using Esfe.SysAsistencia.UI.Helpers;
 using System;
@@ -45,7 +46,12 @@ namespace Esfe.SysAsistencia.UI.Components
                     IdDocente = Convert.ToByte(selectedValue)
                 };
                 var res = State.grupoDocenteBL.AgregarGrupoDocente(newGrupoDocente);
-                if (!res) MessageBox.Show("error");
+                if (!res)
+                {
+                    MsgBox msg = new MsgBox("filled", "Se registro de forma exitosa");
+                    msg.ShowDialog();
+                }
+
                 refreshGrid();
             }
         }

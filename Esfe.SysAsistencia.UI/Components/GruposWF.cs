@@ -50,6 +50,7 @@ namespace Esfe.SysAsistencia.UI.Components
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
+
             _DetailGrupo detailGrupo = new _DetailGrupo("Nuevo Grupo");
             detailGrupo.ShowDialog();
             refreshGrid();
@@ -93,7 +94,7 @@ namespace Esfe.SysAsistencia.UI.Components
                 Id = Convert.ToInt32(gridGrupos.CurrentRow.Cells["Id"].Value);
                 _DetailGrupo detailGrupo = new _DetailGrupo(Id);
                 detailGrupo.ShowDialog();
-                refreshGrid();
+              
             }
             if (gridGrupos.Columns[e.ColumnIndex].Name == "Eliminar")
             {
@@ -104,15 +105,14 @@ namespace Esfe.SysAsistencia.UI.Components
                 {
                     var grupo = new Grupo() { Id = Id };
                     bool resul = State.grupoBL.EliminarGrupo(grupo);
-                    if (resul)
+                    if (!resul)
                     {
-                        refreshGrid();
-                        return;
+                        MsgBox err = new MsgBox("onlyerror", "No se pudo eliminar");
+                        err.ShowDialog();
                     }
-                    MsgBox err = new MsgBox("onlyerror", "No se pudo eliminar");
-                    err.ShowDialog();
                 }
             }
+            refreshGrid();
         }
 
         private void refreshGrid()

@@ -36,9 +36,9 @@ namespace Esfe.SysAsistencia.BL
             oEstudianteDAL.EliminarEstudiante(estudiante);
         }
 
-        public void ActualizarEstudiante(Estudiante estudiante)
+        public bool ActualizarEstudiante(Estudiante estudiante)
         {
-            oEstudianteDAL.ActualizarEstudiante(estudiante);
+            return oEstudianteDAL.ActualizarEstudiante(estudiante);
         }
 
     }

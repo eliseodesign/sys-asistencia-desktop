@@ -29,7 +29,7 @@ namespace Esfe.SysAsistencia.DAL
 
         public bool ActualizarDocente(Docente update)
         {
-            List<string> parametros = new() { "Id", "Nombre", "Apellido", "Dui", "Cel", "Huella", "IdGrupo", "IdCarrera"};
+            List<string> parametros = new() { "Id", "Nombre", "Apellido", "Dui", "Cel", "Huella", "IdCarrera"};
             //try
             //{
                 int valor = ComunBD.EjecutarSP("SPUpdateDocente", update, parametros);

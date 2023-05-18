@@ -25,6 +25,7 @@ namespace Esfe.SysAsistencia.UI.Components
 
         public Panel _panel_app;
         private int GloabalID;
+        public int ID;
         List<Carrera> carreras = State.carreraBL.ObtenerCarrera();
         List<NumGrupo> numGrupos = State.numGrupoBL.ObtenerNumGrupo();
 
@@ -83,6 +84,7 @@ namespace Esfe.SysAsistencia.UI.Components
             }
             var docente = new Docente()
             {
+                Id = ID,
                 Nombre = txtNombres.Text,
                 Apellido = txtApellidos.Text,
                 Cel = txtTelefono.Text,
@@ -91,17 +93,28 @@ namespace Esfe.SysAsistencia.UI.Components
                 IdCarrera = Convert.ToByte(txtCarrera.SelectedValue)
             };
 
-            var si = State.docenteBL.AgregarDocente(docente);
-            if (si)
+            var exist = State.docenteBL.ObtenerDocentes().FirstOrDefault(x=>x.Dui == docente.Dui);
+            if(exist == null)
             {
-                MsgBox msg = new MsgBox("filled", $"Se creó el grupo de forma exitosa");
-                msg.ShowDialog();
+                State.docenteBL.ActualizarDocente(docente);
+                
             }
             else
             {
-                MsgBox msg = new MsgBox("onlywarning", "¡Error en el proceso!");
-                msg.ShowDialog();
+                var si = State.docenteBL.AgregarDocente(docente);
+                if (si)
+                {
+                    MsgBox msg = new MsgBox("filled", $"Se creó el grupo de forma exitosa");
+                    msg.ShowDialog();
+                }
+                else
+                {
+                    MsgBox msg = new MsgBox("onlywarning", "¡Error en el proceso!");
+                    msg.ShowDialog();
+                }
             }
+            
+            RefreshGrid();
         }
 
 
@@ -181,6 +194,7 @@ namespace Esfe.SysAsistencia.UI.Components
 
                 if (row != null)
                 {
+                    ID = Convert.ToInt32(row.Cells[0].Value);
 
                     if (row.Cells[0].Value != null) GloabalID = Convert.ToInt32(row.Cells[0].Value);
                     if (row.Cells[1].Value != null) txtNombres.Text = row.Cells[1].Value.ToString();

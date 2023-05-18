@@ -109,7 +109,7 @@ namespace Esfe.SysAsistencia.UI.Components
             }
             else
             {
-                var result = State.estudianteBL.AgregarEstudiante(estudiante);
+                var result = State.estudianteBL.ActualizarEstudiante(estudiante);
                 if (!result)
                 {
                     MsgBox msg = new MsgBox("onlyerror", "¡No se puede registrar con la misma huella!\nDebe de registrar otra huella.");
@@ -118,13 +118,14 @@ namespace Esfe.SysAsistencia.UI.Components
                 }
                 else
                 {
-                    RefreshGrid();
+                  
                     MsgBox msg = new MsgBox("filled", "Se edito el estudiante de forma exitosa");
                     msg.ShowDialog();
                     //MessageBox.Show("Se edito el estudiante de forma exitosa", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             ID = 0;
+            RefreshGrid();
         }
 
         //Refrescar Tabla
@@ -342,6 +343,7 @@ namespace Esfe.SysAsistencia.UI.Components
                     if (row.Cells[3].Value != null) txtTelefono.Text = row.Cells[3].Value.ToString();
                     if (row.Cells[4].Value != null) txtDui.Text = row.Cells[4].Value.ToString();
                     var idGruop = estudianteBL.ObtenerEstudiantes().FirstOrDefault(x => x.Id == Convert.ToInt32(row.Cells[0].Value)).IdGrupo;
+                    ID = idGruop;
                     if (row.Cells[5].Value != null) cbxCarrera.SelectedValue = grupos.FirstOrDefault(x => x.Id == idGruop).IdCarrera;//TODO reparar 
                     cbxCarrera_SelectedValueChanged(null, new EventArgs());
                 }
