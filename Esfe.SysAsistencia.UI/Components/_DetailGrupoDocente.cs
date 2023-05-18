@@ -38,33 +38,31 @@ namespace Esfe.SysAsistencia.UI.Components
             if (listBox.SelectedIndex > -1 && thisGrupo != null) // Verifica que se haya seleccionado un item
             {
                 var selectedValue = listBox.SelectedValue;
-                if (selectedValue != null) // Verifica si el valor seleccionado no es nulo
+               
+                GrupoDocente newGrupoDocente = new GrupoDocente()
                 {
-                    GrupoDocente newGrupoDocente = new GrupoDocente()
-                    {
-                        IdGrupo = Convert.ToByte(thisGrupo.Id),
-                        IdDocente = Convert.ToByte(selectedValue)
-                    };
-                    var res = State.grupoDocenteBL.AgregarGrupoDocente(newGrupoDocente);
-                    if (!res) MessageBox.Show("error al eliminar");
-                    refreshGrid();
-                }
+                    IdGrupo = Convert.ToByte(thisGrupo.Id),
+                    IdDocente = Convert.ToByte(selectedValue)
+                };
+                var res = State.grupoDocenteBL.AgregarGrupoDocente(newGrupoDocente);
+                if (!res) MessageBox.Show("error");
+                refreshGrid();
             }
         }
 
         private void refreshListView()
         {
-           
             var joinDocente = from d in docentes
                               select new
                               {
                                   Id = d.Id,
-                                  Nombre = d.Nombre + " " + d.Apellido
+                                  Nombre = d.Nombre + " " + d.Apellido,
+                                  IdCarrera = d.IdCarrera
                               };
 
             listBox.DisplayMember = "Nombre";
             listBox.ValueMember = "Id";
-            listBox.DataSource = joinDocente.ToList();
+            listBox.DataSource = joinDocente.Where(x=>x.IdCarrera == thisGrupo.IdCarrera).ToList();
         }
         private void refreshGrid()
         {
