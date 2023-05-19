@@ -41,6 +41,7 @@
             gridGrupos = new DataGridView();
             Editar = new DataGridViewImageColumn();
             Eliminar = new DataGridViewImageColumn();
+            Docente = new DataGridViewImageColumn();
             PanelGrupos.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)gridGrupos).BeginInit();
@@ -183,7 +184,7 @@
             gridGrupos.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             gridGrupos.BackgroundColor = Color.FromArgb(220, 230, 241);
             gridGrupos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            gridGrupos.Columns.AddRange(new DataGridViewColumn[] { Editar, Eliminar });
+            gridGrupos.Columns.AddRange(new DataGridViewColumn[] { Editar, Eliminar, Docente });
             gridGrupos.Location = new Point(27, 128);
             gridGrupos.Name = "gridGrupos";
             gridGrupos.RowTemplate.Height = 25;
@@ -203,6 +204,12 @@
             Eliminar.HeaderText = "Eliminar";
             Eliminar.Image = Properties.Resources.deleRoj;
             Eliminar.Name = "Eliminar";
+            // 
+            // Docente
+            // 
+            Docente.HeaderText = "Docente";
+            Docente.Image = Properties.Resources.agregar_usuario__1_;
+            Docente.Name = "Docente";
             // 
             // GruposWF
             // 
@@ -235,5 +242,6 @@
         private Label label1;
         private DataGridViewImageColumn Editar;
         private DataGridViewImageColumn Eliminar;
+        private DataGridViewImageColumn Docente;
     }
 }

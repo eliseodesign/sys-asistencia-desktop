@@ -20,6 +20,7 @@ namespace Esfe.SysAsistencia.UI.Helpers
         public static TurnoBL turnoBL { get; set; } = new TurnoBL();
         public static NumGrupoBL numGrupoBL { get; set; } = new NumGrupoBL();
         public static AsistenciaBL asistenciaBL { get; set; } = new AsistenciaBL();
+        public static GrupoDocenteBL grupoDocenteBL { get; set; } = new GrupoDocenteBL();
 
 
         // ----------- propiedades globales de acceso ------------------------------

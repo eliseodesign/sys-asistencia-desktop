@@ -26,7 +26,9 @@ namespace Esfe.SysAsistencia.UI.Components
         ErrorProvider error = new ErrorProvider();
         DialogResult result = new DialogResult();
         List<Carrera> carreras = State.carreraBL.ObtenerCarrera();
+        List<Anio> anios = State.anioBL.ObtenerAnio();
         List<NumGrupo> numGrupos = State.numGrupoBL.ObtenerNumGrupo();
+        List<Grupo> grupos = State.grupoBL.ObtenerGrupos();
         public EstudianteBL estudianteBL = new EstudianteBL();
         int ID;
         public Panel _panel_app;
@@ -38,16 +40,11 @@ namespace Esfe.SysAsistencia.UI.Components
             RefreshGrid();
             cargarCBX();
         }
-        private void cargarCBX()
-        {
-            ComboBox[] cbxs = new ComboBox[1] { cbxCarrera };
-
-            foreach (ComboBox combo in cbxs)
-            {
-                combo.DisplayMember = "Nombre";
-                combo.ValueMember = "Id";
-            }
-
+        private void cargarCBX() 
+        { 
+           cbxCarrera.DisplayMember = "Nombre";
+           cbxCarrera.ValueMember = "Id";
+ 
             cbxCarrera.DataSource = carreras;
         }
 
@@ -87,7 +84,7 @@ namespace Esfe.SysAsistencia.UI.Components
                 Cel = txtTelefono.Text,
                 Dui = txtDui.Text,
                 Huella = Template.Bytes,
-                IdGrupo = Convert.ToString(cbxCarrera.SelectedValue)
+                IdGrupo = Convert.ToByte(cbxGrupo.SelectedValue)
 
             };
             if (ID == 0)
@@ -112,7 +109,7 @@ namespace Esfe.SysAsistencia.UI.Components
             }
             else
             {
-                var result = State.estudianteBL.AgregarEstudiante(estudiante);
+                var result = State.estudianteBL.ActualizarEstudiante(estudiante);
                 if (!result)
                 {
                     MsgBox msg = new MsgBox("onlyerror", "¡No se puede registrar con la misma huella!\nDebe de registrar otra huella.");
@@ -121,13 +118,14 @@ namespace Esfe.SysAsistencia.UI.Components
                 }
                 else
                 {
-                    RefreshGrid();
+                  
                     MsgBox msg = new MsgBox("filled", "Se edito el estudiante de forma exitosa");
                     msg.ShowDialog();
                     //MessageBox.Show("Se edito el estudiante de forma exitosa", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             ID = 0;
+            RefreshGrid();
         }
 
         //Refrescar Tabla
@@ -135,32 +133,29 @@ namespace Esfe.SysAsistencia.UI.Components
         {
             var estudiantes = State.estudianteBL.ObtenerEstudiantes();
             if (estudiantes.Count == 0) return; // si es cero, se retorna
+
+            var join = from e in estudiantes
+                       join g in grupos on e.IdGrupo equals g.Id
+                       join n in numGrupos on g.IdNumGrupo equals n.Id
+                       join c in carreras on g.IdCarrera equals c.Id
+                       join a in anios on g.IdAnio equals a.Id
+                       select new
+                       {
+                           Id = e.Id,
+                           Nombre = e.Nombre,
+                           Apellido = e.Apellido,
+                           Celular = e.Cel,
+                           Dui = e.Dui,
+                           Grupo = "G" + n.Nombre[n.Nombre.Length - 1] + "-" + a.Nombre.Substring(0, 1) + c.Sigla
+                       };
             gridEstudiantes.DataSource = null;
-            gridEstudiantes.DataSource = estudiantes;
+            gridEstudiantes.DataSource = join.ToList();
         }
 
         //Darle formato a la tabla
         public void SetGridFormat()
         {
-            gridEstudiantes.AutoGenerateColumns = false;
 
-            gridEstudiantes.ColumnCount = 4;
-
-            gridEstudiantes.Columns[0].Name = "ID";
-            gridEstudiantes.Columns[0].DataPropertyName = "Id";
-            gridEstudiantes.Columns[0].Width = 50;
-
-            gridEstudiantes.Columns[1].Name = "Nombre";
-            gridEstudiantes.Columns[1].DataPropertyName = "Nombres";
-            gridEstudiantes.Columns[1].Width = 200;
-
-            gridEstudiantes.Columns[2].Name = "Carrera";
-            gridEstudiantes.Columns[2].DataPropertyName = "IdCarrera";
-            gridEstudiantes.Columns[2].Width = 200;
-
-            gridEstudiantes.Columns[3].Name = "Grupo";
-            gridEstudiantes.Columns[3].DataPropertyName = "CodigoGrupo";
-            gridEstudiantes.Columns[3].Width = 200;
         }
 
         //Abrir form para la huella
@@ -301,14 +296,14 @@ namespace Esfe.SysAsistencia.UI.Components
             }
             MsgBox msg = new MsgBox("question", "¿Desea Eliminar este resgistro?\nSe eliminará permanentemente.");
             msg.ShowDialog();
-            
+
             if (msg.DialogResult == DialogResult.OK)
             {
                 try
                 {
                     //Eliminar registros del datagriedview
 
-                    var delete = new Estudiante() 
+                    var delete = new Estudiante()
                     {
                         //Captura el Id de la linea seleccionada
                         Id = Convert.ToInt32(gridEstudiantes.CurrentRow.Cells[0].Value)
@@ -347,13 +342,42 @@ namespace Esfe.SysAsistencia.UI.Components
                     if (row.Cells[2].Value != null) txtApellidos.Text = row.Cells[2].Value.ToString();
                     if (row.Cells[3].Value != null) txtTelefono.Text = row.Cells[3].Value.ToString();
                     if (row.Cells[4].Value != null) txtDui.Text = row.Cells[4].Value.ToString();
-                    if (row.Cells[5].Value != null) cbxCarrera.Text = row.Cells[6].Value.ToString();
+                    var idGruop = estudianteBL.ObtenerEstudiantes().FirstOrDefault(x => x.Id == Convert.ToInt32(row.Cells[0].Value)).IdGrupo;
+                    ID = idGruop;
+                    if (row.Cells[5].Value != null) cbxCarrera.SelectedValue = grupos.FirstOrDefault(x => x.Id == idGruop).IdCarrera;//TODO reparar 
+                    cbxCarrera_SelectedValueChanged(null, new EventArgs());
                 }
             }
         }
         private void panel3_Paint(object sender, PaintEventArgs e)
         {
             DgvDesing.Formato(gridEstudiantes, 1, false);
+        }
+
+        private void cbxCarrera_SelectedValueChanged(object sender, EventArgs e)
+        {
+
+           
+
+            cbxGrupo.DisplayMember = "Codigo";
+            cbxGrupo.ValueMember = "Id";
+            if (cbxCarrera.SelectedIndex > -1)
+            {
+                var join = from g in grupos
+                           join n in numGrupos on g.IdNumGrupo equals n.Id
+                           join c in carreras on g.IdCarrera equals c.Id
+                           join a in anios on g.IdAnio equals a.Id
+                           select new
+                           {
+                               Id = g.Id,
+                               Codigo = "G" + n.Nombre[n.Nombre.Length - 1] + "-" + a.Nombre.Substring(0, 1) + c.Sigla,
+                               IdCarrera = c.Id
+                           };
+                cbxGrupo.DataSource = join.Where(x=> x.IdCarrera == Convert.ToByte(cbxCarrera.SelectedValue)).ToList();
+
+            }
+
+            
         }
     }
 }

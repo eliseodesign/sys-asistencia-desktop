@@ -24,18 +24,18 @@ namespace Esfe.SysAsistencia.UI.Components
         List<Anio> anios = State.anioBL.ObtenerAnio();
         List<NumGrupo> numGrupos = State.numGrupoBL.ObtenerNumGrupo();
 
-       
+
         public GruposWF(AplicationWF form)
         {
             padre = form;
             InitializeComponent();
             List<Carrera> carreras = State.carreraBL.ObtenerCarrera();
-            carreras.Insert(0, new Carrera() { Id = 0, Nombre = "Todas",Sigla="N/A" });
+            carreras.Insert(0, new Carrera() { Id = 0, Nombre = "Todas", Sigla = "N/A" });
             List<Anio> anios = State.anioBL.ObtenerAnio();
-            anios.Insert(0, new Anio() { Id = 0, Nombre = "Todos"});
+            anios.Insert(0, new Anio() { Id = 0, Nombre = "Todos" });
 
 
-            cbxCarrera.DisplayMember = "Nombre"; 
+            cbxCarrera.DisplayMember = "Nombre";
             cbxCarrera.ValueMember = "Id";
             cbxCarrera.DataSource = carreras;
 
@@ -50,6 +50,7 @@ namespace Esfe.SysAsistencia.UI.Components
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
+
             _DetailGrupo detailGrupo = new _DetailGrupo("Nuevo Grupo");
             detailGrupo.ShowDialog();
             refreshGrid();
@@ -79,12 +80,21 @@ namespace Esfe.SysAsistencia.UI.Components
 
         private void gridGrupos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (gridGrupos.Columns[e.ColumnIndex].Name == "Docente")
+            {
+                DataGridViewRow row = gridGrupos.Rows[e.RowIndex];
+                DataGridViewCell idCell = row.Cells["Id"];
+
+                int idGrupo = Convert.ToByte(idCell.Value);
+                _DetailGrupoDocente detail  = new _DetailGrupoDocente(idGrupo);
+                detail.ShowDialog();
+            }
             if (gridGrupos.Columns[e.ColumnIndex].Name == "Editar")
             {
                 Id = Convert.ToInt32(gridGrupos.CurrentRow.Cells["Id"].Value);
                 _DetailGrupo detailGrupo = new _DetailGrupo(Id);
                 detailGrupo.ShowDialog();
-                refreshGrid();
+              
             }
             if (gridGrupos.Columns[e.ColumnIndex].Name == "Eliminar")
             {
@@ -93,17 +103,16 @@ namespace Esfe.SysAsistencia.UI.Components
                 msg.ShowDialog();
                 if (msg.DialogResult == DialogResult.OK)
                 {
-                    var grupo = new Grupo() { Id = Id};
+                    var grupo = new Grupo() { Id = Id };
                     bool resul = State.grupoBL.EliminarGrupo(grupo);
-                    if (resul)
+                    if (!resul)
                     {
-                        refreshGrid();
-                        return;
+                        MsgBox err = new MsgBox("onlyerror", "No se pudo eliminar");
+                        err.ShowDialog();
                     }
-                    MsgBox err = new MsgBox("onlyerror", "No se pudo eliminar");
-                    err.ShowDialog();
                 }
             }
+            refreshGrid();
         }
 
         private void refreshGrid()
@@ -131,7 +140,7 @@ namespace Esfe.SysAsistencia.UI.Components
 
             var gruposFiltrados = resultado
                 .Where(x => (x.IdAnio == anioSelect || anioSelect == 0) && (x.IdCarrera == carreraSelect || carreraSelect == 0));
-                
+
 
             gridGrupos.DataSource = null;
             gridGrupos.DataSource = gruposFiltrados.ToList();
@@ -150,6 +159,7 @@ namespace Esfe.SysAsistencia.UI.Components
             gridGrupos.Columns["Año"].DisplayIndex = 4;
             gridGrupos.Columns["Editar"].DisplayIndex = 5;
             gridGrupos.Columns["Eliminar"].DisplayIndex = 6;
+            gridGrupos.Columns["Docente"].DisplayIndex = 7;
 
             gridGrupos.Columns["IdAnio"].Visible = false;
             gridGrupos.Columns["IdCarrera"].Visible = false;
@@ -161,6 +171,6 @@ namespace Esfe.SysAsistencia.UI.Components
 
         }
 
-        
+
     }
 }
