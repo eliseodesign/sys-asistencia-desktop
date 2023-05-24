@@ -1,11 +1,10 @@
 # Sistema De Automatización De Asistencia Biometrica Estudiantil Para La ESFE
 
-> Proyecto educativo creado por el grupo 3 en el modulo de codificación de sistemas informaticos de la ESE en el grupo 03-1°TIDS 
-
 Este proyecto es un sistema que utiliza un lector de huella dactilar DigitalPersona UareU 4500 para automatizar la toma de asistencia de los alumnos.
 
 ## Requisitos
 * Microsoft Visual Studio instalado.
+* Base de datos [BDSysAsistencia](https://github.com/eliseodesign/sys-asistencia-db).
 * Lector de huella digital DigitalPersona UareU 4500.
 * SDK del Lector instalado.
 * Dependencias específicas importadas en Visual Studio.
@@ -13,6 +12,7 @@ Este proyecto es un sistema que utiliza un lector de huella dactilar DigitalPers
 
 ## Instalación
 1. Clonar este repositorio en tu máquina local.
+3. Clonar [sys-asistencia-db](https://github.com/eliseodesign/sys-asistencia-db) y ejecutar run.bat, sino deseas hacer esto puedes ejecutar los scripts por separado
 2. Abrir el proyecto en Visual Studio.
 3. Importar las dependencias buscar la carpeta bin y seleccionar las siguientes .dll
 
